@@ -1,6 +1,5 @@
 package com.frz.korearbazar.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -14,40 +13,56 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.frz.korearbazar.ApiInterface;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.frz.korearbazar.Database.CartDB;
+import com.frz.korearbazar.Interface.ProdInterface;
 import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
+import com.frz.korearbazar.adapter.ProdAdapter;
 import com.frz.korearbazar.adapter.ProdDetailsAdapter;
-import com.frz.korearbazar.model.BestSellerModel;
+import com.frz.korearbazar.adapter.RelatedProdAdapter;
 import com.frz.korearbazar.model.CartModel;
-import com.frz.korearbazar.model.NewProdModel;
 import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
-import com.frz.korearbazar.model.SlidersModel;
-import com.google.gson.JsonObject;
+import com.frz.korearbazar.model.RelatedProdModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
-import java.util.List;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import static com.frz.korearbazar.ApiInterface.JSONURL;
 import static com.frz.korearbazar.ApiInterface.PDetailsImgUrl;
+import static com.frz.korearbazar.ApiInterface.ProdDetailsUrl;
 
 
-public class ItemDetailsActivity extends AppCompatActivity {
-   ProdDetailsAdapter prodDetailsAdapter;
-   LinearLayout linearLayout;
+public class ItemDetailsActivity extends AppCompatActivity  {
+
+    //Related Products
+    private ArrayList<ProdDetailsModel> mExampleList;
+//    private ArrayList<RelatedProdModel> rExampleList;
+private ArrayList<ProdModel> rExampleList;
+    private RelatedProdAdapter mExampleAdapter;
+    private RecyclerView mRecyclerView;
+
+    private RequestQueue mRequestQueue;
+    private RequestQueue rRequestQueue;
+    ProdDetailsAdapter prodDetailsAdapter;
+    LinearLayout linearLayout;
+
+
+    ProdDetailsModel prodDetailsModel;
+    String totalPrice;
+
 
    ProdModel prodModel;
    CartDB cartDB;
@@ -66,23 +81,25 @@ public class ItemDetailsActivity extends AppCompatActivity {
     TextView txt_previous_price;
     TextView txt_percentage;
     TextView txtItemOffer;
-    TextView txt_stoke;
+    TextView txt_stoke,txt_size,txt_color;
     LinearLayout count;
     TextView outOfStoke;
     ImageView plusquantity, minusquantity;
     int quantity = 1;
     TextView quantitynumber;
     String slug;
+    String price;
+
+
 
     //Slider
     ImageView imgDtails;
-    private ProdDetailsAdapter sliderAdapter;
-    private RecyclerView sliderRecyclerView;
-    List<SlidersModel> sliderDatumList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_details);
+
 
         cartDB = new CartDB(this);
 
@@ -92,6 +109,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
         lvlCart = findViewById(R.id.lvl_cart);
         txtTitle = findViewById(R.id.txt_title);
         txtDesc = findViewById(R.id.txt_desc);
+        txt_size = findViewById(R.id.txt_size);
+        txt_color = findViewById(R.id.txt_color);
         txtPrice = findViewById(R.id.txt_price);
         txt_previous_price = findViewById(R.id.txt_previous_price);
         txt_percentage = findViewById(R.id.txt_percentage);
@@ -109,11 +128,33 @@ public class ItemDetailsActivity extends AppCompatActivity {
         outOfStoke = findViewById(R.id.outOfStoke);
 
 
+
+///Related Product
+        mRecyclerView = findViewById(R.id.recycler_releted);
+        mRecyclerView.setHasFixedSize(true);
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        mRequestQueue = Volley.newRequestQueue(this);
+        mExampleList = new ArrayList<>();
+
+        rExampleList = new ArrayList<>();
+        rRequestQueue = Volley.newRequestQueue(this);
+
         //All product receive
         Bundle intent = getIntent().getExtras();
         if (intent!=null){
-            prodModel = (ProdModel) intent.getSerializable("prodctModel");
+            slug=intent.getString("prodctModel");
+            price = intent.getString("price");
         }
+//        Toast.makeText(this, ""+slug, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Total"+price, Toast.LENGTH_SHORT).show();
+        //Product Details
+        getdata();
+
+        ///Related Product
+        parseJSON();
+
 
         imgDtails =findViewById(R.id.imgDtails);
 
@@ -121,25 +162,20 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
         linearLayout = findViewById(R.id.linearLayout1);
 
-        ProdDetailsfetchJSON();
+
+//        prodDetailsModel.getShowPrice();
+//        Toast.makeText(this, "Get Show Price"+prodDetailsModel.getShowPrice(), Toast.LENGTH_SHORT).show();
 
         plusquantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                prodModel.getShowPrice();
-                Toast.makeText(ItemDetailsActivity.this, ""+prodModel.getShowPrice(), Toast.LENGTH_SHORT).show();
+                String Price= totalPrice;
 
-                String pricWithStr = prodModel.getShowPrice();
+                String pricWithStr = Price;
                 pricWithStr = pricWithStr.replaceAll("[^\\d.]", "");
                 float pp = Float.parseFloat(pricWithStr);
 
-//                double basePrice = Double.parseDouble((prodModel.getShowPrice()));
-//                quantity++;
-//                displayQuantity();
-//                double productPrice = basePrice * quantity;
-//                String setnewPrice = String.valueOf(productPrice);
-//                txtPrice.setText(setnewPrice);
 
                 double basePrice = pp;
                 quantity++;
@@ -156,7 +192,9 @@ public class ItemDetailsActivity extends AppCompatActivity {
         minusquantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String pricWithStr = prodModel.getShowPrice();
+                //String pricWithStr = prodModel.getShowPrice();
+                String Price= totalPrice;
+                String pricWithStr = Price;
                 pricWithStr = pricWithStr.replaceAll("[^\\d.]", "");
                 float pp = Float.parseFloat(pricWithStr);
 
@@ -231,6 +269,7 @@ public class ItemDetailsActivity extends AppCompatActivity {
         quantitynumber.setText(String.valueOf(quantity));
     }
 
+    //Cart data save
     private void SaveCart() {
 
         // getting the values from our views
@@ -250,333 +289,197 @@ public class ItemDetailsActivity extends AppCompatActivity {
 
     }
 
-    private void ProdDetailsfetchJSON() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
 
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getProductsDetails();
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
+    //Product Details
+    public void getdata(){
+        //String url = "http://ecom.hrventure.xyz/public/api/item/"+slug;
+        String url = JSONURL+ProdDetailsUrl+slug;
 
-                        String jsonresponse = response.body().toString();
 
-                        prod_details_writeRecycler(jsonresponse);
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
 
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");
-                        Toast.makeText(getApplicationContext(),"Nothing returned",Toast.LENGTH_LONG).show();
+                            JSONObject jsonArray = response.getJSONObject("productt");
+
+                            //JSONObject ja = response.getJSONObject("user");
+                           // Toast.makeText(ItemDetailsActivity.this, "Hello User"+jsonArray, Toast.LENGTH_SHORT).show();
+
+                            String name = jsonArray.getString("name");
+                            String details = jsonArray.getString("details");
+                            String stock = jsonArray.getString("stock");
+                            String photo = jsonArray.getString("photo");
+                            String slug = jsonArray.getString("slug");
+                            String size = jsonArray.getString("size");
+                            String size_qty = jsonArray.getString("size_qty");
+                            String size_price = jsonArray.getString("size_price");
+
+                            String color = jsonArray.getString("color");
+                            String myColor = color;
+
+                            String galleries = jsonArray.getString("galleries");
+                            String showPrice = jsonArray.getString("showPrice");
+                            String setCurrency = jsonArray.getString("setCurrency");
+                            String showPreviousPrice = jsonArray.getString("showPreviousPrice");
+                            String user = jsonArray.getString("user");
+
+
+                            //int price = jsonArray.getInt("price");
+
+                            mExampleList.add(new ProdDetailsModel(name,details,stock,photo,slug,size,size_qty,size_price,color,galleries,showPrice,setCurrency,showPreviousPrice,user));
+
+                            txtTitle.setText(jsonArray.getString("name"));
+                            txtDesc.setText(jsonArray.getString("details"));
+
+
+                            ////////////Price
+
+                            totalPrice = jsonArray.getString("showPrice");
+
+                            String totalPreviousPrice = jsonArray.getString("showPreviousPrice");
+
+                            if (totalPreviousPrice.equals(""))
+                            {
+                                txtPrice.setText(totalPrice);
+                            }
+                            else {
+                                txtPrice.setText(totalPrice);
+
+                                SpannableString ss = new SpannableString(totalPreviousPrice);
+                                StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
+                                ss.setSpan(strikethroughSpan,0,3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+                                txt_previous_price.setText(ss);
+
+                                String pricWithStr = totalPrice;
+                                pricWithStr = pricWithStr.replaceAll("[^\\d.]", "");
+                                float pp = Float.parseFloat(pricWithStr);
+
+                                String pPricWithStr = totalPreviousPrice;
+                                pPricWithStr = pPricWithStr.replaceAll("[^\\d.]", "");
+                                float ppp = Float.parseFloat(pPricWithStr);
+
+
+                                float diff = (ppp - pp);
+                                if (diff > 0 ){
+                                    float dif = (diff / ppp) * 100;
+                                    String fff= String.valueOf(dif);
+
+                                    int b = Math.round(dif);
+                                    String fa = String.valueOf(b+" %off");
+
+                                    txt_percentage.setText(fa);
+                                }else {
+                                    Toast.makeText(ItemDetailsActivity.this, "Not a Previous Price", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            ///////////////////Price
+
+
+                            //txt_stoke.setText("stock");
+                            if (jsonArray.getString("stock") == (String.valueOf(0))) {
+                                txt_stoke.setText("Out Of Stock");
+                                //txt_stoke.setTextColor(R.color.colorRad);
+                                count.setVisibility(View.GONE);
+                                outOfStoke.setVisibility(View.VISIBLE);
+                                buyNow.setVisibility(View.GONE);
+                                btnAddtocart.setVisibility(View.GONE);
+                            } else {
+                                txt_stoke.setText("In Stock");
+                                //txt_stoke.setTextColor(R.color.colorAccent);
+                            }
+
+
+
+
+                            txtDesc.setText(jsonArray.getString("details"));
+                            txt_size.setText(jsonArray.getString("size"));
+                            txt_color.setText(myColor);
+                            //Picasso.get().load("http://ecom.hrventure.xyz/assets/images/products/1606560895gDvz8eUj.png").into(imgDtails);
+                            imgUrl = JSONURL+PDetailsImgUrl+photo;
+                            Picasso.get().load(imgUrl).into(imgDtails);
+
+
+                            prodDetailsAdapter = new ProdDetailsAdapter(ItemDetailsActivity.this, mExampleList);
+
+                            // mRecyclerView.setAdapter(mExampleAdapter);
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            }
-
+                }, new com.android.volley.Response.ErrorListener() {
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(ItemDetailsActivity.this, "Error"+t, Toast.LENGTH_SHORT).show();
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
             }
         });
+        mRequestQueue.add(request);
     }
 
-    @SuppressLint("ResourceAsColor")
-    private void prod_details_writeRecycler(String jsonresponse) {
+    //Related Product
+    private void parseJSON() {
+        String url = JSONURL+ProdDetailsUrl+slug;
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new com.android.volley.Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            //ArrayList<ProdModel> prodmodelRecyclerArrayList = new ArrayList<>();
+                            JSONArray jsonArray = response.getJSONArray("trending");
+                           // Toast.makeText(ItemDetailsActivity.this, "Trending Done "+jsonArray, Toast.LENGTH_SHORT).show();
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject hit = jsonArray.getJSONObject(i);
+                                String id = hit.getString("id");
+                                String user_id = hit.getString("user_id");
+                                String name = hit.getString("name");
+                                String slug = hit.getString("slug");
+                                String features = hit.getString("features");
+                                String colors = hit.getString("colors");
+                                String thumbnail = hit.getString("thumbnail");
+                                String price = hit.getString("price");
+                                String previous_price = hit.getString("previous_price");
+                                String attributes = hit.getString("attributes");
+                                String size = hit.getString("size");
+                                String size_price = hit.getString("size_price");
+                                String discount_date = hit.getString("discount_date");
+
+                                String showPrice = hit.getString("showPrice");
+                                String setCurrency = hit.getString("setCurrency");
+                                String showPreviousPrice = hit.getString("showPreviousPrice");
+
+//rExampleList
+                                rExampleList.add(new ProdModel(id,user_id,name, slug,features,colors, thumbnail,price,previous_price,attributes,size,size_price,discount_date,showPrice,setCurrency,showPreviousPrice));
+                            }
+                            mExampleAdapter = new RelatedProdAdapter(ItemDetailsActivity.this, rExampleList);
+                            mRecyclerView.setAdapter(mExampleAdapter);
 
 
-
-        try {
-            JSONObject object = new JSONObject(jsonresponse);
-
-                ArrayList<ProdDetailsModel> prodDetailsmodelRecyclerArrayList = new ArrayList<>();
-
-                JSONArray jsonArray = object.getJSONArray("products");
-//                JSONObject jsonObject = object.getJSONObject("productt");
-//                Toast.makeText(this, "Done" + jsonObject, Toast.LENGTH_SHORT).show();
-
-
-                for (int i = 0; i < jsonArray.length(); i++) {
-
-                    ProdDetailsModel prodDetalisModelRecycler = new ProdDetailsModel();
-                    JSONObject dataobj = jsonArray.getJSONObject(i);
-
-
-                    String slugf=dataobj.getString("slug");
-
-//                    JSONObject jsonObject = object.getJSONObject("productt");
-//                    Toast.makeText(this, "productt" + jsonObject, Toast.LENGTH_SHORT).show();
-
-                     if (slugf.equals(prodModel.getSlug())){
-                         prodDetalisModelRecycler.setSlug(dataobj.getString("slug"));
-                         prodDetalisModelRecycler.setPhoto(dataobj.getString("photo"));
-                         String photo=dataobj.getString("photo");
-                         //prodDetalisModelRecycler.setGalleries(dataobj.getString("galleries"));
-                         prodDetalisModelRecycler.setName(dataobj.getString("name"));
-                         prodDetalisModelRecycler.setDetails(dataobj.getString("details"));
-                         prodDetalisModelRecycler.setShowPreviousPrice(dataobj.getString("showPreviousPrice"));
-                         prodDetalisModelRecycler.setShowPrice(dataobj.getString("showPrice"));
-                         prodDetalisModelRecycler.setStock(dataobj.getString("stock"));
-                         //prodDetalisModelRecycler.setSlug(dataobj.getString("slug"));
-
-
-                         txtTitle.setText(dataobj.getString("name"));
-
-
-                         ////////////Price
-
-                         String totalPrice = dataobj.getString("showPrice");
-
-                         String totalPreviousPrice = dataobj.getString("showPreviousPrice");
-
-                         if (totalPreviousPrice.equals(""))
-                         {
-                             txtPrice.setText(totalPrice);
-                         }
-                         else {
-                             txtPrice.setText(totalPrice);
-
-                             SpannableString ss = new SpannableString(totalPreviousPrice);
-                             StrikethroughSpan strikethroughSpan = new StrikethroughSpan();
-                             ss.setSpan(strikethroughSpan,0,3, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
-                             txt_previous_price.setText(ss);
-
-                             String pricWithStr = totalPrice;
-                             pricWithStr = pricWithStr.replaceAll("[^\\d.]", "");
-                             float pp = Float.parseFloat(pricWithStr);
-
-                             String pPricWithStr = totalPreviousPrice;
-                             pPricWithStr = pPricWithStr.replaceAll("[^\\d.]", "");
-                             float ppp = Float.parseFloat(pPricWithStr);
-
-
-                             float diff = (ppp - pp);
-                             if (diff > 0 ){
-                                 float dif = (diff / ppp) * 100;
-                                 String fff= String.valueOf(dif);
-
-                                 int b = Math.round(dif);
-                                 String fa = String.valueOf(b+" %off");
-
-                                 txt_percentage.setText(fa);
-                             }else {
-                                 Toast.makeText(this, "Not a p Price", Toast.LENGTH_SHORT).show();
-                             }
-                         }
-
-                       ///////////////////Price
-
-
-                         //txt_stoke.setText("stock");
-                         if (dataobj.getString("stock") == (String.valueOf(0))) {
-                             txt_stoke.setText("Out Of Stock");
-                             txt_stoke.setTextColor(R.color.colorRad);
-                             count.setVisibility(View.GONE);
-                             outOfStoke.setVisibility(View.VISIBLE);
-                             buyNow.setVisibility(View.GONE);
-                             btnAddtocart.setVisibility(View.GONE);
-                         } else {
-                                 txt_stoke.setText("In Stock");
-                                 txt_stoke.setTextColor(R.color.colorAccent);
-                         }
-
-
-
-
-                         txtDesc.setText(dataobj.getString("details"));
-                         //Picasso.get().load("http://ecom.hrventure.xyz/assets/images/products/1606560895gDvz8eUj.png").into(imgDtails);
-                         imgUrl = JSONURL+PDetailsImgUrl+photo;
-                         Picasso.get().load(imgUrl).into(imgDtails);
-
-
-
-
-                     }
-
-
-
-
-//                    sliderAdapter = new ProdDetailsAdapter(this,prodDetailsmodelRecyclerArrayList);
-//                    sliderRecyclerView.setAdapter(sliderAdapter);
-//                    sliderRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-
-
-                }
-
-        }
-            catch (JSONException e) {
-            e.printStackTrace();
-        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        });
+        rRequestQueue.add(request);
     }
 
-//    public void updateItem() {
-//        Cursor res = databaseHelper.getAllData();
-//        if (res.getCount() == 0) {
-//            txtTcount.setText("0");
-//        } else {
-//            txtTcount.setText("" + res.getCount());
-//        }
-//    }
-//
-//    @OnClick({R.id.img_back, R.id.lvl_cart, R.id.btn_addtocart})
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.img_back:
-//                finish();
-//                break;
-//            case R.id.lvl_cart:
-//                fragment();
-//                break;
-//            case R.id.btn_addtocart:
-//                finish();
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-//
-//    private void setJoinPlayrList(LinearLayout lnrView, ProductItem datum, Price price) {
-//
-//        lnrView.removeAllViews();
-//        final int[] count = {0};
-//        DatabaseHelper helper = new DatabaseHelper(lnrView.getContext());
-//        LayoutInflater inflater = LayoutInflater.from(this);
-//        View view = inflater.inflate(R.layout.custome_additem, null);
-//        TextView txtcount = view.findViewById(R.id.txtcount);
-//        LinearLayout lvl_addremove = view.findViewById(R.id.lvl_addremove);
-//        LinearLayout lvl_addcart = view.findViewById(R.id.lvl_addcart);
-//        LinearLayout img_mins = view.findViewById(R.id.img_mins);
-//        LinearLayout img_plus = view.findViewById(R.id.img_plus);
-//        MyCart myCart = new MyCart();
-//        myCart.setPid(datum.getId());
-//        myCart.setImage(datum.getProductImage());
-//        myCart.setTitle(datum.getProductName());
-//        myCart.setWeight(price.getProductType());
-//        myCart.setCost(price.getProductPrice());
-//        myCart.setDiscount(datum.getmDiscount());
-//        int qrt = helper.getCard(myCart.getPid(), myCart.getCost());
-//        if (qrt != -1) {
-//            count[0] = qrt;
-//            txtcount.setText("" + count[0]);
-//            lvl_addremove.setVisibility(View.VISIBLE);
-//            lvl_addcart.setVisibility(View.GONE);
-//        } else {
-//            lvl_addremove.setVisibility(View.GONE);
-//            lvl_addcart.setVisibility(View.VISIBLE);
-//
-//        }
-//        img_mins.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                count[0] = Integer.parseInt(txtcount.getText().toString());
-//
-//                count[0] = count[0] - 1;
-//                if (count[0] <= 0) {
-//                    lvl_addremove.setVisibility(View.GONE);
-//                    lvl_addcart.setVisibility(View.VISIBLE);
-//                    txtcount.setText("0");
-//                    helper.deleteRData(myCart.getPid(), myCart.getCost());
-//                } else {
-//                    txtcount.setVisibility(View.VISIBLE);
-//                    txtcount.setText("" + count[0]);
-//                    myCart.setQty(String.valueOf(count[0]));
-//                    helper.insertData(myCart);
-//                }
-//                updateItem();
-//                if (itemListFragment != null)
-//                    itemListFragment.updateItem();
-//            }
-//        });
-//
-//        img_plus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                count[0] = Integer.parseInt(txtcount.getText().toString());
-//
-//                count[0] = count[0] + 1;
-//                txtcount.setText("" + count[0]);
-//                myCart.setQty(String.valueOf(count[0]));
-//                Log.e("INsert", "--> " + helper.insertData(myCart));
-//                updateItem();
-//                if (itemListFragment != null)
-//                    itemListFragment.updateItem();
-//            }
-//        });
-//        lvl_addcart.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                lvl_addcart.setVisibility(View.GONE);
-//                lvl_addremove.setVisibility(View.VISIBLE);
-//                count[0] = Integer.parseInt(txtcount.getText().toString());
-//
-//                count[0] = count[0] + 1;
-//                txtcount.setText("" + count[0]);
-//                myCart.setQty(String.valueOf(count[0]));
-//                Log.e("INsert", "--> " + helper.insertData(myCart));
-//                updateItem();
-//                if (itemListFragment != null)
-//                    itemListFragment.updateItem();
-//            }
-//        });
-//        lnrView.addView(view);
-//
-//    }
-//
-//    public void fragment() {
-//        SessionManager.iscart = true;
-//        finish();
-//
-//    }
-//
 
-
-
-//    public class MyCustomPagerAdapter extends PagerAdapter {
-//        Context context;
-//        ArrayList<ProdDetailsModel> imageList;
-//        LayoutInflater layoutInflater;
-//
-//        public MyCustomPagerAdapter(Context context, ArrayList<ProdDetailsModel> bannerDatumList) {
-//            this.context = context;
-//            this.imageList = bannerDatumList;
-//            layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//
-//        }
-//
-//        @Override
-//        public int getCount() {
-//            return imageList.size();
-//        }
-//
-//        @Override
-//        public boolean isViewFromObject(View view, Object object) {
-//            return view == ((LinearLayout) object);
-//        }
-//
-//        @Override
-//        public Object instantiateItem(ViewGroup container, final int position) {
-//            View itemView = layoutInflater.inflate(R.layout.item_image, container, false);
-//            ImageView imageView = (ImageView) itemView.findViewById(R.id.imageView);
-//            //txtTitle.setText(txtTitle.getText());
-//           // holder.price.setText(dataModelArrayList.get(position).getPrice());
-//           // holder.previous_price.setText(dataModelArrayList.get(position).getPrevious_price());
-//            Glide.with(ItemDetailsActivity.this).load(JSONURL+ProdImgUrl + imageList.get(position)).placeholder(R.drawable.empty).into(imageView);
-//            container.addView(itemView);
-//
-//            return itemView;
-//        }
-//
-//        @Override
-//        public void destroyItem(ViewGroup container, int position, Object object) {
-//            container.removeView((LinearLayout) object);
+//    @Override
+//    public void setProd(ProdModel prodModel) {
+//        if (prodModel != null) {
+//            Toast.makeText(this, "" + prodModel.getSlug(), Toast.LENGTH_SHORT).show();
+//            Intent i = new Intent(this, ItemDetailsActivity.class);
+//            i.putExtra("prodctModel", prodModel.getSlug());
+//            startActivity(i);
 //        }
 //    }
 }

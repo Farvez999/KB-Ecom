@@ -2,7 +2,26 @@ package com.frz.korearbazar.model;
 
 public class ProdDetailsModel {
 
-    private String name, details, stock, photo, price,previous_price ,slug, size, size_qty, size_price, color, galleries,showPrice,setCurrency,showPreviousPrice;
+
+
+    public ProdDetailsModel(String name, String details, String stock, String photo, String slug, String size, String size_qty, String size_price, String color, String galleries, String showPrice, String setCurrency, String showPreviousPrice, String user) {
+        this.name = name;
+        this.details = details;
+        this.stock = stock;
+        this.photo = photo;
+        this.slug = slug;
+        this.size = size;
+        this.size_qty = size_qty;
+        this.size_price = size_price;
+        this.color = color;
+        this.galleries = galleries;
+        this.showPrice = showPrice;
+        this.setCurrency = setCurrency;
+        this.showPreviousPrice = showPreviousPrice;
+        this.user = user;
+    }
+
+    private String name, details, stock, photo, slug, size, size_qty, size_price, color, galleries,showPrice,setCurrency,showPreviousPrice,user;
 
     public String getName() {
         return name;
@@ -34,22 +53,6 @@ public class ProdDetailsModel {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }
-
-    public String getPrice() {
-        return price;
-    }
-
-    public void setPrice(String price) {
-        this.price = price;
-    }
-
-    public String getPrevious_price() {
-        return previous_price;
-    }
-
-    public void setPrevious_price(String previous_price) {
-        this.previous_price = previous_price;
     }
 
     public String getSlug() {
@@ -123,4 +126,14 @@ public class ProdDetailsModel {
     public void setShowPreviousPrice(String showPreviousPrice) {
         this.showPreviousPrice = showPreviousPrice;
     }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+
 }

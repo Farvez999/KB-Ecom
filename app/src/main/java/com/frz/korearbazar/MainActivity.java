@@ -1624,7 +1624,8 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
         if (newProdModel != null) {
             Toast.makeText(this, "" + newProdModel.getSlug(), Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, ItemDetailsActivity.class);
-            i.putExtra("prodctModel", newProdModel);
+            i.putExtra("prodctModel", newProdModel.getSlug());
+            i.putExtra("price",newProdModel.getShowPrice());
             startActivity(i);
         }
     }

@@ -21,6 +21,28 @@ public class ProdModel implements Serializable {
     private String setCurrency;
     private String showPreviousPrice;
 
+    public ProdModel(String id, String user_id, String name, String slug, String features, String colors, String thumbnail, String price, String previous_price, String attributes, String size, String size_price, String discount_date, String showPrice, String setCurrency, String showPreviousPrice) {
+        this.id = id;
+        this.user_id = user_id;
+        this.name = name;
+        this.slug = slug;
+        this.features = features;
+        this.colors = colors;
+        this.thumbnail = thumbnail;
+        this.price = price;
+        this.previous_price = previous_price;
+        this.attributes = attributes;
+        this.size = size;
+        this.size_price = size_price;
+        this.discount_date = discount_date;
+        this.showPrice = showPrice;
+        this.setCurrency = setCurrency;
+        this.showPreviousPrice = showPreviousPrice;
+    }
+
+    public ProdModel() {
+
+    }
 
     public String getId() {
         return id;

@@ -17,6 +17,7 @@ import com.frz.korearbazar.activity.CategoryActivity;
 import com.frz.korearbazar.activity.ItemDetailsActivity;
 import com.frz.korearbazar.activity.LoginActivity;
 import com.frz.korearbazar.activity.ProfileActivity;
+import com.frz.korearbazar.activity.VendorRegisterActivity;
 import com.frz.korearbazar.adapter.BSBannerAdapter;
 import com.frz.korearbazar.adapter.BannerTopSmallAdapter;
 import com.frz.korearbazar.adapter.BestSellerAdapter;
@@ -171,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
         setSupportActionBar(toolbar);
         pm = new ArrayList<>();
         sessionManager = new SessionManager(this);
+        Log.e("token",sessionManager.getToken());
 
         //Slider
         sliderRecyclerView = findViewById(R.id.recyclerSlider);
@@ -298,6 +300,17 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
+                finish();
+                return false;
+            }
+        });
+
+        navigationView.getMenu().findItem(R.id.nav_vendorRe).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                drawer.close();
+                Intent intent = new Intent(MainActivity.this, VendorRegisterActivity.class);
+                startActivity(intent);
                 finish();
                 return false;
             }

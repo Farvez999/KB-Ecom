@@ -14,8 +14,8 @@ import retrofit2.http.Headers;
 
 public interface ApiInterface {
 
-    String JSONURL = "http://ecom.hrventure.xyz/public/";
-//   String JSONURL = "http://192.168.0.103/project/hrv-ecom/public/";
+       String JSONURL = "http://ecom.hrventure.xyz/public/";
+    //String JSONURL = "http://192.168.0.108/project/hrv-ecom/public/";
     String CategoryImgUrl = "assets/images/categories/";
     String ProdImgUrl = "assets/images/thumbnails/";
     String SlidersImgUrl = "assets/images/sliders/";
@@ -40,6 +40,9 @@ public interface ApiInterface {
     @GET("api/extra")
     Call<String> getBestProducts();
 
+    @GET("api/profile")
+    Call<String> getProfile();
+
     @GET("api/item/")
     Call<String> getRelatedProductsDetails();
 
@@ -62,16 +65,22 @@ public interface ApiInterface {
 
 
 
-    @FormUrlEncoded // annotation used in POST type requests
-    //@POST("/retrofit/register.php")
+    @FormUrlEncoded
     @retrofit.http.POST("/login")// API's endpoints
-    public void login(@retrofit.http.Field("email") String email,
-                      @retrofit.http.Field("password") String password,
+    public void login(@Field("email") String email,
+                      @Field("password") String password,
                       @Field("logintype") String logintype,
+                      //@Header("Authorization") String Bearer,
                       Callback<SignInResponse> callback);
 
-    @FormUrlEncoded // annotation used in POST type requests
-    //@POST("/retrofit/register.php")
+    @FormUrlEncoded
+    @retrofit.http.POST("/profile")// API's endpoints
+    public void profile(@Header("Authorization") String Bearer,
+                      Callback<SignInResponse> callback);
+
+
+
+    @FormUrlEncoded
     @retrofit.http.POST("/user/register")// API's endpoints
     public void registration(@retrofit.http.Field("name") String name,
                              @retrofit.http.Field("email") String email,
@@ -82,8 +91,6 @@ public interface ApiInterface {
                              @Field("logintype") String logintype,
                              Callback<SignUpResponse> callback);
 
-//    @POST("login/{email}/{password}")
-//    Call login(@Path("email") String username, @Path("password") String password);
 
 
     @FormUrlEncoded // annotation used in POST type requests

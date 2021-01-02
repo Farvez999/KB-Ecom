@@ -9,6 +9,7 @@ public class SignInResponse {
 
     private String success;
     private String message;
+    private String token;
     private int userid;
 
     public User getUser() {
@@ -37,6 +38,14 @@ public class SignInResponse {
         this.message = message;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public int getUserid() {
         return userid;
     }
@@ -53,4 +62,15 @@ public class SignInResponse {
         this.additionalProperties.put(name, value);
     }
 
+    @Override
+    public String toString() {
+        return "SignInResponse{" +
+                "user=" + user +
+                ", success='" + success + '\'' +
+                ", message='" + message + '\'' +
+                ", token='" + token + '\'' +
+                ", userid=" + userid +
+                ", additionalProperties=" + additionalProperties +
+                '}';
+    }
 }

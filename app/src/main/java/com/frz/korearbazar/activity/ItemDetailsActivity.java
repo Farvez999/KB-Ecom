@@ -153,7 +153,7 @@ private ArrayList<ProdModel> rExampleList;
         getdata();
 
         ///Related Product
-        parseJSON();
+        getRelatedProduct();
 
 
         imgDtails =findViewById(R.id.imgDtails);
@@ -276,6 +276,7 @@ private ArrayList<ProdModel> rExampleList;
         String name = txtTitle.getText().toString();
         String price = txtPrice.getText().toString();
         String quantity = quantitynumber.getText().toString();
+
 
         CartModel cartModel = new CartModel(name,price,quantity,imgUrl);
         long insertData=   cartDB.addInsert(cartModel);
@@ -422,7 +423,7 @@ private ArrayList<ProdModel> rExampleList;
     }
 
     //Related Product
-    private void parseJSON() {
+    private void getRelatedProduct() {
         String url = JSONURL+ProdDetailsUrl+slug;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new com.android.volley.Response.Listener<JSONObject>() {

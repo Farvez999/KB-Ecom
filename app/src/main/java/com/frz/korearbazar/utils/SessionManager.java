@@ -35,6 +35,18 @@ public class SessionManager {
         mEditor.apply();
     }
 
+    public void setToken(String token){
+        mPrefs = context.getSharedPreferences(SHAER_FREF_NAME,Context.MODE_PRIVATE);
+        mEditor = mPrefs.edit();
+        mEditor.putString("token",token);
+        mEditor.apply();
+    }
+
+    public String getToken(){
+        mPrefs = context.getSharedPreferences(SHAER_FREF_NAME,Context.MODE_PRIVATE);
+        return mPrefs.getString("token","");
+    }
+
     public boolean isLoggedIn(){
         mPrefs = context.getSharedPreferences(SHAER_FREF_NAME,Context.MODE_PRIVATE);
         return mPrefs.getBoolean("logged",false);

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     SignInResponse signInResponse;
     EditText email;
     EditText password;
-    TextView Login,btn_sign;
+    TextView Login,btn_sign,btn_vendorR;
     Integer user_id;
     SessionManager sessionManager;
 
@@ -51,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password);
         Login = (TextView) findViewById(R.id.Login);
         btn_sign = (TextView) findViewById(R.id.btn_sign);
+        btn_vendorR = (TextView) findViewById(R.id.btn_vendorR);
 
 
         Login.setOnClickListener(new View.OnClickListener() {
@@ -71,6 +73,14 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         //Toast.makeText(this, ""+user.getEmail(), Toast.LENGTH_SHORT).show();
+
+        btn_vendorR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, VendorRegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void logIn() {
@@ -81,24 +91,19 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait"); // set message
         progressDialog.show(); // show progress dialog
 
-        // Api is a class in which we define a method getClient() that returns the API Interface class object
-        // registration is a POST request type method in which we are sending our field's data
         Api.getClient().login(
                 email.getText().toString().trim(),
                 password.getText().toString().trim(),
-                "email", new Callback<SignInResponse>() {
+                "email", new Callback<SignInResponse>(){
                     @Override
                     public void success(SignInResponse signInResponse, Response response) {
-                        // in this method we will get the response from API
                         progressDialog.dismiss(); //dismiss progress dialog
                         signInResponse = signInResponse;
                         user_id = signInResponse.getUserid();
                         sessionManager.saveUser(signInResponse.getUser());
-                        Toast.makeText(LoginActivity.this, signInResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                        SharedPreferences.Editor editor = getSharedPreferences("USER_LOGIN", MODE_PRIVATE).edit();
-//                        editor.putString("email",user.getEmail());
-//                        editor.putString("name",user.getName());
-//                        editor.commit();
+                        sessionManager.setToken("Bearer "+signInResponse.getToken());
+                        Toast.makeText(LoginActivity.this, ""+signInResponse.getToken(), Toast.LENGTH_SHORT).show();
+                        Log.e("login",""+signInResponse.toString());
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

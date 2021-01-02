@@ -54,7 +54,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        //http://ecom.hrventure.xyz/assets/images/thumbnails/
+        //http://ecom.hrventure.xyz/public/assets/images/products/1608651761AYGJiPqU.jpg
         final CartModel cartModel = cartModelArrayList.get(position);
         cartModelArrayList.get(holder.getAdapterPosition());
 //        String cff=cartModelArrayList.get(position).getPrice();
@@ -67,6 +67,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 //        }
 //        sum= Integer.parseInt(sum+cartModelArrayList.get(position).getPrice());
 //        sum = Float.parseFloat(sum + cartModelArrayList.get(position).getPrice());
+
         Picasso.get().load(JSONURL+PDetailsImgUrl+cartModelArrayList.get(position).getImage()).into(holder.iv);
         holder.name.setText(cartModelArrayList.get(position).getTitle());
         holder.quantity.setText(cartModelArrayList.get(position).getQuantity());

@@ -1468,7 +1468,7 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Responsestring", response.body().toString());
+                //Log.i("Responsestring", response.body().toString());
                 //Toast.makeText()
                 if (response.isSuccessful()) {
                     if (response.body() != null) {

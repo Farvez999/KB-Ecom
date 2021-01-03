@@ -5,8 +5,8 @@ public class User {
     int id;
     String name,photo,zip,city,country,address,phone,email,created_at,updated_at,is_provider,status,verification_link,email_verified, affilate_code,affilate_income,shop_name,owner_name,shop_number,shop_address,reg_number,shop_message,shop_details,shop_image,f_url,g_url,t_url,l_url,is_vendor,f_check,g_check,t_check,l_check,mail_sent,shipping_cost,current_balance,date,ban;
 
-    public User() {
-    }
+//    public User(int id, String name, String photo, String zip, String city, String country, String address, String phone, String email, String created_at, String updated_at, String is_provider, String status, String verification_link, String email_verified, String affilate_code, String affilate_income, String shop_name, String owner_name, String shop_number, String shop_address, String reg_number, String shop_message, String shop_details, String shop_image, String f_url, String g_url, String t_url, String l_url, String is_vendor, String f_check, String g_check, String t_check, String l_check, String mail_sent, String shipping_cost, String current_balance, String date, String ban) {
+//    }
 
     public User(int id, String name, String photo, String zip, String city, String country, String address) {
         this.id = id;

@@ -14,8 +14,8 @@ import retrofit2.http.Headers;
 
 public interface ApiInterface {
 
-       String JSONURL = "http://ecom.hrventure.xyz/public/";
-    //String JSONURL = "http://192.168.0.108/project/hrv-ecom/public/";
+    //  String JSONURL = "http://ecom.hrventure.xyz/public/";
+     String JSONURL = "http://192.168.0.108/project/hrv-ecom/public/";
     String CategoryImgUrl = "assets/images/categories/";
     String ProdImgUrl = "assets/images/thumbnails/";
     String SlidersImgUrl = "assets/images/sliders/";
@@ -40,8 +40,16 @@ public interface ApiInterface {
     @GET("api/extra")
     Call<String> getBestProducts();
 
-    @GET("api/profile")
-    Call<String> getProfile();
+    @GET("api/user/profile")
+    Call<String> getProfile(
+            @Header("Authorization") String Bearer
+    );
+
+//    @GET("api/profile")
+//    Call<String> getProfile(
+//            @Header("Authorization") String Bearer
+//    );
+
 
     @GET("api/item/")
     Call<String> getRelatedProductsDetails();
@@ -50,18 +58,6 @@ public interface ApiInterface {
     Call<String> getProductsDetails();
 
 
-
-    @FormUrlEncoded // annotation used in POST type requests
-    //@POST("/retrofit/register.php")
-    @retrofit.http.POST("/token")// API's endpoints
-    @Headers({
-            "Accept: application/json",
-            "Content-type: application/x-www-form-urlencoded",
-    })
-    Callback<TokenResponse> getToken(
-           // @Field("grant_type") String grant_type,
-            @Field("email") String email,
-            @Field("password") String password);
 
 
 
@@ -73,10 +69,10 @@ public interface ApiInterface {
                       //@Header("Authorization") String Bearer,
                       Callback<SignInResponse> callback);
 
-    @FormUrlEncoded
-    @retrofit.http.POST("/profile")// API's endpoints
-    public void profile(@Header("Authorization") String Bearer,
-                      Callback<SignInResponse> callback);
+//    @FormUrlEncoded
+//    @retrofit.http.GET("api/profile")// API's endpoints
+//    public void profile(@Header("Authorization") String Bearer,
+//                      Callback<SignInResponse> callback);
 
 
 
@@ -104,5 +100,6 @@ public interface ApiInterface {
                              @retrofit.http.Field("password_confirmation") String password_confirmation,
                              @Field("logintype") String logintype,
                              Callback<SignUpResponse> callback);
+
 
 }

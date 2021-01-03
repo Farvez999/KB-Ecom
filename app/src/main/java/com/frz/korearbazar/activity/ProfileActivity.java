@@ -23,7 +23,9 @@ import com.frz.korearbazar.ApiInterface;
 import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.BigSavePAdapter;
+import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
+import com.frz.korearbazar.model.User;
 import com.frz.korearbazar.utils.SessionManager;
 
 import org.json.JSONArray;
@@ -43,7 +45,8 @@ import static com.frz.korearbazar.ApiInterface.ProdDetailsUrl;
 
 public class ProfileActivity extends AppCompatActivity {
 
-//    WebView webView;
+    private ArrayList<User> mExampleList;
+
     TextView txt_save,ed_username,ed_email,ed_alternatmob,ed_address,ed_city,ed_zip;
     SessionManager sessionManager;
 
@@ -56,8 +59,8 @@ public class ProfileActivity extends AppCompatActivity {
         setTitle("My Profile");
 
         sessionManager = new SessionManager(this);
-        Log.e("token",sessionManager.getToken());
-        Toast.makeText(this, ""+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
+//        Log.e("token",sessionManager.getToken());
+//        Toast.makeText(this, ""+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
 
         mRequestQueue = Volley.newRequestQueue(this);
         getdata();
@@ -77,12 +80,12 @@ public class ProfileActivity extends AppCompatActivity {
         String city=prefs.getString("city",null);
         String zip=prefs.getString("zip",null);
         String address=prefs.getString("address",null);
-        ed_username.setText(name);
-        ed_email.setText(email);
-        ed_alternatmob.setText(phone);
-        ed_city.setText(city);
-        ed_zip.setText(zip);
-        ed_address.setText(address);
+//        ed_username.setText(name);
+//        ed_email.setText(email);
+//        ed_alternatmob.setText(phone);
+//        ed_city.setText(city);
+//        ed_zip.setText(zip);
+//        ed_address.setText(address);
 
 //        String userName = "Hello "+ sessionManager.getUser().getName();
 //        ed_username.setText(userName);
@@ -109,7 +112,8 @@ public class ProfileActivity extends AppCompatActivity {
                 .build();
 
         ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getProfile();
+        Call<String> call = api.getProfile(sessionManager.getToken());
+        Toast.makeText(this, "Check session Manager"+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -141,30 +145,89 @@ public class ProfileActivity extends AppCompatActivity {
             JSONObject obj = new JSONObject(jsonresponse);
 //            if(obj.optString("status").equals("true")){
 
-//            JSONObject obj = new JSONObject(jsonresponse);
-//            Toast.makeText(this, "Check Obj"+obj, Toast.LENGTH_SHORT).show();
+
 
             ArrayList<ProdModel> bsModelRecyclerArrayList = new ArrayList<>();
-            JSONArray dataArray = obj.getJSONArray("big_products");
+            JSONObject jsonObject=obj.getJSONObject("user");
 
-            Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "user "+jsonObject, Toast.LENGTH_SHORT).show();
 
-            for (int i = 0; i < dataArray.length(); i++) {
+            String name = jsonObject.getString("name");
+            String zip = jsonObject.getString("zip");
+            String city = jsonObject.getString("city");
 
-                ProdModel bsModelRecycler = new ProdModel();
-                JSONObject dataobj = dataArray.getJSONObject(i);
+            //Toast.makeText(this, "Last Check"+name, Toast.LENGTH_SHORT).show();
+            ed_username.setText(name);
+            ed_city.setText(city);
+            ed_zip.setText(zip);
 
-                bsModelRecycler.setThumbnail(dataobj.getString("thumbnail"));
-                bsModelRecycler.setName(dataobj.getString("name"));
-                bsModelRecycler.setSlug(dataobj.getString("slug"));
+//            for (int i = 0; i < dataArray.length(); i++) {
+//
+//                ProdModel bsModelRecycler = new ProdModel();
+//                JSONObject dataobj = dataArray.getJSONObject(i);
+//
+//                bsModelRecycler.setThumbnail(dataobj.getString("thumbnail"));
+//                bsModelRecycler.setName(dataobj.getString("name"));
+//                bsModelRecycler.setSlug(dataobj.getString("slug"));
+//
+//                bsModelRecycler.setShowPrice(dataobj.getString("showPrice"));
+//                bsModelRecycler.setShowPreviousPrice(dataobj.getString("showPreviousPrice"));
+//
+//                bsModelRecyclerArrayList.add(bsModelRecycler);
+//
+//            }
 
-                bsModelRecycler.setShowPrice(dataobj.getString("showPrice"));
-                bsModelRecycler.setShowPreviousPrice(dataobj.getString("showPreviousPrice"));
-
-                bsModelRecyclerArrayList.add(bsModelRecycler);
-
-            }
-
+//            int id = jsonObject.getInt("id");
+//            String name = jsonObject.getString("name");
+//            String photo = jsonObject.getString("photo");
+//            String zip = jsonObject.getString("zip");
+//            String city = jsonObject.getString("city");
+//            String country = jsonObject.getString("country");
+//            String address = jsonObject.getString("address");
+//            String phone = jsonObject.getString("phone");
+//            String email = jsonObject.getString("email");
+//            String created_at = jsonObject.getString("created_at");
+//            String updated_at = jsonObject.getString("updated_at");
+//            String is_provider = jsonObject.getString("is_provider");
+//
+//            String status = jsonObject.getString("status");
+//            String verification_link = jsonObject.getString("verification_link");
+//            String email_verified = jsonObject.getString("email_verified");
+//            String affilate_code = jsonObject.getString("affilate_code");
+//            String affilate_income = jsonObject.getString("affilate_income");
+//            String shop_name = jsonObject.getString("shop_name");
+//            String owner_name = jsonObject.getString("owner_name");
+//            String shop_number = jsonObject.getString("shop_number");
+//            String shop_address = jsonObject.getString("shop_address");
+//            String reg_number = jsonObject.getString("reg_number");
+//            String shop_message = jsonObject.getString("shop_message");
+//
+//            String shop_details = jsonObject.getString("shop_details");
+//            String shop_image = jsonObject.getString("shop_image");
+//            String f_url = jsonObject.getString("f_url");
+//            String g_url = jsonObject.getString("g_url");
+//            String t_url = jsonObject.getString("t_url");
+//            String l_url = jsonObject.getString("l_url");
+//            String is_vendor = jsonObject.getString("is_vendor");
+//            String f_check = jsonObject.getString("f_check");
+//            String g_check = jsonObject.getString("g_check");
+//            String t_check = jsonObject.getString("t_check");
+//            String l_check = jsonObject.getString("l_check");
+//
+//            String mail_sent = jsonObject.getString("mail_sent");
+//            String shipping_cost = jsonObject.getString("shipping_cost");
+//            String current_balance = jsonObject.getString("current_balance");
+//            String date = jsonObject.getString("date");
+//            String ban = jsonObject.getString("ban");
+//
+//
+//            mExampleList.add(new User(id,name,photo,zip,city,country,address,phone,email,created_at,updated_at,is_provider,status,verification_link,email_verified, affilate_code,affilate_income,shop_name,owner_name,shop_number,shop_address,reg_number,shop_message, shop_details,shop_image,f_url,g_url,t_url,l_url,is_vendor,f_check,g_check,t_check,l_check, mail_sent,shipping_cost,current_balance,date,ban));
+//            ed_username.setText(name);
+//            ed_email.setText(email);
+//            ed_alternatmob.setText(phone);
+//            ed_city.setText(city);
+//            ed_zip.setText(zip);
+//            ed_address.setText(address);
 //            BSProdAdapter = new BigSavePAdapter(this, bsModelRecyclerArrayList,this);
 //            BSProdRV.setAdapter(BSProdAdapter);
 //            BSProdRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));

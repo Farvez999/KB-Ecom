@@ -1463,12 +1463,12 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
 
         ApiInterface api = retrofit.create(ApiInterface.class);
 
-        Call<String> call = api.getString();
+        Call<String> call = api.getCategory();
 
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                //Log.i("Responsestring", response.body().toString());
+                Log.i("Responsestring", response.body().toString());
                 //Toast.makeText()
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
@@ -1506,6 +1506,7 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
 
                 CateModel modelRecycler = new CateModel();
                 JSONObject dataobj = dataArray.getJSONObject(i);
+
 
                 modelRecycler.setPhoto(dataobj.getString("photo"));
                 modelRecycler.setName(dataobj.getString("name"));

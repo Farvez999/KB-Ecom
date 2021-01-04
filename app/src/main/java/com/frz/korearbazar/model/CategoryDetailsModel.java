@@ -1,25 +1,7 @@
 package com.frz.korearbazar.model;
 
-import java.io.Serializable;
-
-public class CateModel implements Serializable {
-
-    private String id;
-    private String name;
-    private String slug;
-    private String status;
-    private String photo;
-    private String is_featured;
-    private String image;
-    private String subs;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+public class CategoryDetailsModel {
+    String name,slug,status,photo,image;
 
     public String getName() {
         return name;
@@ -53,27 +35,11 @@ public class CateModel implements Serializable {
         this.photo = photo;
     }
 
-    public String getIs_featured() {
-        return is_featured;
-    }
-
-    public void setIs_featured(String is_featured) {
-        this.is_featured = is_featured;
-    }
-
     public String getImage() {
         return image;
     }
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public String getSubs() {
-        return subs;
-    }
-
-    public void setSubs(String subs) {
-        this.subs = subs;
     }
 }

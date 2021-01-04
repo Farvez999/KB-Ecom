@@ -109,8 +109,6 @@ public class SignUpActivity extends AppCompatActivity {
                         progressDialog.dismiss(); //dismiss progress dialog
                         signUpResponsesData = signUpResponse;
                         user_id = signUpResponse.getUserid();
-                        //sessionManager.createSession(user_id);
-                        // display the message getting from web api
                         Toast.makeText(SignUpActivity.this, signUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(SignUpActivity.this, LoginActivity.class);
                         startActivity(intent);

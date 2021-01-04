@@ -14,7 +14,7 @@ import retrofit2.http.Headers;
 
 public interface ApiInterface {
 
-    //  String JSONURL = "http://ecom.hrventure.xyz/public/";
+    //   String JSONURL = "http://ecom.hrventure.xyz/public/";
      String JSONURL = "http://192.168.0.108/project/hrv-ecom/public/";
     String CategoryImgUrl = "assets/images/categories/";
     String ProdImgUrl = "assets/images/thumbnails/";
@@ -33,6 +33,13 @@ public interface ApiInterface {
 
     @GET("api/setting")
     Call<String> getString();
+
+    @GET("api/setting")
+    Call<String> getCategory();
+
+    @GET("api/category")
+    Call<String> getCategoryDetails();
+
 
     @GET("api")
     Call<String> getProducts();

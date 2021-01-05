@@ -25,6 +25,7 @@ import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.CateAdapter;
 import com.frz.korearbazar.adapter.ProdDetailsAdapter;
 import com.frz.korearbazar.adapter.TopRatedPAdapter;
+import com.frz.korearbazar.model.BSBannerModel;
 import com.frz.korearbazar.model.CateModel;
 import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
@@ -79,8 +80,8 @@ public class CategoryDetailsActivity extends AppCompatActivity {
     //Product Details
     private void ProdDetailsfetchJSON() {
         String url = "http://192.168.0.108/project/hrv-ecom/public/api/category/"+slug;
-        Toast.makeText(this, "URL "+url, Toast.LENGTH_SHORT).show();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+        //Toast.makeText(this, "URL "+url, Toast.LENGTH_SHORT).show();
+        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new com.android.volley.Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -89,35 +90,15 @@ public class CategoryDetailsActivity extends AppCompatActivity {
                         try {
 
 
-                            JSONObject features = response.getJSONObject("data");
-                            String name = features.getString("name");
-                            Toast.makeText(CategoryDetailsActivity.this, "data" + name, Toast.LENGTH_SHORT).show();
+                            JSONObject data = response.getJSONObject("data");
+//                            Toast.makeText(CategoryDetailsActivity.this, "Data" +data, Toast.LENGTH_SHORT).show();
+                             //String x = data.getString("cat");
+                            //JSONArray contacts = data.getJSONArray("prods");
+                            String categoryProduct = data.getString("prods");
+                            Toast.makeText(CategoryDetailsActivity.this, "prods "+categoryProduct, Toast.LENGTH_SHORT).show();
 
 
 
-//                            JSONObject features = response.getJSONObject("data");
-//                            Toast.makeText(CategoryDetailsActivity.this, "data"+features, Toast.LENGTH_SHORT).show();
-
-                            //JSONObject jsonObject = response.getJSONObject("cat");
-                            //Toast.makeText(CategoryDetailsActivity.this, "cat"+jsonObject, Toast.LENGTH_SHORT).show();
-//                            JSONObject jsonObject = new JSONObject(String.valueOf(response));
-//                            JSONArray jsonArray = jsonObject.getJSONArray("attributes");
-//                            Toast.makeText(CategoryDetailsActivity.this, "attributes"+jsonArray, Toast.LENGTH_SHORT).show();
-//                            for (int i = 0; i < jsonArray.length(); i++) {
-//                                JSONObject jo = jsonArray.getJSONObject(i);
-//                                // Do you fancy stuff
-//                                // Example: String gifUrl = jo.getString("url");
-//                            }
-
-//                            for (int i = 0; i < jsonArray.length(); i++) {
-//                                JSONObject hit = jsonArray.getJSONObject(i);
-//                                String creatorName = hit.getString("user");
-//                                String imageUrl = hit.getString("webformatURL");
-//                                int likeCount = hit.getInt("likes");
-//                                mExampleList.add(new ExampleItem(imageUrl, creatorName, likeCount));
-//                            }
-//                            mExampleAdapter = new ExampleAdapter(pixabay.this, mExampleList);
-//                            mRecyclerView.setAdapter(mExampleAdapter);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

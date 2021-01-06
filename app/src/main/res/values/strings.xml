@@ -26,4 +26,8 @@
     <string name="txt_tax">Tax :</string>
     <string name="txt_total">Total :</string>
     <string name="txt_shipping">Shipping</string>
+
+    <string name="clear_all">Clear All</string>
+    <string name="delete_all_orders">Are you sure you want to delete all orders?</string>
+    <string name="cart_clean">Your cart is as clean as the first day.</string>
 </resources>

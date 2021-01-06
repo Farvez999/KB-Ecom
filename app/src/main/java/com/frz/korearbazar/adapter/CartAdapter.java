@@ -78,6 +78,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
               //  Toast.makeText(context, "Total"+sum, Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.minImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        holder.plusImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override
@@ -90,7 +104,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         TextView name;
         TextView price;
         TextView quantity;
-        ImageView iv,img_delete;
+        ImageView iv,img_delete,minImage,plusImage;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,6 +114,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             price = (TextView) itemView.findViewById(R.id.txt_price);
             iv = (ImageView) itemView.findViewById(R.id.img_icon);
             img_delete = (ImageView) itemView.findViewById(R.id.img_delete);
+            minImage = (ImageView) itemView.findViewById(R.id.minImage);
+            plusImage = (ImageView) itemView.findViewById(R.id.plusImage);
 
             itemView.setOnClickListener(this);
         }

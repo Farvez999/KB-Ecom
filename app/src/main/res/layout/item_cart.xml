@@ -116,7 +116,7 @@
                         tools:ignore="NewApi">
 
                         <ImageView
-
+                            android:id="@+id/minImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"
@@ -148,7 +148,7 @@
                         tools:ignore="NewApi">
 
                         <ImageView
-
+                            android:id="@+id/plusImage"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:padding="5dp"

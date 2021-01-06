@@ -1,10 +1,14 @@
 package com.frz.korearbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
@@ -16,6 +20,7 @@ import com.frz.korearbazar.Database.CartDB;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.CartAdapter;
 import com.frz.korearbazar.model.CartModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +30,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView orderRecyclerView;
     Button orderButton;
 
-    TextView txtTotal;
+    TextView txtTotal,textClear;
 
     CartDB cartDB;
     List<CartModel> cartModelList;
@@ -40,6 +45,7 @@ public class CartActivity extends AppCompatActivity {
 
         orderRecyclerView = findViewById(R.id.orderRecycler);
         txtTotal = findViewById(R.id.txtTotal);
+        textClear = findViewById(R.id.txtClear);
         orderButton = findViewById(R.id.order);
 
         cartDB=new CartDB(this);
@@ -102,7 +108,7 @@ public class CartActivity extends AppCompatActivity {
             //pricWithStr = pricWithStr.replaceAll("[^\\d.]", "");
             //float pp = Float.parseFloat(pricWithStr);
 
-                double basePrice = 0;
+        double basePrice = 0;
 
         for (int i = 0; i<cartModelList.size(); i++)
         {
@@ -120,8 +126,18 @@ public class CartActivity extends AppCompatActivity {
             txtTotal.setText(aa);
         }
 
+        textClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (cartModelList.size() > 0)
+                {
+                    dialogClearAll();
+                }
+            }
+        });
 
 
+        final double finalBasePrice = basePrice;
 
         orderButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,8 +145,7 @@ public class CartActivity extends AppCompatActivity {
                 cartDB.close();
 
                 Intent intent = new Intent(CartActivity.this, CheckoutActivity.class);
-//                intent.putExtra("tax", str_tax);
-//                intent.putExtra("currency_code", str_currency_code);
+                intent.putExtra("name", finalBasePrice);
                 startActivity(intent);
             }
         });
@@ -153,5 +168,62 @@ public class CartActivity extends AppCompatActivity {
         }
 
         return total;
+    }
+
+    private void dialogClearAll()
+    {
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+        {
+            builder = new AlertDialog.Builder(CartActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else
+        {
+            builder = new AlertDialog.Builder(CartActivity.this);
+        }
+        builder.setTitle(R.string.clear_all)
+                .setMessage(R.string.delete_all_orders)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        clearAll();
+                        showMessage(true, getString(R.string.cart_clean));
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener()
+                {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        // do nothing
+                    }
+                })
+                .show();
+    }
+
+    private void clearAll()
+    {
+        cartModelList.clear();
+
+        //cartModelList= cartDB.close();
+//        orderAdapter.notifyDataSetChanged();
+//
+//        updateBadge();
+//        updateOrderTotal();
+//        handleOrderDrawer();
+    }
+
+    private void showMessage(Boolean isSuccessful, String message)
+    {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG);
+
+        if (isSuccessful)
+        {
+            snackbar.getView().setBackgroundColor(ContextCompat.getColor(CartActivity.this, R.color.colorAccent));
+        } else
+        {
+            snackbar.getView().setBackgroundColor(ContextCompat.getColor(CartActivity.this, R.color.colorRad));
+        }
+
+        snackbar.show();
     }
 }

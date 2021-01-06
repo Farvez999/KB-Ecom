@@ -203,6 +203,11 @@
             </LinearLayout>
 
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/checkRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">

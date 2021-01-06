@@ -2,6 +2,7 @@ package com.frz.korearbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -42,6 +43,10 @@ public class CheckoutActivity extends AppCompatActivity {
     List<CartModel> cartModelList;
 
     CartAdapter cartAdapter;
+
+    Double totalPrice;
+
+    RecyclerView orderRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +54,8 @@ public class CheckoutActivity extends AppCompatActivity {
         setTitle("Check Out");
 
         sessionManager = new SessionManager(this);
+
+        orderRecyclerView = findViewById(R.id.checkRecyclerView);
 
         ed_username = findViewById(R.id.username);
         ed_user_email = findViewById(R.id.user_email);
@@ -65,25 +72,20 @@ public class CheckoutActivity extends AppCompatActivity {
 
         txt_continus = findViewById(R.id.txt_continus);
 
-//        cartDB = new CartDB(this);
-//        try {
-//            cartDB.openDataBase();
-//        } catch (SQLException sqle) {
-//            throw sqle;
-//        }
 
         cartDB=new CartDB(this);
         cartModelList=new ArrayList<>();
         if (cartDB.getAllData().size()>0){
             cartModelList= cartDB.getAllData();
-           // cartAdapter =  new CartAdapter(this,cartModelList);
+            cartAdapter =  new CartAdapter(this,cartModelList);
 
-            //orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-            //
+            orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+            orderRecyclerView.setAdapter(cartAdapter);
+
 //            CartModel cartModel=new CartModel();
 //            edt_order_list.setText("" +cartModel.getTitle());
 
-            Toast.makeText(this, ""+cartModelList, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Cart "+cartModelList, Toast.LENGTH_SHORT).show();
         }
         else {
             Toast.makeText(this, "Cart is Empty", Toast.LENGTH_SHORT).show();
@@ -112,6 +114,7 @@ public class CheckoutActivity extends AppCompatActivity {
         txt_continus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Toast.makeText(CheckoutActivity.this, "Check Out Successful", Toast.LENGTH_SHORT).show();
 
             }
@@ -121,7 +124,18 @@ public class CheckoutActivity extends AppCompatActivity {
 
         //getDataFromDatabase();
         submitOrder();
+        getTaxCurrency();
     }
+
+    public void getTaxCurrency() {
+        Intent intent = getIntent();
+        totalPrice=intent.getDoubleExtra("name",0);
+        String total= String.valueOf(totalPrice);
+        //Toast.makeText(this, "TOtal"+total, Toast.LENGTH_SHORT).show();
+        edt_order_list.setText(total);
+    }
+
+
 
     private void submitOrder() {
     }
@@ -190,8 +204,7 @@ public class CheckoutActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (sessionManager.isLoggedIn()){
-
-            Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this, "Login Successfully", Toast.LENGTH_SHORT).show();
         }else {
             Intent intent = new Intent(CheckoutActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);

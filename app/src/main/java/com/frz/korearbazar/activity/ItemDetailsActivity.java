@@ -50,7 +50,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
     //Related Products
     private ArrayList<ProdDetailsModel> mExampleList;
 //    private ArrayList<RelatedProdModel> rExampleList;
-private ArrayList<ProdModel> rExampleList;
+    private ArrayList<ProdModel> rExampleList;
     private RelatedProdAdapter mExampleAdapter;
     private RecyclerView mRecyclerView;
 

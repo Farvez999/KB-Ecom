@@ -12,6 +12,7 @@ import android.text.Spanned;
 import android.text.style.StrikethroughSpan;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -23,12 +24,15 @@ import com.android.volley.toolbox.Volley;
 import com.frz.korearbazar.ApiInterface;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.CateAdapter;
+import com.frz.korearbazar.adapter.CategoryDetailsProdAdapter;
 import com.frz.korearbazar.adapter.ProdDetailsAdapter;
+import com.frz.korearbazar.adapter.RelatedProdAdapter;
 import com.frz.korearbazar.adapter.TopRatedPAdapter;
 import com.frz.korearbazar.model.BSBannerModel;
 import com.frz.korearbazar.model.CateModel;
 import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
+import com.google.gson.JsonArray;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -42,6 +46,7 @@ import retrofit2.Callback;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+import static com.frz.korearbazar.ApiInterface.CategoryDetails;
 import static com.frz.korearbazar.ApiInterface.JSONURL;
 import static com.frz.korearbazar.ApiInterface.PDetailsImgUrl;
 import static com.frz.korearbazar.ApiInterface.ProdDetailsUrl;
@@ -52,34 +57,46 @@ public class CategoryDetailsActivity extends AppCompatActivity {
     CateModel cateModel;
 
     private CateAdapter retrofitAdapter;
-    private RecyclerView cateRecyclerView;
 
-    private RequestQueue mRequestQueue;
+
 
     String slug;
+
+    private ArrayList<ProdModel> rExampleList;
+    private RequestQueue rRequestQueue;
+    private CategoryDetailsProdAdapter mExampleAdapter;
+    private RecyclerView mRecyclerView;
+
+    TextView testName,testSlug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category_details);
 
-        cateRecyclerView = findViewById(R.id.category_recycler);
+        mRecyclerView = findViewById(R.id.category_recycler);
 
+        rExampleList = new ArrayList<>();
+        rRequestQueue = Volley.newRequestQueue(this);
 
-        mRequestQueue = Volley.newRequestQueue(this);
+        mRecyclerView = findViewById(R.id.recycler_releted);
+        //mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        mExampleList = new ArrayList<>();
 
         Intent intent = getIntent();
         slug = intent.getStringExtra("mySlug");
-        Toast.makeText(this, "Category "+ slug, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Category "+ slug, Toast.LENGTH_SHORT).show();
 
         ProdDetailsfetchJSON();
+
+        testName = findViewById(R.id.nameR);
+        testSlug = findViewById(R.id.slugR);
     }
 
     //Product Details
     private void ProdDetailsfetchJSON() {
-        String url = "http://192.168.0.108/project/hrv-ecom/public/api/category/"+slug;
+        String url = JSONURL+CategoryDetails+slug;
         //Toast.makeText(this, "URL "+url, Toast.LENGTH_SHORT).show();
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new com.android.volley.Response.Listener<JSONObject>() {
@@ -91,13 +108,42 @@ public class CategoryDetailsActivity extends AppCompatActivity {
 
 
                             JSONObject data = response.getJSONObject("data");
-//                            Toast.makeText(CategoryDetailsActivity.this, "Data" +data, Toast.LENGTH_SHORT).show();
-                             //String x = data.getString("cat");
-                            //JSONArray contacts = data.getJSONArray("prods");
+//
                             String categoryProduct = data.getString("prods");
-                            Toast.makeText(CategoryDetailsActivity.this, "prods "+categoryProduct, Toast.LENGTH_SHORT).show();
+                            JSONArray array = new JSONArray(categoryProduct);
+                            for (int i = 0; i< array.length(); i++){
+                                JSONObject jsonObject = array.getJSONObject(i);
+                                String nameR = jsonObject.getString("name");
+                                String  slugR = jsonObject.getString("slug");
 
+//                                String id = jsonObject.getString("id");
+//                                String user_id = jsonObject.getString("user_id");
+//                                String name = jsonObject.getString("name");
+//                                String slug = jsonObject.getString("slug");
+//                                String features = jsonObject.getString("features");
+//                                String colors = jsonObject.getString("colors");
+//                                String thumbnail = jsonObject.getString("thumbnail");
+//                                String price = jsonObject.getString("price");
+//                                String previous_price = jsonObject.getString("previous_price");
+//                                String attributes = jsonObject.getString("attributes");
+//                                String size = jsonObject.getString("size");
+//                                String size_price = jsonObject.getString("size_price");
+//                                String discount_date = jsonObject.getString("discount_date");
+//
+//                                String showPrice = jsonObject.getString("showPrice");
+//                                String setCurrency = jsonObject.getString("setCurrency");
+//                                String showPreviousPrice = jsonObject.getString("showPreviousPrice");
+//
+//                                rExampleList.add(new ProdModel(id,user_id,name, slug,features,colors, thumbnail,price,previous_price,attributes,size,size_price,discount_date,showPrice,setCurrency,showPreviousPrice));
 
+                                Log.e("name",nameR);
+                                Toast.makeText(CategoryDetailsActivity.this, "name"+nameR, Toast.LENGTH_SHORT).show();
+                                testName.setText(nameR);
+                                testSlug.setText(slugR);
+
+                            }
+                            mExampleAdapter = new CategoryDetailsProdAdapter(CategoryDetailsActivity.this, rExampleList);
+//                            mRecyclerView.setAdapter(mExampleAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -109,7 +155,7 @@ public class CategoryDetailsActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-        mRequestQueue.add(request);
+        rRequestQueue.add(request);
     }
 
 //    private void ProdDetailsfetchJSON() {

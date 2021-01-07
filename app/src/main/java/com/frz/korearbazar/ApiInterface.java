@@ -14,8 +14,8 @@ import retrofit2.http.Headers;
 
 public interface ApiInterface {
 
-    //   String JSONURL = "http://ecom.hrventure.xyz/public/";
-     String JSONURL = "http://192.168.0.108/project/hrv-ecom/public/";
+       String JSONURL = "http://ecom.hrventure.xyz/public/";
+    //  String JSONURL = "http://192.168.0.108/project/hrv-ecom/public/";
     String CategoryImgUrl = "assets/images/categories/";
     String ProdImgUrl = "assets/images/thumbnails/";
     String SlidersImgUrl = "assets/images/sliders/";
@@ -25,7 +25,8 @@ public interface ApiInterface {
     String BlogImgUrl = "assets/images/blogs/";
     String PDetailsImgUrl = "assets/images/products/";
     String RelatedProductImgUrl = "assets/images/thumbnails/";
-    String ProdDetailsUrl="api/item/";
+    String ProdDetailsUrl= "api/item/";
+    String CategoryDetails= "api/category/";
 
 
     //set false if you want price to be displayed in decimal

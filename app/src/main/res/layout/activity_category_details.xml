@@ -32,6 +32,17 @@
             android:layout_height="wrap_content"
             android:padding="5dp" />
 
+
+        <TextView
+            android:id="@+id/nameR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></TextView>
+
+        <TextView
+            android:id="@+id/slugR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></TextView>
+
     </LinearLayout>
 
 </LinearLayout>

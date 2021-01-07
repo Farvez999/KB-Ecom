@@ -112,6 +112,12 @@ public class BestSellerAdapter extends RecyclerView.Adapter<BestSellerAdapter.My
         return bestModelArrayList.size();
     }
 
+    ///search bar work
+    public void filteredList(ArrayList<ProdModel> filteredList) {
+        bestModelArrayList = filteredList;
+        notifyDataSetChanged();
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView name;

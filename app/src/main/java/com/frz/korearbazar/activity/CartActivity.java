@@ -43,6 +43,8 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        setTitle("Cart Activity");
+
         orderRecyclerView = findViewById(R.id.orderRecycler);
         txtTotal = findViewById(R.id.txtTotal);
         textClear = findViewById(R.id.txtClear);

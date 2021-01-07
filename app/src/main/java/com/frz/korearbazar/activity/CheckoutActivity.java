@@ -7,23 +7,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.SQLException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.frz.korearbazar.ApiInterface;
 import com.frz.korearbazar.Database.CartDB;
 import com.frz.korearbazar.R;
-import com.frz.korearbazar.adapter.CartAdapter;
+import com.frz.korearbazar.adapter.CheckOutAdapter;
 import com.frz.korearbazar.model.CartModel;
 import com.frz.korearbazar.utils.SessionManager;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class CheckoutActivity extends AppCompatActivity {
 
@@ -42,7 +39,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
     List<CartModel> cartModelList;
 
-    CartAdapter cartAdapter;
+    CheckOutAdapter cartAdapter;
 
     Double totalPrice;
 
@@ -77,13 +74,11 @@ public class CheckoutActivity extends AppCompatActivity {
         cartModelList=new ArrayList<>();
         if (cartDB.getAllData().size()>0){
             cartModelList= cartDB.getAllData();
-            cartAdapter =  new CartAdapter(this,cartModelList);
+            cartAdapter =  new CheckOutAdapter(this,cartModelList);
 
             orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             orderRecyclerView.setAdapter(cartAdapter);
 
-//            CartModel cartModel=new CartModel();
-//            edt_order_list.setText("" +cartModel.getTitle());
 
             Toast.makeText(this, "Cart "+cartModelList, Toast.LENGTH_SHORT).show();
         }

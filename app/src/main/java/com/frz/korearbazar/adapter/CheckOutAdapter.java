@@ -6,27 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.frz.korearbazar.Interface.CartInterface;
-import com.frz.korearbazar.Interface.ProdInterface;
 import com.frz.korearbazar.R;
-import com.frz.korearbazar.activity.CartActivity;
 import com.frz.korearbazar.model.CartModel;
-import com.frz.korearbazar.model.ProdModel;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.frz.korearbazar.ApiInterface.JSONURL;
 import static com.frz.korearbazar.ApiInterface.PDetailsImgUrl;
-import static com.frz.korearbazar.ApiInterface.ProdImgUrl;
 
-public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
+public class CheckOutAdapter extends RecyclerView.Adapter<CheckOutAdapter.MyViewHolder> {
 
     private LayoutInflater inflater;
     private List<CartModel> cartModelArrayList;
@@ -35,7 +29,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
     int sum= 0;
 
 
-    public CartAdapter(Context ctx, List<CartModel> dataModelArrayList){
+    public CheckOutAdapter(Context ctx, List<CartModel> dataModelArrayList){
         this.context=ctx;
         inflater = LayoutInflater.from(ctx);
         this.cartModelArrayList = dataModelArrayList;
@@ -46,53 +40,23 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = inflater.inflate(R.layout.item_cart, parent, false);
-        CartAdapter.MyViewHolder holder = new CartAdapter.MyViewHolder(itemView);
+    public CheckOutAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = inflater.inflate(R.layout.item_checkout, parent, false);
+        CheckOutAdapter.MyViewHolder holder = new CheckOutAdapter.MyViewHolder(itemView);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CheckOutAdapter.MyViewHolder holder, int position) {
         //http://ecom.hrventure.xyz/public/assets/images/products/1608651761AYGJiPqU.jpg
         final CartModel cartModel = cartModelArrayList.get(position);
         cartModelArrayList.get(holder.getAdapterPosition());
-//        String cff=cartModelArrayList.get(position).getPrice();
-//        int ff=Integer.parseInt(cff);
-//        sum = sum +ff ;
-        //int totalPrice = 0;
-//        for (int i = 0; i<cartModelArrayList.size(); i++)
-//        {
-//            sum += cartModelArrayList.get(i).getPrice();
-//        }
-//        sum= Integer.parseInt(sum+cartModelArrayList.get(position).getPrice());
-//        sum = Float.parseFloat(sum + cartModelArrayList.get(position).getPrice());
 
-//        Picasso.get().load(JSONURL+PDetailsImgUrl+cartModelArrayList.get(position).getImage()).into(holder.iv);
-        Picasso.get().load("http://ecom.hrventure.xyz/public/assets/images/products/"+cartModelArrayList.get(position).getImage()).into(holder.iv);
+        Picasso.get().load(JSONURL+PDetailsImgUrl+cartModelArrayList.get(position).getImage()).into(holder.iv);
         holder.name.setText(cartModelArrayList.get(position).getTitle());
         holder.quantity.setText(cartModelArrayList.get(position).getQuantity());
         holder.price.setText(cartModelArrayList.get(position).getPrice());
-        holder.img_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              //  Toast.makeText(context, "Total"+sum, Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        holder.minImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-
-        holder.plusImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override
@@ -105,7 +69,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         TextView name;
         TextView price;
         TextView quantity;
-        ImageView iv,img_delete,minImage,plusImage;
+        ImageView iv;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -114,9 +78,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             quantity = (TextView) itemView.findViewById(R.id.txtcount);
             price = (TextView) itemView.findViewById(R.id.txt_price);
             iv = (ImageView) itemView.findViewById(R.id.img_icon);
-            img_delete = (ImageView) itemView.findViewById(R.id.img_delete);
-            minImage = (ImageView) itemView.findViewById(R.id.minImage);
-            plusImage = (ImageView) itemView.findViewById(R.id.plusImage);
 
             itemView.setOnClickListener(this);
         }

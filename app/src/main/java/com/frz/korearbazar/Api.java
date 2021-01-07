@@ -11,8 +11,8 @@ public class Api {
 
         // change your base URL
         RestAdapter adapter = new RestAdapter.Builder()
-                .setEndpoint("http://192.168.0.108/project/hrv-ecom/public/api/")//Set the Root URL
-                // .setEndpoint("http://ecom.hrventure.xyz/api/")//Set the Root URL
+                // .setEndpoint("http://192.168.0.108/project/hrv-ecom/public/api/")//Set the Root URL
+                 .setEndpoint("http://ecom.hrventure.xyz/api/")//Set the Root URL
                 .build(); //Finally building the adapter
 
         //Creating object for our interface

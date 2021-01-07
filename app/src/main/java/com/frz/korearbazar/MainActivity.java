@@ -3,10 +3,13 @@ package com.frz.korearbazar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.frz.korearbazar.Interface.CategoryInterface;
@@ -62,6 +65,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,14 +121,14 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
 
 
     //Button Small Banner
-    private BSBannerAdapter bsBannerAdapter;
-    private RecyclerView bsBannerRecyclerView;
-    List<SlidersModel> bsBannerDatumList;
+//    private BSBannerAdapter bsBannerAdapter;
+//    private RecyclerView bsBannerRecyclerView;
+//    List<SlidersModel> bsBannerDatumList;
 
 
     //Big Save Products
-    private BigSavePAdapter BSProdAdapter;
-    private RecyclerView BSProdRV;
+//    private BigSavePAdapter BSProdAdapter;
+//    private RecyclerView BSProdRV;
 
     //Hot Products
     private com.frz.korearbazar.adapter.HotProdAdapter HotProdAdapter;
@@ -170,6 +174,10 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+
+
+
         pm = new ArrayList<>();
         sessionManager = new SessionManager(this);
         Log.e("token",sessionManager.getToken());
@@ -209,13 +217,13 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
 
 
         //Button Small Banner
-        bsBannerRecyclerView = findViewById(R.id.bsBanner);
-        bsBannerfetchJSON();
+//        bsBannerRecyclerView = findViewById(R.id.bsBanner);
+//        bsBannerfetchJSON();
 
 
         // Big Save Products
-        BSProdRV = findViewById(R.id.bs_product_recycler);
-        BSProdfetchJSON();
+//        BSProdRV = findViewById(R.id.bs_product_recycler);
+//        BSProdfetchJSON();
 
         // Hot Products
         HotProdRV = findViewById(R.id.hot_product_recycler);
@@ -237,26 +245,29 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
 
 
         //Reviews
-        reviewsRV = findViewById(R.id.reviews_recycler);
-        reviewsfetchJSON();
+//        reviewsRV = findViewById(R.id.reviews_recycler);
+//        reviewsfetchJSON();
 
 
         //Blog
-        blogRV = findViewById(R.id.blog_recycler);
-        blogfetchJSON();
+//        blogRV = findViewById(R.id.blog_recycler);
+//        blogfetchJSON();
 
 
         //Brands
-        BrandsProdRV = findViewById(R.id.brands_product_recycler);
-        BrandsProdfetchJSON();
+//        BrandsProdRV = findViewById(R.id.brands_product_recycler);
+//        BrandsProdfetchJSON();
 
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Intent i1=new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.me/hrventureaiacademy"));
+                i1.setPackage("com.facebook.orca");https:
+                startActivity(i1);
 
             }
         });
@@ -283,15 +294,15 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
             }
         });
 
-        navigationView.getMenu().findItem(R.id.nav_blog).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                drawer.close();
-                Intent i = new Intent(MainActivity.this, BlogActivity.class);
-                startActivity(i);
-                return false;
-            }
-        });
+//        navigationView.getMenu().findItem(R.id.nav_blog).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem menuItem) {
+//                drawer.close();
+//                Intent i = new Intent(MainActivity.this, BlogActivity.class);
+//                startActivity(i);
+//                return false;
+//            }
+//        });
 
         navigationView.getMenu().findItem(R.id.nav_login).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -340,17 +351,17 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
             }
         });
 
-        navigationView.getMenu().findItem(R.id.nav_messenger).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                drawer.close();
-
-                Intent i1=new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.me/hrventureaiacademy"));
-                i1.setPackage("com.facebook.orca");https:
-                startActivity(i1);
-                return false;
-            }
-        });
+//        navigationView.getMenu().findItem(R.id.nav_messenger).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem menuItem) {
+//                drawer.close();
+//
+//                Intent i1=new Intent(Intent.ACTION_VIEW, Uri.parse("https://m.me/hrventureaiacademy"));
+//                i1.setPackage("com.facebook.orca");https:
+//                startActivity(i1);
+//                return false;
+//            }
+//        });
 
 //        SharedPreferences prefs = getSharedPreferences("KOREAR_BAZAR", MODE_PRIVATE);
 //        String dd=prefs.getString("name",null);
@@ -359,148 +370,150 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
     }
 
 
+
     //Blog
-    private void blogfetchJSON() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getBestProducts();
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        blog_prod_writeRecycler(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void blog_prod_writeRecycler(String jsonresponse) {
-        try {
-            //getting the whole json object from the response
-            JSONObject obj = new JSONObject(jsonresponse);
-//            if(obj.optString("status").equals("true")){
-
-            ArrayList<BlogModel> blogModelRecyclerArrayList = new ArrayList<>();
-            JSONArray dataArray = obj.getJSONArray("blogs");
-
-            //Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < dataArray.length(); i++) {
-
-                BlogModel blogModelRecycler = new BlogModel();
-                JSONObject dataobj = dataArray.getJSONObject(i);
-
-                blogModelRecycler.setPhoto(dataobj.getString("photo"));
-                blogModelRecycler.setTitle(dataobj.getString("title"));
-                blogModelRecycler.setDetails(dataobj.getString("details"));
-
-                blogModelRecyclerArrayList.add(blogModelRecycler);
-
-            }
-
-            blogAdapter = new BlogAdapter(this, blogModelRecyclerArrayList);
-            blogRV.setAdapter(blogAdapter);
-            blogRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void blogfetchJSON() {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(ApiInterface.JSONURL)
+//                .addConverterFactory(ScalarsConverterFactory.create())
+//                .build();
+//
+//        ApiInterface api = retrofit.create(ApiInterface.class);
+//        Call<String> call = api.getBestProducts();
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                Log.i("Responsestring", response.body().toString());
+//                //Toast.makeText()
+//                if (response.isSuccessful()) {
+//                    if (response.body() != null) {
+//                        Log.i("onSuccess", response.body().toString());
+//
+//                        String jsonresponse = response.body().toString();
+//                        blog_prod_writeRecycler(jsonresponse);
+//
+//                    } else {
+//                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    private void blog_prod_writeRecycler(String jsonresponse) {
+//        try {
+//            //getting the whole json object from the response
+//            JSONObject obj = new JSONObject(jsonresponse);
+////            if(obj.optString("status").equals("true")){
+//
+//            ArrayList<BlogModel> blogModelRecyclerArrayList = new ArrayList<>();
+//            JSONArray dataArray = obj.getJSONArray("blogs");
+//
+//            //Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
+//
+//            for (int i = 0; i < dataArray.length(); i++) {
+//
+//                BlogModel blogModelRecycler = new BlogModel();
+//                JSONObject dataobj = dataArray.getJSONObject(i);
+//
+//                blogModelRecycler.setPhoto(dataobj.getString("photo"));
+//                blogModelRecycler.setTitle(dataobj.getString("title"));
+//                blogModelRecycler.setDetails(dataobj.getString("details"));
+//
+//                blogModelRecyclerArrayList.add(blogModelRecycler);
+//
+//            }
+//
+//            blogAdapter = new BlogAdapter(this, blogModelRecyclerArrayList);
+//            blogRV.setAdapter(blogAdapter);
+//            blogRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
     //Reviews
-    private void reviewsfetchJSON() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getBestProducts();
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        reviews_prod_writeRecycler(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void reviews_prod_writeRecycler(String jsonresponse) {
-        try {
-            //getting the whole json object from the response
-            JSONObject obj = new JSONObject(jsonresponse);
-//            if(obj.optString("status").equals("true")){
-
-            ArrayList<ReviewsModel> reviewsModelRecyclerArrayList = new ArrayList<>();
-            JSONArray dataArray = obj.getJSONArray("reviews");
-
-            //Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < dataArray.length(); i++) {
-
-                ReviewsModel reviewsModelRecycler = new ReviewsModel();
-                JSONObject dataobj = dataArray.getJSONObject(i);
-
-                reviewsModelRecycler.setPhoto(dataobj.getString("photo"));
-                reviewsModelRecycler.setTitle(dataobj.getString("title"));
-                reviewsModelRecycler.setSubtitle(dataobj.getString("subtitle"));
-                reviewsModelRecycler.setDetails(dataobj.getString("details"));
-
-                reviewsModelRecyclerArrayList.add(reviewsModelRecycler);
-
-            }
-
-            reviewsAdapter = new ReviewsAdapter(this, reviewsModelRecyclerArrayList);
-            reviewsRV.setAdapter(reviewsAdapter);
-            reviewsRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void reviewsfetchJSON() {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(ApiInterface.JSONURL)
+//                .addConverterFactory(ScalarsConverterFactory.create())
+//                .build();
+//
+//        ApiInterface api = retrofit.create(ApiInterface.class);
+//        Call<String> call = api.getBestProducts();
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                Log.i("Responsestring", response.body().toString());
+//                //Toast.makeText()
+//                if (response.isSuccessful()) {
+//                    if (response.body() != null) {
+//                        Log.i("onSuccess", response.body().toString());
+//
+//                        String jsonresponse = response.body().toString();
+//                        reviews_prod_writeRecycler(jsonresponse);
+//
+//                    } else {
+//                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    private void reviews_prod_writeRecycler(String jsonresponse) {
+//        try {
+//            //getting the whole json object from the response
+//            JSONObject obj = new JSONObject(jsonresponse);
+////            if(obj.optString("status").equals("true")){
+//
+//            ArrayList<ReviewsModel> reviewsModelRecyclerArrayList = new ArrayList<>();
+//            JSONArray dataArray = obj.getJSONArray("reviews");
+//
+//            //Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
+//
+//            for (int i = 0; i < dataArray.length(); i++) {
+//
+//                ReviewsModel reviewsModelRecycler = new ReviewsModel();
+//                JSONObject dataobj = dataArray.getJSONObject(i);
+//
+//                reviewsModelRecycler.setPhoto(dataobj.getString("photo"));
+//                reviewsModelRecycler.setTitle(dataobj.getString("title"));
+//                reviewsModelRecycler.setSubtitle(dataobj.getString("subtitle"));
+//                reviewsModelRecycler.setDetails(dataobj.getString("details"));
+//
+//                reviewsModelRecyclerArrayList.add(reviewsModelRecycler);
+//
+//            }
+//
+//            reviewsAdapter = new ReviewsAdapter(this, reviewsModelRecyclerArrayList);
+//            reviewsRV.setAdapter(reviewsAdapter);
+//            reviewsRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
     //Sale
+
     private void SaleProdfetchJSON() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiInterface.JSONURL)
@@ -723,75 +736,75 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
         }
     }
 
-
-    //Brands
-    private void BrandsProdfetchJSON() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getBestProducts();
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        Brands_prod_writeRecycler(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void Brands_prod_writeRecycler(String jsonresponse) {
-        try {
-            //getting the whole json object from the response
-            JSONObject obj = new JSONObject(jsonresponse);
-//            if(obj.optString("status").equals("true")){
-
-            ArrayList<BrandsModel> brandsModelRecyclerArrayList = new ArrayList<>();
-            JSONArray dataArray = obj.getJSONArray("partners");
-
-            // Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < dataArray.length(); i++) {
-
-                BrandsModel brandsModelRecycler = new BrandsModel();
-                JSONObject dataobj = dataArray.getJSONObject(i);
-
-                brandsModelRecycler.setPhoto(dataobj.getString("photo"));
-                // brandsModelRecycler.setLink(dataobj.getString("link"));
-
-
-                brandsModelRecyclerArrayList.add(brandsModelRecycler);
-
-            }
-
-            BrandsProdAdapter = new BrandsAdapter(this, brandsModelRecyclerArrayList);
-            BrandsProdRV.setAdapter(BrandsProdAdapter);
-            BrandsProdRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
-        }
-    }
+//Brand
+    //Brands off kora ace
+//    private void BrandsProdfetchJSON() {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(ApiInterface.JSONURL)
+//                .addConverterFactory(ScalarsConverterFactory.create())
+//                .build();
+//
+//        ApiInterface api = retrofit.create(ApiInterface.class);
+//        Call<String> call = api.getBestProducts();
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                Log.i("Responsestring", response.body().toString());
+//                //Toast.makeText()
+//                if (response.isSuccessful()) {
+//                    if (response.body() != null) {
+//                        Log.i("onSuccess", response.body().toString());
+//
+//                        String jsonresponse = response.body().toString();
+//                        Brands_prod_writeRecycler(jsonresponse);
+//
+//                    } else {
+//                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    private void Brands_prod_writeRecycler(String jsonresponse) {
+//        try {
+//            //getting the whole json object from the response
+//            JSONObject obj = new JSONObject(jsonresponse);
+////            if(obj.optString("status").equals("true")){
+//
+//            ArrayList<BrandsModel> brandsModelRecyclerArrayList = new ArrayList<>();
+//            JSONArray dataArray = obj.getJSONArray("partners");
+//
+//            // Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
+//
+//            for (int i = 0; i < dataArray.length(); i++) {
+//
+//                BrandsModel brandsModelRecycler = new BrandsModel();
+//                JSONObject dataobj = dataArray.getJSONObject(i);
+//
+//                brandsModelRecycler.setPhoto(dataobj.getString("photo"));
+//                // brandsModelRecycler.setLink(dataobj.getString("link"));
+//
+//
+//                brandsModelRecyclerArrayList.add(brandsModelRecycler);
+//
+//            }
+//
+//            BrandsProdAdapter = new BrandsAdapter(this, brandsModelRecyclerArrayList);
+//            BrandsProdRV.setAdapter(BrandsProdAdapter);
+//            BrandsProdRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
     //Hot Product
@@ -870,141 +883,141 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
 
 
     //Big Save Products
-    private void BSProdfetchJSON() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getBestProducts();
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        BS_prod_writeRecycler(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void BS_prod_writeRecycler(String jsonresponse) {
-        try {
-            //getting the whole json object from the response
-            JSONObject obj = new JSONObject(jsonresponse);
-//            if(obj.optString("status").equals("true")){
-
-            ArrayList<ProdModel> bsModelRecyclerArrayList = new ArrayList<>();
-            JSONArray dataArray = obj.getJSONArray("big_products");
-
-            //Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < dataArray.length(); i++) {
-
-                ProdModel bsModelRecycler = new ProdModel();
-                JSONObject dataobj = dataArray.getJSONObject(i);
-
-                bsModelRecycler.setThumbnail(dataobj.getString("thumbnail"));
-                bsModelRecycler.setName(dataobj.getString("name"));
-                bsModelRecycler.setSlug(dataobj.getString("slug"));
-
-                bsModelRecycler.setShowPrice(dataobj.getString("showPrice"));
-                bsModelRecycler.setShowPreviousPrice(dataobj.getString("showPreviousPrice"));
-
-                bsModelRecyclerArrayList.add(bsModelRecycler);
-
-            }
-
-            BSProdAdapter = new BigSavePAdapter(this, bsModelRecyclerArrayList,this);
-            BSProdRV.setAdapter(BSProdAdapter);
-            BSProdRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
-        }
-    }
+//    private void BSProdfetchJSON() {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(ApiInterface.JSONURL)
+//                .addConverterFactory(ScalarsConverterFactory.create())
+//                .build();
+//
+//        ApiInterface api = retrofit.create(ApiInterface.class);
+//        Call<String> call = api.getBestProducts();
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                Log.i("Responsestring", response.body().toString());
+//                //Toast.makeText()
+//                if (response.isSuccessful()) {
+//                    if (response.body() != null) {
+//                        Log.i("onSuccess", response.body().toString());
+//
+//                        String jsonresponse = response.body().toString();
+//                        BS_prod_writeRecycler(jsonresponse);
+//
+//                    } else {
+//                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    private void BS_prod_writeRecycler(String jsonresponse) {
+//        try {
+//            //getting the whole json object from the response
+//            JSONObject obj = new JSONObject(jsonresponse);
+////            if(obj.optString("status").equals("true")){
+//
+//            ArrayList<ProdModel> bsModelRecyclerArrayList = new ArrayList<>();
+//            JSONArray dataArray = obj.getJSONArray("big_products");
+//
+//            //Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
+//
+//            for (int i = 0; i < dataArray.length(); i++) {
+//
+//                ProdModel bsModelRecycler = new ProdModel();
+//                JSONObject dataobj = dataArray.getJSONObject(i);
+//
+//                bsModelRecycler.setThumbnail(dataobj.getString("thumbnail"));
+//                bsModelRecycler.setName(dataobj.getString("name"));
+//                bsModelRecycler.setSlug(dataobj.getString("slug"));
+//
+//                bsModelRecycler.setShowPrice(dataobj.getString("showPrice"));
+//                bsModelRecycler.setShowPreviousPrice(dataobj.getString("showPreviousPrice"));
+//
+//                bsModelRecyclerArrayList.add(bsModelRecycler);
+//
+//            }
+//
+//            BSProdAdapter = new BigSavePAdapter(this, bsModelRecyclerArrayList,this);
+//            BSProdRV.setAdapter(BSProdAdapter);
+//            BSProdRV.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+//
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            Toast.makeText(this, "" + e, Toast.LENGTH_SHORT).show();
+//        }
+//    }
 
 
     //Button Small Banner
-    private void bsBannerfetchJSON() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-
-        Call<String> call = api.getBestProducts();
-
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        bsBannerWriteRecycler(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    private void bsBannerWriteRecycler(String jsonresponse) {
-        try {
-            JSONObject object = new JSONObject(jsonresponse);
-
-            ArrayList<BSBannerModel> bsBannerModelRecyclerArrayList = new ArrayList<>();
-            JSONArray jsonArray = object.getJSONArray("bottom_small_banners");
-
-            // Toast.makeText(this, ""+jsonArray, Toast.LENGTH_SHORT).show();
-
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                BSBannerModel bsBannerModelRecycler = new BSBannerModel();
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                bsBannerModelRecycler.setPhoto(jsonObject.getString("photo"));
-
-                bsBannerModelRecyclerArrayList.add(bsBannerModelRecycler);
-            }
-
-            bsBannerAdapter = new BSBannerAdapter(this, bsBannerModelRecyclerArrayList);
-            bsBannerRecyclerView.setAdapter(bsBannerAdapter);
-            bsBannerRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
+//    private void bsBannerfetchJSON() {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(ApiInterface.JSONURL)
+//                .addConverterFactory(ScalarsConverterFactory.create())
+//                .build();
+//
+//        ApiInterface api = retrofit.create(ApiInterface.class);
+//
+//        Call<String> call = api.getBestProducts();
+//
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                Log.i("Responsestring", response.body().toString());
+//                //Toast.makeText()
+//                if (response.isSuccessful()) {
+//                    if (response.body() != null) {
+//                        Log.i("onSuccess", response.body().toString());
+//
+//                        String jsonresponse = response.body().toString();
+//                        bsBannerWriteRecycler(jsonresponse);
+//
+//                    } else {
+//                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//    }
+//
+//    private void bsBannerWriteRecycler(String jsonresponse) {
+//        try {
+//            JSONObject object = new JSONObject(jsonresponse);
+//
+//            ArrayList<BSBannerModel> bsBannerModelRecyclerArrayList = new ArrayList<>();
+//            JSONArray jsonArray = object.getJSONArray("bottom_small_banners");
+//
+//            // Toast.makeText(this, ""+jsonArray, Toast.LENGTH_SHORT).show();
+//
+//
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                BSBannerModel bsBannerModelRecycler = new BSBannerModel();
+//                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//
+//                bsBannerModelRecycler.setPhoto(jsonObject.getString("photo"));
+//
+//                bsBannerModelRecyclerArrayList.add(bsBannerModelRecycler);
+//            }
+//
+//            bsBannerAdapter = new BSBannerAdapter(this, bsBannerModelRecyclerArrayList);
+//            bsBannerRecyclerView.setAdapter(bsBannerAdapter);
+//            bsBannerRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+//    }
 
 
     //Top Rated Products
@@ -1614,8 +1627,9 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
                 Intent intent = new Intent(MainActivity.this, CartActivity.class);
                 startActivity(intent);
                 return true;
-            case R.id.action_settings:
-
+            case R.id.action_myProfile:
+                Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

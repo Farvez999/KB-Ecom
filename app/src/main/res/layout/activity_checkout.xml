@@ -219,7 +219,7 @@
                     android:layout_margin="10dp"
                     android:layout_marginBottom="10dp"
                     android:gravity="top|left"
-                    android:hint="check out order list"
+                    android:hint="Total Price"
                     android:inputType="textMultiLine"
                     android:padding="10dp"
                     android:textColor="@color/colorBalck">

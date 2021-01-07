@@ -26,9 +26,50 @@
         android:fillViewport="true">
 
         <LinearLayout
+            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/lvl_actionsearch"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_search"
+                android:elevation="10dp"
+                android:gravity="center|right"
+                android:orientation="horizontal">
+
+
+                <EditText
+                    android:id="@+id/ed_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:drawablePadding="10dp"
+                    android:ems="10"
+                    android:gravity="left|center"
+                    android:hint="Search.."
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:paddingLeft="8dp"
+                    android:textColor="@color/colorGrey1"
+                    android:textColorHint="@color/colorGrey1" />
+
+                <ImageView
+                    android:id="@+id/img_search"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:padding="13dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:src="@drawable/ic_search"
+                    tools:ignore="NewApi" />
+            </LinearLayout>
 
 
             ///Slider
@@ -201,7 +242,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Top Rated"
+                    android:text="Top Products"
                     android:background="@drawable/rounded_bg"
                     android:layout_gravity="center"
                     android:textSize="20sp"
@@ -219,49 +260,49 @@
             </LinearLayout>
 
 
-            //Button Small banner
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+<!--            //Button Small banner-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/bsBanner"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="10dp"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/item_image"></androidx.recyclerview.widget.RecyclerView>
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/bsBanner"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:padding="10dp"-->
+<!--                    tools:itemCount="2"-->
+<!--                    tools:listitem="@layout/item_image"></androidx.recyclerview.widget.RecyclerView>-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
 
-            //Big Save
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
+<!--            //Big Save-->
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Big Save"
-                    android:background="@drawable/rounded_bg"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:padding="5dp"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10sp"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Big Save"-->
+<!--                    android:background="@drawable/rounded_bg"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:layout_marginLeft="10sp"-->
+<!--                    android:layout_marginRight="10sp"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/bs_product_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/bs_product_recycler"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="5dp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
 
             //Hot
@@ -377,70 +418,88 @@
 
 
             //Reviews
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:orientation="vertical">-->
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/reviews_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/reviews_recycler"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="5dp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
 
             //Blog
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:orientation="vertical">-->
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/blog_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp" />
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/blog_recycler"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:padding="5dp" />-->
 
-            </LinearLayout>
+<!--        </LinearLayout>-->
 
             //Brands
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="5dp"-->
+<!--                android:orientation="vertical">-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Brands"
-                    android:background="@drawable/rounded_bg"
-                    android:layout_gravity="center"
-                    android:textSize="20sp"
-                    android:padding="5dp"
-                    android:layout_marginLeft="10sp"
-                    android:layout_marginRight="10sp"
-                    android:textStyle="bold"/>
+<!--                <TextView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Brands"-->
+<!--                    android:background="@drawable/rounded_bg"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:textSize="20sp"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:layout_marginLeft="10sp"-->
+<!--                    android:layout_marginRight="10sp"-->
+<!--                    android:textStyle="bold"/>-->
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/brands_product_recycler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="5dp" />
+<!--                <androidx.recyclerview.widget.RecyclerView-->
+<!--                    android:id="@+id/brands_product_recycler"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:padding="5dp" />-->
 
-            </LinearLayout>
+<!--            </LinearLayout>-->
 
+
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="10dp"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <ImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="100dp"-->
+<!--                    android:src="@drawable/logo"-->
+<!--                    android:padding="10dp"-->
+<!--                    ></ImageView>-->
+
+<!--            </LinearLayout>-->
 
 
 
 
         </LinearLayout>
+
+
+
     </ScrollView>
 
 

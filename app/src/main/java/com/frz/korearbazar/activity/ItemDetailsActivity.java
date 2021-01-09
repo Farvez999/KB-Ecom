@@ -30,6 +30,7 @@ import com.frz.korearbazar.adapter.ProdAdapter;
 import com.frz.korearbazar.adapter.ProdDetailsAdapter;
 import com.frz.korearbazar.adapter.RelatedProdAdapter;
 import com.frz.korearbazar.model.CartModel;
+import com.frz.korearbazar.model.CheckOutModel;
 import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
 import com.frz.korearbazar.model.RelatedProdModel;
@@ -67,6 +68,9 @@ public class ItemDetailsActivity extends AppCompatActivity  {
    ProdModel prodModel;
    CartDB cartDB;
    String imgUrl = "";
+   String pStock = "";
+   String dp = "0";
+   String product_id = "";
 
     ImageView imgBack;
     ImageView imgCart;
@@ -278,7 +282,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
         String quantity = quantitynumber.getText().toString();
 
 
-        CartModel cartModel = new CartModel(name,price,quantity,imgUrl);
+        CartModel cartModel = new CartModel(name,price,quantity,imgUrl,pStock,dp,product_id);
         long insertData=   cartDB.addInsert(cartModel);
         if (insertData>0){
             Toast t = Toast.makeText( getApplicationContext(), "Successfully Added to Cart!" + insertData, Toast.LENGTH_LONG );
@@ -289,6 +293,8 @@ public class ItemDetailsActivity extends AppCompatActivity  {
         }
 
     }
+
+
 
 
     //Product Details
@@ -307,7 +313,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
 
                             //JSONObject ja = response.getJSONObject("user");
                            // Toast.makeText(ItemDetailsActivity.this, "Hello User"+jsonArray, Toast.LENGTH_SHORT).show();
-
+                            String id = jsonArray.getString("id");
                             String name = jsonArray.getString("name");
                             String details = jsonArray.getString("details");
                             String stock = jsonArray.getString("stock");
@@ -329,7 +335,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
 
                             //int price = jsonArray.getInt("price");
 
-                            mExampleList.add(new ProdDetailsModel(name,details,stock,photo,slug,size,size_qty,size_price,color,galleries,showPrice,setCurrency,showPreviousPrice,user));
+                            mExampleList.add(new ProdDetailsModel(id,name,details,stock,photo,slug,size,size_qty,size_price,color,galleries,showPrice,setCurrency,showPreviousPrice,user));
 
                             txtTitle.setText(jsonArray.getString("name"));
                             txtDesc.setText(jsonArray.getString("details"));
@@ -403,6 +409,8 @@ public class ItemDetailsActivity extends AppCompatActivity  {
                             //Picasso.get().load("http://ecom.hrventure.xyz/assets/images/products/1606560895gDvz8eUj.png").into(imgDtails);
                             imgUrl = JSONURL+PDetailsImgUrl+photo;
                             Picasso.get().load(imgUrl).into(imgDtails);
+                            pStock = stock;
+                            product_id = id;
 
 
                             prodDetailsAdapter = new ProdDetailsAdapter(ItemDetailsActivity.this, mExampleList);

@@ -6,6 +6,9 @@ public class CartModel {
     private String price;
     private String quantity;
     private String image;
+    private String stock;
+    private String dp;
+    private String product_id;
 
     public CartModel() {
     }
@@ -15,6 +18,9 @@ public class CartModel {
         this.price = price;
         this.quantity = quantity;
         this.image = image;
+    }
+
+    public CartModel(String name, String price, String quantity, String imgUrl, String pStock, String dp, String product_id) {
     }
 
     public int getId() {
@@ -57,4 +63,27 @@ public class CartModel {
         this.image = image;
     }
 
+    public String getStock() {
+        return stock;
+    }
+
+    public void setStock(String stock) {
+        this.stock = stock;
+    }
+
+    public String getDp() {
+        return dp;
+    }
+
+    public void setDp(String dp) {
+        this.dp = dp;
+    }
+
+    public String getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(String product_id) {
+        this.product_id = product_id;
+    }
 }

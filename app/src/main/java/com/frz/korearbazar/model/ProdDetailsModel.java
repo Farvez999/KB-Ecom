@@ -4,7 +4,8 @@ public class ProdDetailsModel {
 
 
 
-    public ProdDetailsModel(String name, String details, String stock, String photo, String slug, String size, String size_qty, String size_price, String color, String galleries, String showPrice, String setCurrency, String showPreviousPrice, String user) {
+    public ProdDetailsModel(String id, String name, String details, String stock, String photo, String slug, String size, String size_qty, String size_price, String color, String galleries, String showPrice, String setCurrency, String showPreviousPrice, String user) {
+        this.id = id;
         this.name = name;
         this.details = details;
         this.stock = stock;
@@ -21,7 +22,15 @@ public class ProdDetailsModel {
         this.user = user;
     }
 
-    private String name, details, stock, photo, slug, size, size_qty, size_price, color, galleries,showPrice,setCurrency,showPreviousPrice,user;
+    private String id, name, details, stock, photo, slug, size, size_qty, size_price, color, galleries,showPrice,setCurrency,showPreviousPrice,user;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

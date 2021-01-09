@@ -148,19 +148,37 @@
             </LinearLayout>
 
             <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_weight="1">
+
+            <EditText
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:textColorHint="@color/colorGrey"
+                android:drawablePadding="10dp"
+                android:hint="Address"
+                android:padding="12dp"
+                android:textColor="@color/colorGrey2" />
+        </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_weight="1">
 
                 <EditText
-                    android:id="@+id/address"
+                    android:id="@+id/country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/rounded_editetext"
                     android:textColorHint="@color/colorGrey"
                     android:drawablePadding="10dp"
-                    android:hint="Address"
+                    android:hint="Country"
                     android:padding="12dp"
                     android:textColor="@color/colorGrey2" />
             </LinearLayout>

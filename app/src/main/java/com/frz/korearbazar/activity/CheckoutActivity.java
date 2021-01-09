@@ -13,17 +13,30 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.frz.korearbazar.Api;
 import com.frz.korearbazar.Database.CartDB;
+import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.CheckOutAdapter;
 import com.frz.korearbazar.model.CartModel;
+import com.frz.korearbazar.model.CheckOutModel;
+import com.frz.korearbazar.model.CheckOutResponse;
+import com.frz.korearbazar.model.SignUpResponse;
 import com.frz.korearbazar.utils.SessionManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class CheckoutActivity extends AppCompatActivity {
 
+    CheckOutResponse checkOutResponseData;
+    Integer user_id;
     SessionManager sessionManager;
     CartDB cartDB;
     ProgressDialog progressDialog;
@@ -31,13 +44,19 @@ public class CheckoutActivity extends AppCompatActivity {
     String data_order_list = "";
     String str_currency_code;
 
-    TextView ed_username,ed_user_email,txt_continus;
-    EditText ed_fullName,ed_phone,ed_email,ed_address,ed_city,ed_postCode;
+    TextView personal_name,ed_user_email,txt_continus;
+    EditText ed_fullName,ed_phone,ed_email,ed_address,ed_country,ed_city,ed_postCode;
     EditText edt_order_list,edt_order_total;
 
-
+    String method ="cash on delivery";
+    String dp = "0";
+    String tax = "0";
+    String totalQty = "2";
+    String vendor_shipping_id="0";
+    String vendor_packing_id="0";
 
     List<CartModel> cartModelList;
+    List<CheckOutModel> checkoutModelList;
 
     CheckOutAdapter cartAdapter;
 
@@ -52,15 +71,19 @@ public class CheckoutActivity extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
 
+        cartDB=new CartDB(this);
+        cartModelList=new ArrayList<>();
+
         orderRecyclerView = findViewById(R.id.checkRecyclerView);
 
-        ed_username = findViewById(R.id.username);
+        personal_name = findViewById(R.id.username);
         ed_user_email = findViewById(R.id.user_email);
 
         ed_fullName = findViewById(R.id.fullName);
         ed_phone = findViewById(R.id.phone);
         ed_email = findViewById(R.id.email);
         ed_address = findViewById(R.id.address);
+        ed_country = findViewById(R.id.country);
         ed_city = findViewById(R.id.city);
         ed_postCode = findViewById(R.id.postCode);
 
@@ -70,8 +93,19 @@ public class CheckoutActivity extends AppCompatActivity {
         txt_continus = findViewById(R.id.txt_continus);
 
 
-        cartDB=new CartDB(this);
-        cartModelList=new ArrayList<>();
+
+
+        Map<String, String> map = new HashMap<>();
+        for(int i=0; i<cartModelList.size();i++){
+            map.put("cart[items]["+cartModelList.get(i).getQuantity()+"][qty]",cartModelList.get(i).getQuantity());
+            map.put("cart[items]["+cartModelList.get(i).getStock()+"][stock]",cartModelList.get(i).getStock());
+            map.put("cart[items]["+cartModelList.get(i).getPrice()+"][price]",cartModelList.get(i).getPrice());
+            map.put("cart[items]["+cartModelList.get(i).getDp()+"][dp]",cartModelList.get(i).getDp());//dp product e nai but dp input na dile checkout hobe na..kichu na hole 0 dite hobe
+            map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][product_id]", String.valueOf(cartModelList.get(i).getProduct_id()));
+        }
+
+
+
         if (cartDB.getAllData().size()>0){
             cartModelList= cartDB.getAllData();
             cartAdapter =  new CheckOutAdapter(this,cartModelList);
@@ -94,15 +128,17 @@ public class CheckoutActivity extends AppCompatActivity {
         String phone=prefs.getString("phone",null);
         String email=prefs.getString("email",null);
         String address=prefs.getString("address",null);
+        String country=prefs.getString("country",null);
         String city=prefs.getString("city",null);
         String postCode=prefs.getString("zip",null);
-        ed_username.setText(name);
+        personal_name.setText(name);
         ed_user_email.setText(userEmail);
 
         ed_fullName.setText(fullName);
         ed_phone.setText(phone);
         ed_email.setText(email);
         ed_address.setText(address);
+        ed_country.setText(country);
         ed_city.setText(city);
         ed_postCode.setText(postCode);
 
@@ -110,6 +146,7 @@ public class CheckoutActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                checkoutComplete();
                 Toast.makeText(CheckoutActivity.this, "Check Out Successful", Toast.LENGTH_SHORT).show();
 
             }
@@ -120,6 +157,61 @@ public class CheckoutActivity extends AppCompatActivity {
         //getDataFromDatabase();
         submitOrder();
         getTaxCurrency();
+    }
+
+    private void checkoutComplete() {
+            // display a progress dialog
+            final ProgressDialog progressDialog = new ProgressDialog(CheckoutActivity.this);
+            progressDialog.setCancelable(false); // set cancelable to false
+            progressDialog.setMessage("Please Wait"); // set message
+            progressDialog.show(); // show progress dialog
+
+            // Api is a class in which we define a method getClient() that returns the API Interface class object
+            // registration is a POST request type method in which we are sending our field's data
+            Api.getClient().checkout(
+                    personal_name.getText().toString().trim(),
+                    ed_user_email.getText().toString().trim(),
+                    ed_fullName.getText().toString().trim(),
+                    ed_email.getText().toString().trim(),
+                    ed_phone.getText().toString().trim(),
+                    ed_address.getText().toString().trim(),
+
+                    ed_country.getText().toString().trim(),
+                    ed_user_email.getText().toString().trim(),
+                    ed_city.getText().toString().trim(),
+                    ed_postCode.getText().toString().trim(),
+
+                    method= method,
+                    dp = dp,
+                    tax = tax,
+                    totalQty= totalQty,
+                    vendor_shipping_id = vendor_shipping_id,
+                    vendor_packing_id = vendor_packing_id,
+
+                    edt_order_total.getText().toString().trim(),
+
+                    "email", new Callback<CheckOutResponse>() {
+                        @Override
+                        public void success(CheckOutResponse checkOutResponse, Response response) {
+                            // in this method we will get the response from API
+                            progressDialog.dismiss(); //dismiss progress dialog
+                            checkOutResponseData = checkOutResponse;
+                            user_id = checkOutResponse.getUserid();
+                            Toast.makeText(CheckoutActivity.this, checkOutResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(CheckoutActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        }
+
+                        @Override
+                        public void failure(RetrofitError error) {
+                            // if error occurs in network transaction then we can get the error in this method.
+                            Toast.makeText(CheckoutActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss(); //dismiss progress dialog
+
+                        }
+                    });
+
+
     }
 
     public void getTaxCurrency() {

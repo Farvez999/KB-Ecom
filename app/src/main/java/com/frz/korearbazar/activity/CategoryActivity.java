@@ -86,7 +86,7 @@ public class CategoryActivity extends AppCompatActivity {
     //Related Product
     private void getRelatedProduct() {
         //String url = JSONURL+ProdDetailsUrl+slug;
-        String url = "//192.168.0.108/project/hrv-ecom/public/api/category/"+slug;
+        String url = "http://ecom.hrventure.xyz/public/api/category/"+slug;
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new com.android.volley.Response.Listener<JSONObject>() {
                     @Override

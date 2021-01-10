@@ -23,7 +23,9 @@ import com.frz.korearbazar.model.CheckOutResponse;
 import com.frz.korearbazar.utils.SessionManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -90,15 +92,15 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
 
-//
-//        Map<String, String> map = new HashMap<>();
-//        for(int i=0; i<cartModelList.size();i++){
-//            map.put("cart[items]["+cartModelList.get(i).getQuantity()+"][qty]",cartModelList.get(i).getQuantity());
-//            //map.put("cart[items]["+cartModelList.get(i).getStock()+"][stock]",cartModelList.get(i).getStock());
-//            map.put("cart[items]["+cartModelList.get(i).getPrice()+"][price]",cartModelList.get(i).getPrice());
-//            //map.put("cart[items]["+cartModelList.get(i).getDp()+"][dp]",cartModelList.get(i).getDp());//dp product e nai but dp input na dile checkout hobe na..kichu na hole 0 dite hobe
-//            //map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][product_id]", String.valueOf(cartModelList.get(i).getProduct_id()));
-//        }
+
+        Map<String, String> map = new HashMap<>();
+        for(int i=0; i<cartModelList.size();i++){
+            map.put("cart[items]["+cartModelList.get(i).getQuantity()+"][qty]",cartModelList.get(i).getQuantity());
+            map.put("cart[items]["+cartModelList.get(i).getStock()+"][stock]",cartModelList.get(i).getStock());
+            map.put("cart[items]["+cartModelList.get(i).getPrice()+"][price]",cartModelList.get(i).getPrice());
+            map.put("cart[items]["+cartModelList.get(i).getDp()+"][dp]",cartModelList.get(i).getDp());//dp product e nai but dp input na dile checkout hobe na..kichu na hole 0 dite hobe
+            map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][product_id]", String.valueOf(cartModelList.get(i).getProduct_id()));
+        }
 
 
 

@@ -33,15 +33,27 @@ public class CartDB extends SQLiteOpenHelper {
     private static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;
 
-    private static final String CREATE_TABLE="CREATE TABLE "+TABLE_NAME+"("
-            + ID+ " INTEGER PRIMARY KEY, "
-            +TITLE+" TEXT, "
-            +IMAGE+" TEXT, "
-            +PRICE+" TEXT, "
-            +QUANTITY+" TEXT, "
-            +DP+"TEXT, "
-            +STOCK+"TEXT, "
-            +PRODUCTID+"TEXT) ";
+    private static final String CREATE_TABLE=
+            "CREATE TABLE " + TABLE_NAME + " ("
+                    + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    + TITLE + " TEXT, " // Need comma here
+                    + IMAGE + " TEXT, " // Need comma here
+                    + PRICE + " TEXT, "
+                    + QUANTITY + " TEXT, "
+                    + DP + " TEXT, "
+                    + STOCK + " TEXT, "
+                    + PRODUCTID + " TEXT "// Need not comma here, because this is last column of table
+                    + ");";
+
+//            "CREATE TABLE "+TABLE_NAME+"("
+//            + ID+ " INTEGER PRIMARY KEY, "
+//            +TITLE+" TEXT, "
+//            +IMAGE+" TEXT, "
+//            +PRICE+" TEXT, "
+//            +QUANTITY+" TEXT, "
+//            +DP+"TEXT, "
+//            +STOCK+"TEXT, "
+//            +PRODUCTID+"TEXT) ";
         //db.execSQL(CREATE_TABLE);
 
 

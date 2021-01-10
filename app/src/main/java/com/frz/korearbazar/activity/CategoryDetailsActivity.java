@@ -107,6 +107,7 @@ public class CategoryDetailsActivity extends AppCompatActivity {
                         try {
 
 
+
                             JSONObject data = response.getJSONObject("data");
 //
                             String categoryProduct = data.getString("prods");

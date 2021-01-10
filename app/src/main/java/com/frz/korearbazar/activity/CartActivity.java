@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
@@ -55,6 +56,7 @@ public class CartActivity extends AppCompatActivity {
         if (cartDB.getAllData().size()>0){
             cartModelList= cartDB.getAllData();
             cartAdapter =  new CartAdapter(this,cartModelList);
+
 
             orderRecyclerView.setLayoutManager(new LinearLayoutManager(this));
             orderRecyclerView.setAdapter(cartAdapter);

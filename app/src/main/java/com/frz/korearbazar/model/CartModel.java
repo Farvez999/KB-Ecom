@@ -13,14 +13,14 @@ public class CartModel {
     public CartModel() {
     }
 
-    public CartModel(String title, String price, String quantity, String image) {
+    public CartModel(String title, String price, String quantity, String image, String dp, String stock, String product_id) {
         this.title = title;
         this.price = price;
         this.quantity = quantity;
         this.image = image;
-    }
-
-    public CartModel(String name, String price, String quantity, String imgUrl, String pStock, String dp, String product_id) {
+        this.dp = dp;
+        this.stock = stock;
+        this.product_id = product_id;
     }
 
     public int getId() {
@@ -85,5 +85,19 @@ public class CartModel {
 
     public void setProduct_id(String product_id) {
         this.product_id = product_id;
+    }
+
+    @Override
+    public String toString() {
+        return "CartModel{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", price='" + price + '\'' +
+                ", quantity='" + quantity + '\'' +
+                ", image='" + image + '\'' +
+                ", stock='" + stock + '\'' +
+                ", dp='" + dp + '\'' +
+                ", product_id='" + product_id + '\'' +
+                '}';
     }
 }

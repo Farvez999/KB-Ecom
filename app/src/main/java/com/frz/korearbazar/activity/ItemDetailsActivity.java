@@ -23,23 +23,20 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.frz.korearbazar.Database.CartDB;
-import com.frz.korearbazar.Interface.ProdInterface;
 import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
-import com.frz.korearbazar.adapter.ProdAdapter;
 import com.frz.korearbazar.adapter.ProdDetailsAdapter;
 import com.frz.korearbazar.adapter.RelatedProdAdapter;
 import com.frz.korearbazar.model.CartModel;
-import com.frz.korearbazar.model.CheckOutModel;
 import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
-import com.frz.korearbazar.model.RelatedProdModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.frz.korearbazar.ApiInterface.JSONURL;
 import static com.frz.korearbazar.ApiInterface.PDetailsImgUrl;
@@ -68,9 +65,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
    ProdModel prodModel;
    CartDB cartDB;
    String imgUrl = "";
-   String pStock = "";
-   String dp = "0";
-   String product_id = "";
+
 
     ImageView imgBack;
     ImageView imgCart;
@@ -93,6 +88,11 @@ public class ItemDetailsActivity extends AppCompatActivity  {
     TextView quantitynumber;
     String slug;
     String price;
+
+    String pdp="Farvez";
+    String pStock = "One";
+
+    String pproduct_id = "";
 
 
 
@@ -280,15 +280,27 @@ public class ItemDetailsActivity extends AppCompatActivity  {
         String name = txtTitle.getText().toString();
         String price = txtPrice.getText().toString();
         String quantity = quantitynumber.getText().toString();
+        String dp = pdp;
+        String stock = pStock;
+        String product_id = pproduct_id;
+        Log.e("PProduct_id",product_id);
+        Log.e("PSO",stock);
+        Log.e("PD",dp);
+        Log.e("QUAAN",quantity);
 
 
-        CartModel cartModel = new CartModel(name,price,quantity,imgUrl,pStock,dp,product_id);
-        long insertData=   cartDB.addInsert(cartModel);
+        CartModel cartModel = new CartModel(name,price,quantity,imgUrl,dp,stock,product_id);
+        long insertData=  cartDB.addInsert(cartModel);
         if (insertData>0){
+            List<CartModel>list= new ArrayList<>();
+            for (int i=0; i<cartDB.getAllData().size();i++){
+                cartDB.getAllData();
+                Log.e("getAllData",cartDB.getAllData().get(i).toString());
+            }
             Toast t = Toast.makeText( getApplicationContext(), "Successfully Added to Cart!" + insertData, Toast.LENGTH_LONG );
             t.show();
         }else {
-            Toast t = Toast.makeText( getApplicationContext(), "Successfully not Added to Cart!", Toast.LENGTH_LONG );
+            Toast t = Toast.makeText( getApplicationContext(), "Not Added to Cart!", Toast.LENGTH_LONG );
             t.show();
         }
 
@@ -314,9 +326,12 @@ public class ItemDetailsActivity extends AppCompatActivity  {
                             //JSONObject ja = response.getJSONObject("user");
                            // Toast.makeText(ItemDetailsActivity.this, "Hello User"+jsonArray, Toast.LENGTH_SHORT).show();
                             String id = jsonArray.getString("id");
+                            pproduct_id=id;
                             String name = jsonArray.getString("name");
                             String details = jsonArray.getString("details");
                             String stock = jsonArray.getString("stock");
+                           // pStock = stock;
+                           // Log.e("PST",pStock);
                             String photo = jsonArray.getString("photo");
                             String slug = jsonArray.getString("slug");
                             String size = jsonArray.getString("size");
@@ -410,7 +425,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
                             imgUrl = JSONURL+PDetailsImgUrl+photo;
                             Picasso.get().load(imgUrl).into(imgDtails);
                             pStock = stock;
-                            product_id = id;
+                            //product_id = id;
 
 
                             prodDetailsAdapter = new ProdDetailsAdapter(ItemDetailsActivity.this, mExampleList);

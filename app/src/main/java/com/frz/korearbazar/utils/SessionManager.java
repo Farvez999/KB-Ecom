@@ -31,6 +31,7 @@ public class SessionManager {
         mEditor.putString("city",user.getCity());
         mEditor.putString("zip",user.getZip());
         mEditor.putString("address",user.getAddress());
+        mEditor.putString("country",user.getCountry());
         mEditor.putBoolean("logged",true);
         mEditor.apply();
     }
@@ -60,7 +61,9 @@ public class SessionManager {
                 mPrefs.getString("phone",null),
                 mPrefs.getString("city",null),
                 mPrefs.getString("zip",null),
-                mPrefs.getString("address",null));
+                mPrefs.getString("address",null),
+                mPrefs.getString("country",null));
+
 
     }
 

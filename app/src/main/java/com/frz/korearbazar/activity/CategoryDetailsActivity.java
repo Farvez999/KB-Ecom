@@ -1,17 +1,11 @@
 package com.frz.korearbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.StrikethroughSpan;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,19 +15,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.frz.korearbazar.ApiInterface;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.CateAdapter;
 import com.frz.korearbazar.adapter.CategoryDetailsProdAdapter;
-import com.frz.korearbazar.adapter.ProdDetailsAdapter;
-import com.frz.korearbazar.adapter.RelatedProdAdapter;
-import com.frz.korearbazar.adapter.TopRatedPAdapter;
-import com.frz.korearbazar.model.BSBannerModel;
 import com.frz.korearbazar.model.CateModel;
-import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
-import com.google.gson.JsonArray;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,15 +27,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Retrofit;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
-
 import static com.frz.korearbazar.ApiInterface.CategoryDetails;
 import static com.frz.korearbazar.ApiInterface.JSONURL;
-import static com.frz.korearbazar.ApiInterface.PDetailsImgUrl;
-import static com.frz.korearbazar.ApiInterface.ProdDetailsUrl;
 
 public class CategoryDetailsActivity extends AppCompatActivity {
 
@@ -109,6 +88,10 @@ public class CategoryDetailsActivity extends AppCompatActivity {
 
 
                             JSONObject data = response.getJSONObject("data");
+
+//                            JSONArray jsonArray= response.getJSONArray("prods");
+//                            //Log.e("JSONA",jsonArray);
+//                            Toast.makeText(CategoryDetailsActivity.this, "JSONA"+jsonArray, Toast.LENGTH_SHORT).show();
 //
                             String categoryProduct = data.getString("prods");
                             JSONArray array = new JSONArray(categoryProduct);

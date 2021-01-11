@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -46,12 +47,28 @@ public class CheckoutActivity extends AppCompatActivity {
     EditText ed_fullName,ed_phone,ed_email,ed_address,ed_country,ed_city,ed_postCode;
     EditText edt_order_list,edt_order_total;
 
+    String shipping="shipto";
+    String pickup_location="Bangladesh";
+
+    String shipping_name="jubayer Api";
+    String shipping_email="jubayerk7@gmail.com";
+    String shipping_phone= "01710029052";
+    String shipping_address="DHaka, Bangladesh";
+    String shipping_country="Bangladesh";
+    String shipping_city="Dhaka";
+    String shipping_zip="3456";
+
+    String shipping_cost= String.valueOf(0);
+    String packing_cost= String.valueOf(0);
+
     String method ="cash on delivery";
     String dp = "0";
     String tax = "0";
     String totalQty = "2";
     String vendor_shipping_id="0";
     String vendor_packing_id="0";
+
+    Map<String, String> map;
 
     List<CartModel> cartModelList;
    // List<CheckOutModel> checkoutModelList;
@@ -93,7 +110,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
 
-        Map<String, String> map = new HashMap<>();
+        map = new HashMap<>();
         for(int i=0; i<cartModelList.size();i++){
             map.put("cart[items]["+cartModelList.get(i).getQuantity()+"][qty]",cartModelList.get(i).getQuantity());
             map.put("cart[items]["+cartModelList.get(i).getStock()+"][stock]",cartModelList.get(i).getStock());
@@ -122,11 +139,16 @@ public class CheckoutActivity extends AppCompatActivity {
         String name=prefs.getString("name",null);
         String userEmail=prefs.getString("email",null);
 
+        int userId = prefs.getInt("id",-1);
+        Log.e("USERID", String.valueOf(userId));
+        user_id=userId;
+
         String fullName=prefs.getString("name",null);
         String phone=prefs.getString("phone",null);
         String email=prefs.getString("email",null);
         String address=prefs.getString("address",null);
         String country=prefs.getString("country",null);
+//        Log.e("USERCountry", country);
         String city=prefs.getString("city",null);
         String postCode=prefs.getString("zip",null);
         personal_name.setText(name);
@@ -137,6 +159,7 @@ public class CheckoutActivity extends AppCompatActivity {
         ed_email.setText(email);
         ed_address.setText(address);
         ed_country.setText(country);
+
         ed_city.setText(city);
         ed_postCode.setText(postCode);
 
@@ -164,30 +187,41 @@ public class CheckoutActivity extends AppCompatActivity {
             progressDialog.setMessage("Please Wait"); // set message
             progressDialog.show(); // show progress dialog
 
-            // Api is a class in which we define a method getClient() that returns the API Interface class object
-            // registration is a POST request type method in which we are sending our field's data
+
             Api.getClient().checkout(
                     personal_name.getText().toString().trim(),
                     ed_user_email.getText().toString().trim(),
-                    ed_fullName.getText().toString().trim(),
-                    ed_email.getText().toString().trim(),
-                    ed_phone.getText().toString().trim(),
-                    ed_address.getText().toString().trim(),
 
+                    shipping,
+                    pickup_location,
+
+                    ed_fullName.getText().toString().trim(),
+                    ed_phone.getText().toString().trim(),
+                    ed_email.getText().toString().trim(),
+                    ed_address.getText().toString().trim(),
                     ed_country.getText().toString().trim(),
-                    ed_user_email.getText().toString().trim(),
                     ed_city.getText().toString().trim(),
                     ed_postCode.getText().toString().trim(),
 
+        shipping_name,
+        shipping_email,
+        shipping_phone,
+        shipping_address,
+        shipping_country,
+        shipping_city,
+        shipping_zip,
+
                     method= method,
+                    shipping_cost,
+                    packing_cost,
                     dp = dp,
                     tax = tax,
                     totalQty= totalQty,
                     vendor_shipping_id = vendor_shipping_id,
                     vendor_packing_id = vendor_packing_id,
-
                     edt_order_total.getText().toString().trim(),
-
+                    String.valueOf(user_id = user_id),
+                    map,
                     "email", new Callback<CheckOutResponse>() {
                         @Override
                         public void success(CheckOutResponse checkOutResponse, Response response) {

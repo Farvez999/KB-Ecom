@@ -85,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ApiInterface api = retrofit.create(ApiInterface.class);
         Call<String> call = api.getProfile(sessionManager.getToken());
-        Toast.makeText(this, "Check session Manager"+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Check session Manager"+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
@@ -120,7 +120,7 @@ public class ProfileActivity extends AppCompatActivity {
             ArrayList<ProdModel> bsModelRecyclerArrayList = new ArrayList<>();
             JSONObject jsonObject=obj.getJSONObject("user");
 
-            Toast.makeText(this, "user "+jsonObject, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "user "+jsonObject, Toast.LENGTH_SHORT).show();
 
 
             String name = jsonObject.getString("name");
@@ -153,35 +153,5 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-//    private void getdata() {
-//        String url = "http://ecom.hrventure.xyz/api/profile";
-//
-//        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET,url,null,
-//                new com.android.volley.Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        try {
-//                            JSONObject jsonObject = response.getJSONObject("user");
-//                            Toast.makeText(ProfileActivity.this, "User "+jsonObject, Toast.LENGTH_SHORT).show();
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                },new com.android.volley.Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                error.printStackTrace();
-//            }
-//        });
-//        mRequestQueue.add(request);
-//    }
-//    @Override
-//    public boolean onKeyDown(int keyCode, KeyEvent event) {
-//        if ((keyCode == KeyEvent.KEYCODE_BACK) && this.webView.canGoBack()) {
-//            this.webView.goBack();
-//            return true;
-//        }
-//
-//        return super.onKeyDown(keyCode, event);
-//    }
+
 }

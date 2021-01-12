@@ -84,16 +84,13 @@ public class CategoryDetailsActivity extends AppCompatActivity {
 
 
                         try {
-
-
-
                             JSONObject data = response.getJSONObject("data");
 
-//                            JSONArray jsonArray= response.getJSONArray("prods");
-//                            //Log.e("JSONA",jsonArray);
-//                            Toast.makeText(CategoryDetailsActivity.this, "JSONA"+jsonArray, Toast.LENGTH_SHORT).show();
-//
+                            Log.e("DATATA", String.valueOf(data));
+
+
                             String categoryProduct = data.getString("prods");
+                            Log.e("DATATAT", String.valueOf(categoryProduct));
                             JSONArray array = new JSONArray(categoryProduct);
                             for (int i = 0; i< array.length(); i++){
                                 JSONObject jsonObject = array.getJSONObject(i);

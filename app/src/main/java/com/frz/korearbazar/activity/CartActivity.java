@@ -48,7 +48,7 @@ public class CartActivity extends AppCompatActivity {
 
         orderRecyclerView = findViewById(R.id.orderRecycler);
         txtTotal = findViewById(R.id.txtTotal);
-        textClear = findViewById(R.id.txtClear);
+        //textClear = findViewById(R.id.txtClear);
         orderButton = findViewById(R.id.order);
 
         cartDB=new CartDB(this);
@@ -122,7 +122,7 @@ public class CartActivity extends AppCompatActivity {
 
             //double ff= Double.parseDouble(String.valueOf(pp));
             basePrice =basePrice+pp;
-            Toast.makeText(this, ""+basePrice, Toast.LENGTH_SHORT).show();
+            // .makeText(this, ""+basePrice, Toast.LENGTH_SHORT).show();
             double dd = basePrice;
             String vv = String.valueOf(dd);
             float cc = Float.parseFloat(vv);
@@ -130,15 +130,18 @@ public class CartActivity extends AppCompatActivity {
             txtTotal.setText(aa);
         }
 
-        textClear.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (cartModelList.size() > 0)
-                {
-                    dialogClearAll();
-                }
-            }
-        });
+//        textClear.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                cartDB.deleteAll();
+////                if (cartModelList.size() > 0)
+////                {
+////                    cartDB.deleteAll();
+////                    //cartModelList.clear();
+////                    //dialogClearAll();
+////                }
+//            }
+//        });
 
 
         final double finalBasePrice = basePrice;
@@ -176,7 +179,7 @@ public class CartActivity extends AppCompatActivity {
 
     private void dialogClearAll()
     {
-        AlertDialog.Builder builder;
+        final AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
         {
             builder = new AlertDialog.Builder(CartActivity.this, android.R.style.Theme_Material_Dialog_Alert);
@@ -184,24 +187,20 @@ public class CartActivity extends AppCompatActivity {
         {
             builder = new AlertDialog.Builder(CartActivity.this);
         }
-        builder.setTitle(R.string.clear_all)
-                .setMessage(R.string.delete_all_orders)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        clearAll();
-                        showMessage(true, getString(R.string.cart_clean));
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        // do nothing
-                    }
-                })
-                .show();
+        builder.setTitle(R.string.clear_all);
+        builder.setMessage(R.string.delete_all_orders);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                //cartDB.deleteAll();
+                showMessage(true, getString(R.string.cart_clean));
+            }
+        });
+        builder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                // do nothing
+            }
+        });
+        builder.show();
     }
 
     private void clearAll()

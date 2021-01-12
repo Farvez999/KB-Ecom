@@ -170,34 +170,34 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:orientation="vertical">-->
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/rounded_selectd"
-                android:gravity="center"
-                android:text="Or"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:background="@drawable/rounded_selectd"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Or"-->
+<!--                android:textColor="@color/colorPrimary"-->
+<!--                android:textStyle="bold" />-->
 
-            <TextView
-                android:id="@+id/btn_vendorR"
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="5dp"
-                android:background="@drawable/rounded_selectd"
-                android:gravity="center"
-                android:text="Vendor Register"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
-        </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/btn_vendorR"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="48dp"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:layout_marginLeft="5dp"-->
+<!--                android:background="@drawable/rounded_selectd"-->
+<!--                android:gravity="center"-->
+<!--                android:text="Vendor Register"-->
+<!--                android:textColor="@color/colorPrimary"-->
+<!--                android:textStyle="bold" />-->
+<!--        </LinearLayout>-->
 
         <View
             android:layout_width="match_parent"

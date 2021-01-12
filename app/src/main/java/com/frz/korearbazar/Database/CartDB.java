@@ -137,6 +137,14 @@ public class CartDB extends SQLiteOpenHelper {
         sqLiteDatabase.close();
 
     }
+
+//    public void deleteAll()
+//    {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        db.execSQL("delete from "+ TABLE_NAME);
+//        db.close();
+//    }
+
     //count how many user contacts avaiable in my SQLite Database
     public int getCountUser(){
         String countQuery="Select * From " +TABLE_NAME;
@@ -177,4 +185,6 @@ public class CartDB extends SQLiteOpenHelper {
         }
         return fileName;
     }
+
+
 }

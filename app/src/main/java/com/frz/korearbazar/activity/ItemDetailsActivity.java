@@ -189,7 +189,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
                 txtPrice.setText(setnewPrice);
 
                 Log.e("new price",setnewPrice);
-                Toast.makeText(ItemDetailsActivity.this, ""+setnewPrice, Toast.LENGTH_SHORT).show();
+               // Toast.makeText(ItemDetailsActivity.this, ""+setnewPrice, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -233,7 +233,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
         buyNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ItemDetailsActivity.this, "Buy Now", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(ItemDetailsActivity.this, "Buy Now", Toast.LENGTH_SHORT).show();
                // Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse("http://ecom.hrventure.xyz/carts"));
                 Intent intent1 = new Intent(ItemDetailsActivity.this,CartActivity.class);
                 startActivity(intent1);

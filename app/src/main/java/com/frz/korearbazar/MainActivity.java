@@ -316,16 +316,16 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
             }
         });
 
-        navigationView.getMenu().findItem(R.id.nav_vendorRe).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                drawer.close();
-                Intent intent = new Intent(MainActivity.this, VendorRegisterActivity.class);
-                startActivity(intent);
-                finish();
-                return false;
-            }
-        });
+//        navigationView.getMenu().findItem(R.id.nav_vendorRe).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem menuItem) {
+//                drawer.close();
+//                Intent intent = new Intent(MainActivity.this, VendorRegisterActivity.class);
+//                startActivity(intent);
+//                finish();
+//                return false;
+//            }
+//        });
 
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
                 Intent i = new Intent(MainActivity.this, LoginActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(i);
-                Toast.makeText(MainActivity.this, "Log Out Success", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "Log Out Success", Toast.LENGTH_SHORT).show();
                 finish();
                 return false;
             }
@@ -1650,7 +1650,7 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
     @Override
     public void setProd(ProdModel newProdModel) {
         if (newProdModel != null) {
-            Toast.makeText(this, "" + newProdModel.getSlug(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "" + newProdModel.getSlug(), Toast.LENGTH_SHORT).show();
             Intent i = new Intent(this, ItemDetailsActivity.class);
             i.putExtra("prodctModel", newProdModel.getSlug());
             i.putExtra("price",newProdModel.getShowPrice());
@@ -1658,31 +1658,5 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
         }
     }
 
-//    @Override
-//    public void setCategory(CateModel cateModel) {
-//        if (cateModel != null) {
-//            Toast.makeText(this, "Click category Item" + cateModel.getSlug(), Toast.LENGTH_SHORT).show();
-//            Intent i = new Intent(this, ItemDetailsActivity.class);
-//            i.putExtra("categoryModel", cateModel);
-//            startActivity(i);
-//        }
-//    }
-
-
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//
-//        if (sessionManager.isLogin())
-//        {
-//            Toast.makeText(this, "Session Done", Toast.LENGTH_SHORT).show();
-//            Intent i = new Intent(MainActivity.this,MainActivity.class);
-//            startActivity(i);
-//            finish();
-//        }
-//        else {
-//
-//        }
-//    }
 
     }

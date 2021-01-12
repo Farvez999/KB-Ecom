@@ -101,8 +101,7 @@ public interface ApiInterface {
 
 
 
-    @FormUrlEncoded // annotation used in POST type requests
-    //@POST("/retrofit/register.php")
+    @FormUrlEncoded
     @retrofit.http.POST("/cashondelivery")// API's endpoints
     public void checkout(@retrofit.http.Field("personal_name") String personal_name,
                          @retrofit.http.Field("personal_email") String personal_email,
@@ -141,7 +140,7 @@ public interface ApiInterface {
 
                          @retrofit.http.Field("user_id") String user_id,
                          @retrofit.http.FieldMap Map<String, String> cartInfo,
-                         @Field("logintype") String logintype,
+                         //@Field("logintype") String logintype,
                          Callback<CheckOutResponse> callback);
 
 

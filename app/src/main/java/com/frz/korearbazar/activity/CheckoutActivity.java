@@ -43,9 +43,9 @@ public class CheckoutActivity extends AppCompatActivity {
     String data_order_list = "";
     String str_currency_code;
 
-    TextView personal_name,ed_user_email,txt_continus;
-    EditText ed_fullName,ed_phone,ed_email,ed_address,ed_country,ed_city,ed_postCode;
-    EditText edt_order_list,edt_order_total;
+    TextView personal_name,personal_email,txt_continus;
+    EditText name,phone,email,address,customer_country,city,zip;
+    EditText edt_order_list,total;
 
     String shipping="shipto";
     String pickup_location="Bangladesh";
@@ -92,18 +92,18 @@ public class CheckoutActivity extends AppCompatActivity {
         orderRecyclerView = findViewById(R.id.checkRecyclerView);
 
         personal_name = findViewById(R.id.username);
-        ed_user_email = findViewById(R.id.user_email);
+        personal_email = findViewById(R.id.user_email);
 
-        ed_fullName = findViewById(R.id.fullName);
-        ed_phone = findViewById(R.id.phone);
-        ed_email = findViewById(R.id.email);
-        ed_address = findViewById(R.id.address);
-        ed_country = findViewById(R.id.country);
-        ed_city = findViewById(R.id.city);
-        ed_postCode = findViewById(R.id.postCode);
+        name = findViewById(R.id.fullName);
+        phone = findViewById(R.id.phone);
+        email = findViewById(R.id.email);
+        address = findViewById(R.id.address);
+        customer_country = findViewById(R.id.country);
+        city = findViewById(R.id.city);
+        zip = findViewById(R.id.postCode);
 
         edt_order_list = findViewById(R.id.edt_order_list);
-        edt_order_total = findViewById(R.id.edt_order_total);
+        total = findViewById(R.id.edt_order_total);
 
         txt_continus = findViewById(R.id.txt_continus);
 
@@ -136,7 +136,7 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
         SharedPreferences prefs = getSharedPreferences("KOREAR_BAZAR", MODE_PRIVATE);
-        String name=prefs.getString("name",null);
+        String userName=prefs.getString("name",null);
         String userEmail=prefs.getString("email",null);
 
         int userId = prefs.getInt("id",-1);
@@ -144,31 +144,32 @@ public class CheckoutActivity extends AppCompatActivity {
         user_id=userId;
 
         String fullName=prefs.getString("name",null);
-        String phone=prefs.getString("phone",null);
-        String email=prefs.getString("email",null);
-        String address=prefs.getString("address",null);
+        String Phone=prefs.getString("phone",null);
+        String Email=prefs.getString("email",null);
+        String Address=prefs.getString("address",null);
         String country=prefs.getString("country",null);
 //        Log.e("USERCountry", country);
-        String city=prefs.getString("city",null);
+        String City=prefs.getString("city",null);
         String postCode=prefs.getString("zip",null);
-        personal_name.setText(name);
-        ed_user_email.setText(userEmail);
 
-        ed_fullName.setText(fullName);
-        ed_phone.setText(phone);
-        ed_email.setText(email);
-        ed_address.setText(address);
-        ed_country.setText(country);
+        personal_name.setText(userName);
+        personal_email.setText(userEmail);
 
-        ed_city.setText(city);
-        ed_postCode.setText(postCode);
+        name.setText(fullName);
+        phone.setText(Phone);
+        email.setText(Email);
+        address.setText(Address);
+        customer_country.setText(country);
+
+        city.setText(City);
+        zip.setText(postCode);
 
         txt_continus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 checkoutComplete();
-                Toast.makeText(CheckoutActivity.this, "Check Out Successful", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CheckoutActivity.this, "Check Out Successful", Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -190,18 +191,18 @@ public class CheckoutActivity extends AppCompatActivity {
 
             Api.getClient().checkout(
                     personal_name.getText().toString().trim(),
-                    ed_user_email.getText().toString().trim(),
+                    personal_email.getText().toString().trim(),
 
                     shipping,
                     pickup_location,
 
-                    ed_fullName.getText().toString().trim(),
-                    ed_phone.getText().toString().trim(),
-                    ed_email.getText().toString().trim(),
-                    ed_address.getText().toString().trim(),
-                    ed_country.getText().toString().trim(),
-                    ed_city.getText().toString().trim(),
-                    ed_postCode.getText().toString().trim(),
+                    name.getText().toString().trim(),
+                    phone.getText().toString().trim(),
+                    email.getText().toString().trim(),
+                    address.getText().toString().trim(),
+                    customer_country.getText().toString().trim(),
+                    city.getText().toString().trim(),
+                    zip.getText().toString().trim(),
 
         shipping_name,
         shipping_email,
@@ -219,16 +220,17 @@ public class CheckoutActivity extends AppCompatActivity {
                     totalQty= totalQty,
                     vendor_shipping_id = vendor_shipping_id,
                     vendor_packing_id = vendor_packing_id,
-                    edt_order_total.getText().toString().trim(),
+                    total.getText().toString().trim(),
                     String.valueOf(user_id = user_id),
                     map,
-                    "email", new Callback<CheckOutResponse>() {
+                    //"email",
+                    new Callback<CheckOutResponse>() {
                         @Override
                         public void success(CheckOutResponse checkOutResponse, Response response) {
-                            // in this method we will get the response from API
-                            progressDialog.dismiss(); //dismiss progress dialog
+                            progressDialog.dismiss();
                             checkOutResponseData = checkOutResponse;
                             user_id = checkOutResponse.getUserid();
+                            Log.e("ERROR",checkOutResponse.getMessage());
                             Toast.makeText(CheckoutActivity.this, checkOutResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(CheckoutActivity.this, MainActivity.class);
                             startActivity(intent);
@@ -237,7 +239,8 @@ public class CheckoutActivity extends AppCompatActivity {
                         @Override
                         public void failure(RetrofitError error) {
                             // if error occurs in network transaction then we can get the error in this method.
-                            Toast.makeText(CheckoutActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(CheckoutActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
+                            Log.e("fdsgjsdh",error.getMessage());
                             progressDialog.dismiss(); //dismiss progress dialog
 
                         }

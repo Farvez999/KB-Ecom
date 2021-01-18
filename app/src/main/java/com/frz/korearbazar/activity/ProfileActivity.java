@@ -23,6 +23,8 @@ import com.frz.korearbazar.ApiInterface;
 import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.BigSavePAdapter;
+import com.frz.korearbazar.adapter.CategoryDetailsProdAdapter;
+import com.frz.korearbazar.model.CategoryDetailsProdModel;
 import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
 import com.frz.korearbazar.model.User;
@@ -41,6 +43,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
+import static com.frz.korearbazar.ApiInterface.CategoryDetails;
 import static com.frz.korearbazar.ApiInterface.JSONURL;
 import static com.frz.korearbazar.ApiInterface.ProdDetailsUrl;
 
@@ -66,7 +69,7 @@ public class ProfileActivity extends AppCompatActivity {
         mRequestQueue = Volley.newRequestQueue(this);
         getdata();
 
-        //txt_save = findViewById(R.id.txt_save);
+
         ed_username = findViewById(R.id.ed_username);
         ed_email = findViewById(R.id.ed_email);
         ed_alternatmob = findViewById(R.id.ed_alternatmob);
@@ -74,7 +77,129 @@ public class ProfileActivity extends AppCompatActivity {
         ed_zip = findViewById(R.id.zip);
         ed_address = findViewById(R.id.address);
         affiliateBonus = findViewById(R.id.affiliateBonus);
+
+        ProdDetailsfetchJSON();
     }
+
+    private void ProdDetailsfetchJSON() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ApiInterface.JSONURL)
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .build();
+
+        ApiInterface api = retrofit.create(ApiInterface.class);
+        Call<String> call = api.getOrder(sessionManager.getToken());
+        //Toast.makeText(this, "Check session Manager"+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
+        call.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("Responsestring", response.body().toString());
+                //Toast.makeText()
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        Log.i("onSuccess", response.body().toString());
+
+                        String jsonresponse = response.body().toString();
+                        Order_writeRecycler(jsonresponse);
+
+                    } else {
+                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(ProfileActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void Order_writeRecycler(String jsonresponse) {
+        try {
+
+            JSONObject obj = new JSONObject(jsonresponse);
+            JSONObject data=obj.getJSONObject("user");
+            Log.e("ORDEARS rrr",data.getString("id"));
+
+
+            JSONArray jsonArray=data.getJSONArray("orders");
+            Log.e("ORDEARS e",jsonArray.getString(Integer.parseInt("id")));
+            for (int i=0; i<jsonArray.length();i++){
+                JSONObject jsonObject=jsonArray.getJSONObject(i);
+
+
+                Log.e("ORDEARS",jsonObject.getString("id"));
+
+//                                String id =jsonObject1.getString("id");
+//                                String name =jsonObject1.getString("name");
+//                                String slug =jsonObject1.getString("slug");
+//                                String thumbnail = jsonObject1.getString("thumbnail");
+//                                String photo = jsonObject1.getString("photo");
+//                                String price = jsonObject1.getString("price");
+//                                String previous_price = jsonObject1.getString("previous_price");
+
+                //mExampleList.add(new CategoryDetailsProdModel(id,name,slug,thumbnail,photo,price,previous_price));
+            }
+
+//                            mExampleAdapter = new CategoryDetailsProdAdapter(CategoryDetailsActivity.this, mExampleList);
+//                            mRecyclerView.setAdapter(mExampleAdapter);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+//    private void ProdDetailsfetchJSON() {
+//        String url = "http://ecom.hrventure.xyz/public/api/user/dashboard";
+//
+//
+//        //Toast.makeText(this, "URL "+url, Toast.LENGTH_SHORT).show();
+//        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+//                new com.android.volley.Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//
+//
+//                        try {
+//                            JSONObject data = response.getJSONObject("user");
+//                            Toast.makeText(ProfileActivity.this, "ORDEARS ee DEAR"+data, Toast.LENGTH_SHORT).show();
+//
+//                            JSONArray jsonArray=data.getJSONArray("orders");
+//                            Toast.makeText(ProfileActivity.this, "ORDEARS DEAR"+jsonArray, Toast.LENGTH_SHORT).show();
+//
+//                            for (int i=0; i<jsonArray.length();i++){
+//                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
+//
+//
+//                                Log.e("ORDEARS",jsonObject1.getString("id"));
+//
+////                                String id =jsonObject1.getString("id");
+////                                String name =jsonObject1.getString("name");
+////                                String slug =jsonObject1.getString("slug");
+////                                String thumbnail = jsonObject1.getString("thumbnail");
+////                                String photo = jsonObject1.getString("photo");
+////                                String price = jsonObject1.getString("price");
+////                                String previous_price = jsonObject1.getString("previous_price");
+//
+//                                //mExampleList.add(new CategoryDetailsProdModel(id,name,slug,thumbnail,photo,price,previous_price));
+//                            }
+//
+////                            mExampleAdapter = new CategoryDetailsProdAdapter(CategoryDetailsActivity.this, mExampleList);
+////                            mRecyclerView.setAdapter(mExampleAdapter);
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    }
+//                }, new com.android.volley.Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                error.printStackTrace();
+//            }
+//        });
+//        mRequestQueue.add(request);
+//    }
 
     //Big Save Products
     private void getdata() {
@@ -113,15 +238,10 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void BS_prod_writeRecycler(String jsonresponse) {
         try {
-            //getting the whole json object from the response
             JSONObject obj = new JSONObject(jsonresponse);
-//            if(obj.optString("status").equals("true")){
 
             ArrayList<ProdModel> bsModelRecyclerArrayList = new ArrayList<>();
             JSONObject jsonObject=obj.getJSONObject("user");
-
-            //Toast.makeText(this, "user "+jsonObject, Toast.LENGTH_SHORT).show();
-
 
             String name = jsonObject.getString("name");
             String email=jsonObject.getString("email");
@@ -136,7 +256,6 @@ public class ProfileActivity extends AppCompatActivity {
             df.setMaximumFractionDigits(2);
 
 
-            //Toast.makeText(this, "Last Check"+name, Toast.LENGTH_SHORT).show();
             ed_username.setText(name);
             ed_email.setText(email);
             ed_alternatmob.setText(phone);

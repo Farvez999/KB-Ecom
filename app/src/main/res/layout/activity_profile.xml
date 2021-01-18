@@ -7,12 +7,13 @@
     android:orientation="vertical"
     tools:context=".activity.ProfileActivity">
 
-<!--    <WebView-->
-<!--        android:id="@+id/webview"-->
-<!--        android:layout_alignParentTop="true"-->
-<!--        android:layout_alignParentLeft="true"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:fillViewport="true">
+
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,9 +22,7 @@
         android:orientation="vertical">
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -158,37 +157,6 @@
             </LinearLayout>
 
 
-
-
-<!--            <View-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="25dp" />-->
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/txt_save"-->
-<!--                android:layout_width="160dp"-->
-<!--                android:layout_height="48dp"-->
-<!--                android:layout_marginLeft="20dp"-->
-<!--                android:layout_marginTop="30dp"-->
-<!--                android:layout_marginRight="20dp"-->
-<!--                android:elevation="10dp"-->
-<!--                android:background="@drawable/rounded_green"-->
-<!--                android:layout_gravity="center"-->
-<!--                android:gravity="center"-->
-<!--                android:text="Save"-->
-<!--                android:textColor="@color/colorWhite" />-->
-
-<!--            <View-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="35dp" />-->
-<!--        </LinearLayout>-->
-
-
-<!--        <View-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="25dp" />-->
-
     </LinearLayout>
 
 
@@ -229,8 +197,33 @@
 
             </LinearLayout>
 
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Recent Orders"
+                    android:textSize="30dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recentOrderRV"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/item_order"></androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

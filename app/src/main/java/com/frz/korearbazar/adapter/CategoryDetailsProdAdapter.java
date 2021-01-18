@@ -14,22 +14,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.frz.korearbazar.Interface.ProdInterface;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.activity.ItemDetailsActivity;
+import com.frz.korearbazar.model.CategoryDetailsProdModel;
 import com.frz.korearbazar.model.ProdModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
+import static com.frz.korearbazar.ApiInterface.CategoryDetailsProds;
 import static com.frz.korearbazar.ApiInterface.JSONURL;
 import static com.frz.korearbazar.ApiInterface.RelatedProductImgUrl;
 
 public class CategoryDetailsProdAdapter extends RecyclerView.Adapter<CategoryDetailsProdAdapter.MyViewHolder> {
 
     private LayoutInflater inflater;
-    private ArrayList<ProdModel> bestModelArrayList;
+    private ArrayList<CategoryDetailsProdModel> bestModelArrayList;
     Context context;
     ProdInterface prodInterface;
 
-    public CategoryDetailsProdAdapter(Context ctx, ArrayList<ProdModel> dataModelArrayList){
+    public CategoryDetailsProdAdapter(Context ctx, ArrayList<CategoryDetailsProdModel> dataModelArrayList){
         this.context=ctx;
         inflater = LayoutInflater.from(ctx);
         this.bestModelArrayList = dataModelArrayList;
@@ -51,11 +53,11 @@ public class CategoryDetailsProdAdapter extends RecyclerView.Adapter<CategoryDet
 
     @Override
     public void onBindViewHolder(@NonNull CategoryDetailsProdAdapter.MyViewHolder holder, int position) {
-//http://192.168.0.103/project/hrv-ecom/public/assets/images/thumbnails/1568025872thPsuRSJ.jpg
-        Picasso.get().load(JSONURL+RelatedProductImgUrl+bestModelArrayList.get(position).getThumbnail()).into(holder.iv);
+//http://ecom.hrventure.xyz/assets/images/thumbnails/1607271709rcE4R1aG.jpg JSONURL+CategoryDetailsProds
+        Picasso.get().load("http://ecom.hrventure.xyz/assets/images/thumbnails/"+bestModelArrayList.get(position).getPhoto()).into(holder.iv);
         holder.name.setText(bestModelArrayList.get(position).getName());
-        holder.price.setText(bestModelArrayList.get(position).getShowPrice());
-        holder.previous_price.setText(bestModelArrayList.get(position).getShowPreviousPrice());
+        holder.price.setText(bestModelArrayList.get(position).getPrice());
+        holder.previous_price.setText(bestModelArrayList.get(position).getPrevious_price());
 
     }
 
@@ -87,11 +89,10 @@ public class CategoryDetailsProdAdapter extends RecyclerView.Adapter<CategoryDet
         @Override
         public void onClick(View view) {
 
-            int postion = this.getPosition();
-            ProdModel pm=bestModelArrayList.get(postion);
-            Intent intent = new Intent(context , ItemDetailsActivity.class);
-            intent.putExtra("prodctModel" , pm.getSlug());
-            // intent.putExtra("price" ,pm.getPrice());
+            int postion = this.getLayoutPosition();
+            CategoryDetailsProdModel cdpm = bestModelArrayList.get(postion);
+            Intent intent = new Intent(context,ItemDetailsActivity.class);
+            intent.putExtra("prodctModel", cdpm.getSlug());
 
             view.getContext().startActivity(intent);
 

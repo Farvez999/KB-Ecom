@@ -29,6 +29,7 @@ public interface ApiInterface {
     String BlogImgUrl = "assets/images/blogs/";
     String PDetailsImgUrl = "assets/images/products/";
     String RelatedProductImgUrl = "assets/images/thumbnails/";
+    String CategoryDetailsProds = "assets/images/thumbnails/";
     String ProdDetailsUrl= "api/item/";
     String CategoryDetails= "api/category/";
 
@@ -54,6 +55,11 @@ public interface ApiInterface {
 
     @GET("api/user/profile")
     Call<String> getProfile(
+            @Header("Authorization") String Bearer
+    );
+
+    @GET("api/user/dashboard")
+    Call<String> getOrder(
             @Header("Authorization") String Bearer
     );
 

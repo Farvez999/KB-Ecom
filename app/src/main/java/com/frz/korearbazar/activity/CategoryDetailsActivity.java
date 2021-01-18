@@ -1,6 +1,7 @@
 package com.frz.korearbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -19,6 +20,7 @@ import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.CateAdapter;
 import com.frz.korearbazar.adapter.CategoryDetailsProdAdapter;
 import com.frz.korearbazar.model.CateModel;
+import com.frz.korearbazar.model.CategoryDetailsProdModel;
 import com.frz.korearbazar.model.ProdModel;
 
 import org.json.JSONArray;
@@ -32,21 +34,13 @@ import static com.frz.korearbazar.ApiInterface.JSONURL;
 
 public class CategoryDetailsActivity extends AppCompatActivity {
 
-    private ArrayList<CateModel> mExampleList;
-    CateModel cateModel;
-
-    private CateAdapter retrofitAdapter;
-
-
+    private RecyclerView mRecyclerView;
+    private CategoryDetailsProdAdapter mExampleAdapter;
+    private ArrayList<CategoryDetailsProdModel> mExampleList;
+    private RequestQueue mRequestQueue;
 
     String slug;
 
-    private ArrayList<ProdModel> rExampleList;
-    private RequestQueue rRequestQueue;
-    private CategoryDetailsProdAdapter mExampleAdapter;
-    private RecyclerView mRecyclerView;
-
-    TextView testName,testSlug;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,24 +48,22 @@ public class CategoryDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category_details);
 
         mRecyclerView = findViewById(R.id.category_recycler);
-
-        rExampleList = new ArrayList<>();
-        rRequestQueue = Volley.newRequestQueue(this);
-
-        mRecyclerView = findViewById(R.id.recycler_releted);
-        //mRecyclerView.setHasFixedSize(true);
-//        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        mExampleList = new ArrayList<>();
+        mRequestQueue = Volley.newRequestQueue(this);
 
 
         Intent intent = getIntent();
         slug = intent.getStringExtra("mySlug");
-        //Toast.makeText(this, "Category "+ slug, Toast.LENGTH_SHORT).show();
 
         ProdDetailsfetchJSON();
 
-        testName = findViewById(R.id.nameR);
-        testSlug = findViewById(R.id.slugR);
+
+
     }
+
+
 
     //Product Details
     private void ProdDetailsfetchJSON() {
@@ -86,45 +78,25 @@ public class CategoryDetailsActivity extends AppCompatActivity {
                         try {
                             JSONObject data = response.getJSONObject("data");
 
-                            Log.e("DATATA", String.valueOf(data));
+                            JSONArray jsonArray=data.getJSONArray("prods");
+                            for (int i=0; i<jsonArray.length();i++){
+                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
 
 
-                            String categoryProduct = data.getString("prods");
-                            Log.e("DATATAT", String.valueOf(categoryProduct));
-                            JSONArray array = new JSONArray(categoryProduct);
-                            for (int i = 0; i< array.length(); i++){
-                                JSONObject jsonObject = array.getJSONObject(i);
-                                String nameR = jsonObject.getString("name");
-                                String  slugR = jsonObject.getString("slug");
 
-//                                String id = jsonObject.getString("id");
-//                                String user_id = jsonObject.getString("user_id");
-//                                String name = jsonObject.getString("name");
-//                                String slug = jsonObject.getString("slug");
-//                                String features = jsonObject.getString("features");
-//                                String colors = jsonObject.getString("colors");
-//                                String thumbnail = jsonObject.getString("thumbnail");
-//                                String price = jsonObject.getString("price");
-//                                String previous_price = jsonObject.getString("previous_price");
-//                                String attributes = jsonObject.getString("attributes");
-//                                String size = jsonObject.getString("size");
-//                                String size_price = jsonObject.getString("size_price");
-//                                String discount_date = jsonObject.getString("discount_date");
-//
-//                                String showPrice = jsonObject.getString("showPrice");
-//                                String setCurrency = jsonObject.getString("setCurrency");
-//                                String showPreviousPrice = jsonObject.getString("showPreviousPrice");
-//
-//                                rExampleList.add(new ProdModel(id,user_id,name, slug,features,colors, thumbnail,price,previous_price,attributes,size,size_price,discount_date,showPrice,setCurrency,showPreviousPrice));
+                                String id =jsonObject1.getString("id");
+                                String name =jsonObject1.getString("name");
+                                String slug =jsonObject1.getString("slug");
+                                String thumbnail = jsonObject1.getString("thumbnail");
+                                String photo = jsonObject1.getString("photo");
+                                String price = jsonObject1.getString("price");
+                                String previous_price = jsonObject1.getString("previous_price");
 
-                                Log.e("name",nameR);
-                                Toast.makeText(CategoryDetailsActivity.this, "name"+nameR, Toast.LENGTH_SHORT).show();
-                                testName.setText(nameR);
-                                testSlug.setText(slugR);
-
+                                mExampleList.add(new CategoryDetailsProdModel(id,name,slug,thumbnail,photo,price,previous_price));
                             }
-                            mExampleAdapter = new CategoryDetailsProdAdapter(CategoryDetailsActivity.this, rExampleList);
-//                            mRecyclerView.setAdapter(mExampleAdapter);
+
+                            mExampleAdapter = new CategoryDetailsProdAdapter(CategoryDetailsActivity.this, mExampleList);
+                            mRecyclerView.setAdapter(mExampleAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -136,113 +108,8 @@ public class CategoryDetailsActivity extends AppCompatActivity {
                 error.printStackTrace();
             }
         });
-        rRequestQueue.add(request);
+        mRequestQueue.add(request);
     }
 
-//    private void ProdDetailsfetchJSON() {
-//        Retrofit retrofit = new Retrofit.Builder()
-//                .baseUrl(JSONURL)
-//                .addConverterFactory(ScalarsConverterFactory.create())
-//                .build();
-//
-//        ApiInterface api = retrofit.create(ApiInterface.class);
-//        Call<String> call = api.getCategoryDetails();
-//        call.enqueue(new Callback<String>() {
-//            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.i("Responsestring", response.body().toString());
-//                //Toast.makeText()
-//                if (response.isSuccessful()) {
-//                    if (response.body() != null) {
-//                        Log.i("onSuccess", response.body().toString());
-//
-//                        String jsonresponse = response.body().toString();
-//
-//                        prod_details_writeRecycler(jsonresponse);
-//
-//                    } else {
-//                        Log.i("onEmptyResponse", "Returned empty response");
-//                        Toast.makeText(getApplicationContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//                Toast.makeText(CategoryDetailsActivity.this, "Error"+t, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//    }
-//
-//    @SuppressLint("ResourceAsColor")
-//    private void prod_details_writeRecycler(String jsonresponse) {
-//
-//
-//
-//        try {
-//            JSONObject object = new JSONObject(jsonresponse);
-//
-//            ArrayList<CateModel> cateDetailsmodelRecyclerArrayList = new ArrayList<>();
-//
-//            JSONArray jsonArray = object.getJSONArray("prods");
-////                JSONObject jsonObject = object.getJSONObject("productt");
-//                Toast.makeText(this, "Done" + jsonArray, Toast.LENGTH_SHORT).show();
-//
-//
-////            for (int i = 0; i < jsonArray.length(); i++) {
-////
-////                CateModel cateModelRecycler = new CateModel();
-////                JSONObject dataobj = jsonArray.getJSONObject(i);
-////
-////
-////                cateModelRecycler.setName(dataobj.getString("name"));
-////
-////
-////
-////
-////                cateDetailsmodelRecyclerArrayList.add(cateModelRecycler);
-////
-////            }
-////
-////            retrofitAdapter = new CateAdapter(this,cateDetailsmodelRecyclerArrayList);
-////            cateRecyclerView.setAdapter(retrofitAdapter);
-////            cateRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-//
-//
-//
-//            for (int i = 0; i < jsonArray.length(); i++) {
-//
-//                CateModel cateDetalisModelRecycler = new CateModel();
-//                JSONObject dataobj = jsonArray.getJSONObject(i);
-//
-//
-//                String slugf=dataobj.getString("slug");
-//
-////                    JSONObject jsonObject = object.getJSONObject("productt");
-////                    Toast.makeText(this, "productt" + jsonObject, Toast.LENGTH_SHORT).show();
-//
-//                if (slugf.equals(cateModel.getSlug())){
-//                    cateDetalisModelRecycler.setSlug(dataobj.getString("slug"));
-//                    cateDetalisModelRecycler.setPhoto(dataobj.getString("photo"));
-//                    String photo=dataobj.getString("photo");
-//                    //prodDetalisModelRecycler.setGalleries(dataobj.getString("galleries"));
-//                    cateDetalisModelRecycler.setName(dataobj.getString("name"));
-//
-//
-//                    cateDetailsmodelRecyclerArrayList.add(cateDetalisModelRecycler);
-//
-//                }
-//
-//                    retrofitAdapter = new CateAdapter(this,cateDetailsmodelRecyclerArrayList);
-//                    cateRecyclerView.setAdapter(retrofitAdapter);
-//                    cateRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
-//
-//
-//            }
-//
-//        }
-//        catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
 }

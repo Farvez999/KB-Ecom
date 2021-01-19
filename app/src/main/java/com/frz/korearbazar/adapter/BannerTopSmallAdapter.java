@@ -12,9 +12,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.frz.korearbazar.R;
-import com.frz.korearbazar.activity.ItemDetailsActivity;
 import com.frz.korearbazar.model.BannerTopSmallModel;
-import com.frz.korearbazar.model.SlidersModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

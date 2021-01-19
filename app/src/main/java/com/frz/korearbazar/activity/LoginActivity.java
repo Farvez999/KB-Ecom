@@ -4,9 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,19 +13,14 @@ import android.widget.Toast;
 import com.frz.korearbazar.Api;
 import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
-import com.frz.korearbazar.ApiInterface;
 import com.frz.korearbazar.model.SignInResponse;
-import com.frz.korearbazar.model.SignUpResponse;
 import com.frz.korearbazar.model.TokenResponse;
 import com.frz.korearbazar.model.User;
 import com.frz.korearbazar.utils.SessionManager;
-import com.google.gson.Gson;
 
-import okhttp3.ResponseBody;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-import retrofit2.Call;
 
 public class LoginActivity extends AppCompatActivity {
 

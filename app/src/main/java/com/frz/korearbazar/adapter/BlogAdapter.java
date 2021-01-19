@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.model.BlogModel;
-import com.frz.korearbazar.model.ReviewsModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

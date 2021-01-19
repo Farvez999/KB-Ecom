@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -129,10 +128,11 @@ public class CheckoutActivity extends AppCompatActivity {
 
         map = new HashMap<>();
         for(int i=0; i<cartModelList.size();i++){
-            map.put("cart[items]["+cartModelList.get(i).getQuantity()+"][qty]",cartModelList.get(i).getQuantity());
-            map.put("cart[items]["+cartModelList.get(i).getStock()+"][stock]",cartModelList.get(i).getStock());
-            map.put("cart[items]["+cartModelList.get(i).getPrice()+"][price]",cartModelList.get(i).getPrice());
-            map.put("cart[items]["+cartModelList.get(i).getDp()+"][dp]",cartModelList.get(i).getDp());//dp product e nai but dp input na dile checkout hobe na..kichu na hole 0 dite hobe
+            map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][qty]",cartModelList.get(i).getQuantity());
+            map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][size_qty]",cartModelList.get(i).getSize_qty());
+            map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][stock]",cartModelList.get(i).getStock());
+            map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][price]",cartModelList.get(i).getPrice());
+            map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][dp]",cartModelList.get(i).getDp());//dp product e nai but dp input na dile checkout hobe na..kichu na hole 0 dite hobe
             map.put("cart[items]["+cartModelList.get(i).getProduct_id()+"][product_id]", String.valueOf(cartModelList.get(i).getProduct_id()));
         }
 

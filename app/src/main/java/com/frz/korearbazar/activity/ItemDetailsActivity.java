@@ -90,6 +90,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
     String price;
 
     String pdp="Farvez";
+    String Size_qty = "";
     String pStock = "One";
 
     String pproduct_id = "";
@@ -280,6 +281,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
         String name = txtTitle.getText().toString();
         String price = txtPrice.getText().toString();
         String quantity = quantitynumber.getText().toString();
+        String size_qty = Size_qty;
         String dp = pdp;
         String stock = pStock;
         String product_id = pproduct_id;
@@ -289,7 +291,7 @@ public class ItemDetailsActivity extends AppCompatActivity  {
         Log.e("QUAAN",quantity);
 
 
-        CartModel cartModel = new CartModel(name,price,quantity,imgUrl,dp,stock,product_id);
+        CartModel cartModel = new CartModel(name,price,quantity,size_qty,imgUrl,dp,stock,product_id);
         long insertData=  cartDB.addInsert(cartModel);
         if (insertData>0){
             List<CartModel>list= new ArrayList<>();

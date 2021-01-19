@@ -5,6 +5,7 @@ public class CartModel {
     private String title;
     private String price;
     private String quantity;
+    private String size_qty;
     private String image;
     private String stock;
     private String dp;
@@ -13,10 +14,11 @@ public class CartModel {
     public CartModel() {
     }
 
-    public CartModel(String title, String price, String quantity, String image, String dp, String stock, String product_id) {
+    public CartModel(String title, String price, String quantity, String size_qty, String image, String dp, String stock, String product_id) {
         this.title = title;
         this.price = price;
         this.quantity = quantity;
+        this.size_qty = size_qty;
         this.image = image;
         this.dp = dp;
         this.stock = stock;
@@ -53,6 +55,14 @@ public class CartModel {
 
     public void setQuantity(String quantity) {
         this.quantity = quantity;
+    }
+
+    public String getSize_qty() {
+        return size_qty;
+    }
+
+    public void setSize_qty(String size_qty) {
+        this.size_qty = size_qty;
     }
 
     public String getImage() {

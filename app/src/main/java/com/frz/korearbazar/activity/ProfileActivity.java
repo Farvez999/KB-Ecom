@@ -1,31 +1,16 @@
 package com.frz.korearbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.View;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
 import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.frz.korearbazar.ApiInterface;
-import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
-import com.frz.korearbazar.adapter.BigSavePAdapter;
-import com.frz.korearbazar.adapter.CategoryDetailsProdAdapter;
-import com.frz.korearbazar.model.CategoryDetailsProdModel;
-import com.frz.korearbazar.model.ProdDetailsModel;
 import com.frz.korearbazar.model.ProdModel;
 import com.frz.korearbazar.model.User;
 import com.frz.korearbazar.utils.SessionManager;
@@ -42,10 +27,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
-
-import static com.frz.korearbazar.ApiInterface.CategoryDetails;
-import static com.frz.korearbazar.ApiInterface.JSONURL;
-import static com.frz.korearbazar.ApiInterface.ProdDetailsUrl;
 
 public class ProfileActivity extends AppCompatActivity {
 

@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,22 +43,25 @@ public class CheckoutActivity extends AppCompatActivity {
     String data_order_list = "";
     String str_currency_code;
 
-    //TextView personal_name,personal_email,
+    TextView personal_name,personal_email;
     TextView txt_continus;
-    //EditText name,phone,email,address,customer_country,city,zip;
+    EditText name,phone,email,address,customer_country,city,zip;
     EditText edt_order_list;
-    //EditText total;
+    EditText total;
+
 
     String shipping="shipto";
     String pickup_location="Bangladesh";
 
-    String shipping_name="jubayer Api";
-    String shipping_email="jubayerk7@gmail.com";
-    String shipping_phone= "01710029052";
-    String shipping_address="DHaka, Bangladesh";
-    String shipping_country="Bangladesh";
-    String shipping_city="Dhaka";
-    String shipping_zip="3456";
+//    String shipping_name="jubayer Api";
+//    String shipping_email="jubayerk7@gmail.com";
+//    String shipping_phone= "01710029052";
+//    String shipping_address="DHaka, Bangladesh";
+//    String shipping_country="Bangladesh";
+//    String shipping_city="Dhaka";
+//    String shipping_zip="3456";
+
+    EditText shipping_name,shipping_email,shipping_phone,shipping_address,shipping_country,shipping_city,shipping_zip;
 
     String shipping_cost= String.valueOf(0);
     String packing_cost= String.valueOf(0);
@@ -69,19 +73,19 @@ public class CheckoutActivity extends AppCompatActivity {
     String vendor_shipping_id="0";
     String vendor_packing_id="0";
 
-    String personal_name="user";
-    String personal_email="user@gmail.com";
+//    String personal_name="user";
+//    String personal_email="user@gmail.com";
 
-    String name="USER";
-            String phone="34534534534";
-                    String email="user@gmail.com";
-                            String address="Test Address";
-                                    String customer_country="Bangladesh";
-                                            String city="Test City";
-                                                    String zip="1231";
-
-                                                    String total="1000";
-    String user_id="22";
+//    String name="USER";
+//            String phone="34534534534";
+//                    String email="user@gmail.com";
+//                            String address="Test Address";
+//                                    String customer_country="Bangladesh";
+//                                            String city="Test City";
+//                                                    String zip="1231";
+//
+//                                                    String total="1000";
+    //String user_id="22";
 
 
     Map<String, String> map;
@@ -107,19 +111,29 @@ public class CheckoutActivity extends AppCompatActivity {
 
         orderRecyclerView = findViewById(R.id.checkRecyclerView);
 
-//        personal_name = findViewById(R.id.username);
-//        personal_email = findViewById(R.id.user_email);
-//
-//        name = findViewById(R.id.fullName);
-//        phone = findViewById(R.id.phone);
-//        email = findViewById(R.id.email);
-//        address = findViewById(R.id.address);
-//        customer_country = findViewById(R.id.country);
-//        city = findViewById(R.id.city);
-//        zip = findViewById(R.id.postCode);
-//
-//        edt_order_list = findViewById(R.id.edt_order_list);
-//        total = findViewById(R.id.edt_order_total);
+        personal_name = findViewById(R.id.username);
+        personal_email = findViewById(R.id.user_email);
+
+        name = findViewById(R.id.fullName);
+        phone = findViewById(R.id.phone);
+        email = findViewById(R.id.email);
+        address = findViewById(R.id.address);
+        customer_country = findViewById(R.id.country);
+        city = findViewById(R.id.city);
+        zip = findViewById(R.id.postCode);
+
+        //EditText shipping_name,shipping_email,shipping_phone,shipping_address,shipping_country,shipping_city,shipping_zip;
+
+        shipping_name = findViewById(R.id.shipping_name);
+        shipping_email = findViewById(R.id.shipping_email);
+        shipping_phone = findViewById(R.id.shipping_phone);
+        shipping_address = findViewById(R.id.shipping_address);
+        shipping_country = findViewById(R.id.shipping_country);
+        shipping_city = findViewById(R.id.shipping_city);
+        shipping_zip = findViewById(R.id.shipping_zip);
+
+        edt_order_list = findViewById(R.id.edt_order_list);
+        total = findViewById(R.id.edt_order_total);
 
         txt_continus = findViewById(R.id.txt_continus);
 
@@ -152,34 +166,34 @@ public class CheckoutActivity extends AppCompatActivity {
             Toast.makeText(this, "Cart is Empty", Toast.LENGTH_SHORT).show();
         }
 
-//        SharedPreferences prefs = getSharedPreferences("KOREAR_BAZAR", MODE_PRIVATE);
-//        String userName=prefs.getString("name",null);
-//        String userEmail=prefs.getString("email",null);
-//
-//        int userId = prefs.getInt("id",-1);
-//        Log.e("USERID", String.valueOf(userId));
-//        user_id=userId;
-//
-//        String fullName=prefs.getString("name",null);
-//        String Phone=prefs.getString("phone",null);
-//        String Email=prefs.getString("email",null);
-//        String Address=prefs.getString("address",null);
-//        String country=prefs.getString("country",null);
-////        Log.e("USERCountry", country);
-//        String City=prefs.getString("city",null);
-//        String postCode=prefs.getString("zip",null);
-//
-//        personal_name.setText(userName);
-//        personal_email.setText(userEmail);
-//
-//        name.setText(fullName);
-//        phone.setText(Phone);
-//        email.setText(Email);
-//        address.setText(Address);
-//        customer_country.setText(country);
-//
-//        city.setText(City);
-//        zip.setText(postCode);
+        SharedPreferences prefs = getSharedPreferences("KOREAR_BAZAR", MODE_PRIVATE);
+        String userName=prefs.getString("name",null);
+        String userEmail=prefs.getString("email",null);
+
+        int user_id = prefs.getInt("id",-1);
+        Log.e("USERID", String.valueOf(user_id));
+        userId=user_id;
+
+        String fullName=prefs.getString("name",null);
+        String Phone=prefs.getString("phone",null);
+        String Email=prefs.getString("email",null);
+        String Address=prefs.getString("address",null);
+        String country=prefs.getString("country",null);
+//        Log.e("USERCountry", country);
+        String City=prefs.getString("city",null);
+        String postCode=prefs.getString("zip",null);
+
+        personal_name.setText(userName);
+        personal_email.setText(userEmail);
+
+        name.setText(fullName);
+        phone.setText(Phone);
+        email.setText(Email);
+        address.setText(Address);
+        customer_country.setText(country);
+
+        city.setText(City);
+        zip.setText(postCode);
 
         txt_continus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -207,36 +221,36 @@ public class CheckoutActivity extends AppCompatActivity {
 
 
             Api.getClient().checkout(
-//                    personal_name.getText().toString().trim(),
-//                    personal_email.getText().toString().trim(),
-                    personal_name,
-                    personal_email,
+                    personal_name.getText().toString().trim(),
+                    personal_email.getText().toString().trim(),
+//                    personal_name,
+//                    personal_email,
 
                     shipping,
                     pickup_location,
 
-//                    name.getText().toString().trim(),
-//                    phone.getText().toString().trim(),
-//                    email.getText().toString().trim(),
-//                    address.getText().toString().trim(),
-//                    customer_country.getText().toString().trim(),
-//                    city.getText().toString().trim(),
-//                    zip.getText().toString().trim(),
-                    name,
-                    phone,
-                    email,
-                    address,
-                    customer_country,
-                    city,
-                    zip,
+                    name.getText().toString().trim(),
+                    phone.getText().toString().trim(),
+                    email.getText().toString().trim(),
+                    address.getText().toString().trim(),
+                    customer_country.getText().toString().trim(),
+                    city.getText().toString().trim(),
+                    zip.getText().toString().trim(),
+//                    name,
+//                    phone,
+//                    email,
+//                    address,
+//                    customer_country,
+//                    city,
+//                    zip,
 
-        shipping_name,
-        shipping_email,
-        shipping_phone,
-        shipping_address,
-        shipping_country,
-        shipping_city,
-        shipping_zip,
+        shipping_name.getText().toString().trim(),
+        shipping_email.getText().toString().trim(),
+        shipping_phone.getText().toString().trim(),
+        shipping_address.getText().toString().trim(),
+        shipping_country.getText().toString().trim(),
+        shipping_city.getText().toString().trim(),
+        shipping_zip.getText().toString().trim(),
 
                     method= method,
                     shipping_cost,
@@ -246,10 +260,10 @@ public class CheckoutActivity extends AppCompatActivity {
                     totalQty= totalQty,
                     vendor_shipping_id = vendor_shipping_id,
                     vendor_packing_id = vendor_packing_id,
-                    total,
-                   // total.getText().toString().trim(),
-                    //user_id,
-                    String.valueOf(user_id = user_id),
+                    //total,
+                    total.getText().toString().trim(),
+                    userId,
+                    //String.valueOf(user_id = user_id),
                     map,
                     //"email",
                     new Callback<CheckOutResponse>() {

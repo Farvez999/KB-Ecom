@@ -1,6 +1,8 @@
 package com.frz.korearbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,9 +13,14 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.frz.korearbazar.ApiInterface;
 import com.frz.korearbazar.R;
+import com.frz.korearbazar.adapter.CategoryDetailsProdAdapter;
+import com.frz.korearbazar.adapter.DasboardOrderAdapter;
+import com.frz.korearbazar.model.CategoryDetailsProdModel;
+import com.frz.korearbazar.model.DasboardOrderModel;
 import com.frz.korearbazar.model.ProdModel;
 import com.frz.korearbazar.model.User;
 import com.frz.korearbazar.utils.SessionManager;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,12 +37,15 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private ArrayList<User> mExampleList;
+    //private ArrayList<User> mExampleList;
+    private RecyclerView mRecyclerView;
+    private DasboardOrderAdapter mExampleAdapter;
+    private ArrayList<DasboardOrderModel> mExampleList;
+    private RequestQueue mRequestQueue;
 
     TextView txt_save,ed_username,ed_email,ed_alternatmob,ed_address,ed_city,ed_zip,affiliateBonus;
     SessionManager sessionManager;
 
-    private RequestQueue mRequestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,12 +54,17 @@ public class ProfileActivity extends AppCompatActivity {
         setTitle("My Profile");
 
         sessionManager = new SessionManager(this);
-//        Log.e("token",sessionManager.getToken());
-//        Toast.makeText(this, ""+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
+
+
+        mRecyclerView = findViewById(R.id.recentOrderRV);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false));
+        mExampleList = new ArrayList<>();
+        mRequestQueue = Volley.newRequestQueue(this);
 
         mRequestQueue = Volley.newRequestQueue(this);
         getdata();
-
+        ProdDetailsfetchJSON();
 
         ed_username = findViewById(R.id.ed_username);
         ed_email = findViewById(R.id.ed_email);
@@ -59,7 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
         ed_address = findViewById(R.id.address);
         affiliateBonus = findViewById(R.id.affiliateBonus);
 
-        ProdDetailsfetchJSON();
+
     }
 
     private void ProdDetailsfetchJSON() {
@@ -101,86 +116,36 @@ public class ProfileActivity extends AppCompatActivity {
 
             JSONObject obj = new JSONObject(jsonresponse);
             JSONObject data=obj.getJSONObject("user");
-            Log.e("ORDEARS rrr",data.getString("id"));
+            //Toast.makeText(this, "userA"+data, Toast.LENGTH_SHORT).show();
 
+//            JSONArray dataA=obj.getJSONArray("orders");
+//            Toast.makeText(this, "userB"+dataA, Toast.LENGTH_SHORT).show();
 
-            JSONArray jsonArray=data.getJSONArray("orders");
-            Log.e("ORDEARS e",jsonArray.getString(Integer.parseInt("id")));
+            JSONArray jsonArray=obj.getJSONArray("orders");
             for (int i=0; i<jsonArray.length();i++){
-                JSONObject jsonObject=jsonArray.getJSONObject(i);
+                JSONObject jsonObject1=jsonArray.getJSONObject(i);
+                Log.e("products_id",jsonObject1.getString("id"));
+                String id =jsonObject1.getString("id");
+                String order_number =jsonObject1.getString("order_number");
+                //Log.e("orderNumber",jsonObject1.getString(order_number));
+                String created_at =jsonObject1.getString("created_at");
+                String pay_amount =jsonObject1.getString("pay_amount");
+                String payment_status =jsonObject1.getString("payment_status");
 
-
-                Log.e("ORDEARS",jsonObject.getString("id"));
-
-//                                String id =jsonObject1.getString("id");
-//                                String name =jsonObject1.getString("name");
-//                                String slug =jsonObject1.getString("slug");
-//                                String thumbnail = jsonObject1.getString("thumbnail");
-//                                String photo = jsonObject1.getString("photo");
-//                                String price = jsonObject1.getString("price");
-//                                String previous_price = jsonObject1.getString("previous_price");
-
-                //mExampleList.add(new CategoryDetailsProdModel(id,name,slug,thumbnail,photo,price,previous_price));
+                mExampleList.add(new DasboardOrderModel(id,order_number,created_at,pay_amount,payment_status));
             }
 
-//                            mExampleAdapter = new CategoryDetailsProdAdapter(CategoryDetailsActivity.this, mExampleList);
-//                            mRecyclerView.setAdapter(mExampleAdapter);
+            mExampleAdapter = new DasboardOrderAdapter(ProfileActivity.this, mExampleList);
+            mRecyclerView.setAdapter(mExampleAdapter);
+
+
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-//    private void ProdDetailsfetchJSON() {
-//        String url = "http://ecom.hrventure.xyz/public/api/user/dashboard";
-//
-//
-//        //Toast.makeText(this, "URL "+url, Toast.LENGTH_SHORT).show();
-//        final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
-//                new com.android.volley.Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//
-//
-//                        try {
-//                            JSONObject data = response.getJSONObject("user");
-//                            Toast.makeText(ProfileActivity.this, "ORDEARS ee DEAR"+data, Toast.LENGTH_SHORT).show();
-//
-//                            JSONArray jsonArray=data.getJSONArray("orders");
-//                            Toast.makeText(ProfileActivity.this, "ORDEARS DEAR"+jsonArray, Toast.LENGTH_SHORT).show();
-//
-//                            for (int i=0; i<jsonArray.length();i++){
-//                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
-//
-//
-//                                Log.e("ORDEARS",jsonObject1.getString("id"));
-//
-////                                String id =jsonObject1.getString("id");
-////                                String name =jsonObject1.getString("name");
-////                                String slug =jsonObject1.getString("slug");
-////                                String thumbnail = jsonObject1.getString("thumbnail");
-////                                String photo = jsonObject1.getString("photo");
-////                                String price = jsonObject1.getString("price");
-////                                String previous_price = jsonObject1.getString("previous_price");
-//
-//                                //mExampleList.add(new CategoryDetailsProdModel(id,name,slug,thumbnail,photo,price,previous_price));
-//                            }
-//
-////                            mExampleAdapter = new CategoryDetailsProdAdapter(CategoryDetailsActivity.this, mExampleList);
-////                            mRecyclerView.setAdapter(mExampleAdapter);
-//
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                }, new com.android.volley.Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//                error.printStackTrace();
-//            }
-//        });
-//        mRequestQueue.add(request);
-//    }
+
 
     //Big Save Products
     private void getdata() {

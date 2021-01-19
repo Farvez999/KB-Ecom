@@ -8,6 +8,7 @@ import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.http.Field;
+import retrofit.http.FieldMap;
 import retrofit.http.FormUrlEncoded;
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -106,43 +107,43 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @retrofit.http.POST("/cashondelivery")// API's endpoints
-    public void checkout(@retrofit.http.Field("personal_name") String personal_name,
-                         @retrofit.http.Field("personal_email") String personal_email,
+    public void checkout(@Field("personal_name") String personal_name,
+                         @Field("personal_email") String personal_email,
 
-                         @retrofit.http.Field("shipping") String shipping,
-                         @retrofit.http.Field("pickup_location") String pickup_location,
+                         @Field("shipping") String shipping,
+                         @Field("pickup_location") String pickup_location,
 
-                         @retrofit.http.Field("name") String name,
-                         @retrofit.http.Field("phone") String phone,
-                         @retrofit.http.Field("email") String email,
-                         @retrofit.http.Field("address") String address,
-                         @retrofit.http.Field("customer_country") String customer_country,
-                         @retrofit.http.Field("city") String city,
-                         @retrofit.http.Field("zip") String zip,
-
-
-
-                         @retrofit.http.Field("shipping_name") String shipping_name,
-                         @retrofit.http.Field("shipping_email") String shipping_email,
-                         @retrofit.http.Field("shipping_phone") String shipping_phone,
-                         @retrofit.http.Field("shipping_address") String shipping_address,
-                         @retrofit.http.Field("shipping_country") String shipping_country,
-                         @retrofit.http.Field("shipping_city") String shipping_city,
-                         @retrofit.http.Field("shipping_zip") String shipping_zip,
+                         @Field("name") String name,
+                         @Field("phone") String phone,
+                         @Field("email") String email,
+                         @Field("address") String address,
+                         @Field("customer_country") String customer_country,
+                         @Field("city") String city,
+                         @Field("zip") String zip,
 
 
-    @retrofit.http.Field("method") String method,
-    @retrofit.http.Field("shipping_cost") String shipping_cost,
-    @retrofit.http.Field("packing_cost") String packing_cost,
-    @retrofit.http.Field("dp") String dp,
-    @retrofit.http.Field("tax") String tax,
-    @retrofit.http.Field("totalQty") String totalQty,
-    @retrofit.http.Field("vendor_shipping_id") String vendor_shipping_id,
-    @retrofit.http.Field("vendor_packing_id") String vendor_packing_id,
-    @retrofit.http.Field("total") String total,
 
-                         @retrofit.http.Field("user_id") String user_id,
-                         @retrofit.http.FieldMap Map<String, String> cartInfo,
+                         @Field("shipping_name") String shipping_name,
+                         @Field("shipping_email") String shipping_email,
+                         @Field("shipping_phone") String shipping_phone,
+                         @Field("shipping_address") String shipping_address,
+                         @Field("shipping_country") String shipping_country,
+                         @Field("shipping_city") String shipping_city,
+                         @Field("shipping_zip") String shipping_zip,
+
+
+    @Field("method") String method,
+    @Field("shipping_cost") String shipping_cost,
+    @Field("packing_cost") String packing_cost,
+    @Field("dp") String dp,
+    @Field("tax") String tax,
+    @Field("totalQty") String totalQty,
+    @Field("vendor_shipping_id") String vendor_shipping_id,
+    @Field("vendor_packing_id") String vendor_packing_id,
+    @Field("total") String total,
+
+                         @Field("user_id") Integer user_id,
+                         @FieldMap Map<String, String> cartInfo,
                          //@Field("logintype") String logintype,
                          Callback<CheckOutResponse> callback);
 

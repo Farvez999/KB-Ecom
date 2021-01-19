@@ -16,6 +16,7 @@ import com.android.volley.toolbox.Volley;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.adapter.CategoryDetailsProdAdapter;
 import com.frz.korearbazar.model.CategoryDetailsProdModel;
+import com.frz.korearbazar.utils.SessionManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,7 @@ public class CategoryDetailsActivity extends AppCompatActivity {
     private RequestQueue mRequestQueue;
 
     String slug;
+    SessionManager sessionManager;
 
 
     @Override
@@ -62,12 +64,13 @@ public class CategoryDetailsActivity extends AppCompatActivity {
     //Product Details
     private void ProdDetailsfetchJSON() {
         String url = JSONURL+CategoryDetails+slug;
+
+//        String call =(sessionManager.getToken());
         //Toast.makeText(this, "URL "+url, Toast.LENGTH_SHORT).show();
         final JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new com.android.volley.Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-
 
                         try {
                             JSONObject data = response.getJSONObject("data");
@@ -104,6 +107,8 @@ public class CategoryDetailsActivity extends AppCompatActivity {
         });
         mRequestQueue.add(request);
     }
+
+
 
 
 }

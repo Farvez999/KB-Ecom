@@ -221,6 +221,201 @@
             </LinearLayout>
 
 
+<!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/checkRecyclerView"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>-->
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content">-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edt_order_list"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:gravity="top|left"-->
+<!--                    android:hint="Total Price"-->
+<!--                    android:inputType="textMultiLine"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:textColor="@color/colorBalck">-->
+
+<!--                </EditText>-->
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:visibility="gone">-->
+
+<!--                <EditText-->
+<!--                    android:id="@+id/edt_order_total"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_marginBottom="10dp"-->
+<!--                    android:inputType="text"-->
+<!--                    android:padding="10dp"-->
+<!--                    android:textColor="@color/colorBalck">-->
+
+<!--                </EditText>-->
+
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Shipping Details"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/shipping_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_editetext"
+                    android:textColorHint="@color/colorGrey"
+                    android:drawablePadding="10dp"
+                    android:hint="Full Name"
+                    android:padding="12dp"
+                    android:textColor="@color/colorGrey2" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/shipping_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_editetext"
+                    android:textColorHint="@color/colorGrey"
+                    android:drawablePadding="10dp"
+                    android:hint="Email"
+                    android:padding="12dp"
+                    android:textColor="@color/colorGrey2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+
+                <EditText
+                    android:id="@+id/shipping_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_editetext"
+                    android:textColorHint="@color/colorGrey"
+                    android:drawablePadding="10dp"
+                    android:hint="Phone Number"
+                    android:padding="12dp"
+                    android:textColor="@color/colorGrey2" />
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/shipping_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_editetext"
+                    android:textColorHint="@color/colorGrey"
+                    android:drawablePadding="10dp"
+                    android:hint="Address"
+                    android:padding="12dp"
+                    android:textColor="@color/colorGrey2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/shipping_country"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_editetext"
+                    android:textColorHint="@color/colorGrey"
+                    android:drawablePadding="10dp"
+                    android:hint="Country"
+                    android:padding="12dp"
+                    android:textColor="@color/colorGrey2" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/shipping_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_editetext"
+                    android:textColorHint="@color/colorGrey"
+                    android:drawablePadding="10dp"
+                    android:hint="City"
+                    android:padding="12dp"
+                    android:textColor="@color/colorGrey2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1">
+
+                <EditText
+                    android:id="@+id/shipping_zip"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_editetext"
+                    android:textColorHint="@color/colorGrey"
+                    android:drawablePadding="10dp"
+                    android:hint="Post Code"
+                    android:padding="12dp"
+                    android:textColor="@color/colorGrey2" />
+            </LinearLayout>
+
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/checkRecyclerView"
                 android:layout_width="match_parent"

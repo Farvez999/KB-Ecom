@@ -2,11 +2,8 @@ package com.frz.korearbazar.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 
 import com.frz.korearbazar.model.User;
-
-import java.util.HashMap;
 
 
 public class SessionManager {

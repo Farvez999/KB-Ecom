@@ -7,22 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Response;
 import com.frz.korearbazar.Interface.ProdInterface;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.activity.ItemDetailsActivity;
-import com.frz.korearbazar.model.NewProdModel;
 import com.frz.korearbazar.model.ProdModel;
-import com.frz.korearbazar.model.RelatedProdModel;
 import com.squareup.picasso.Picasso;
 
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 

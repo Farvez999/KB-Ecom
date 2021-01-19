@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.frz.korearbazar.Interface.CategoryInterface;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.activity.CategoryDetailsActivity;
-import com.frz.korearbazar.activity.ItemDetailsActivity;
 import com.frz.korearbazar.model.CateModel;
 import com.squareup.picasso.Picasso;
 

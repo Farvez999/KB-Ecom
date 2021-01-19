@@ -15,14 +15,9 @@ import com.frz.korearbazar.Interface.ProdInterface;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.activity.ItemDetailsActivity;
 import com.frz.korearbazar.model.CategoryDetailsProdModel;
-import com.frz.korearbazar.model.ProdModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
-import static com.frz.korearbazar.ApiInterface.CategoryDetailsProds;
-import static com.frz.korearbazar.ApiInterface.JSONURL;
-import static com.frz.korearbazar.ApiInterface.RelatedProductImgUrl;
 
 public class CategoryDetailsProdAdapter extends RecyclerView.Adapter<CategoryDetailsProdAdapter.MyViewHolder> {
 

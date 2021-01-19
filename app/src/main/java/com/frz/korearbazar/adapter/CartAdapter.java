@@ -6,25 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.frz.korearbazar.Interface.CartInterface;
-import com.frz.korearbazar.Interface.ProdInterface;
 import com.frz.korearbazar.R;
-import com.frz.korearbazar.activity.CartActivity;
 import com.frz.korearbazar.model.CartModel;
-import com.frz.korearbazar.model.ProdModel;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import static com.frz.korearbazar.ApiInterface.JSONURL;
-import static com.frz.korearbazar.ApiInterface.PDetailsImgUrl;
-import static com.frz.korearbazar.ApiInterface.ProdImgUrl;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> {
 

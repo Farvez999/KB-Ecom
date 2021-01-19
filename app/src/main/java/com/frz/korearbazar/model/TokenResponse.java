@@ -2,9 +2,6 @@ package com.frz.korearbazar.model;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class TokenResponse {
 
     @SerializedName("ResponseCode")

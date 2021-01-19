@@ -2,7 +2,6 @@ package com.frz.korearbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Notification;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,7 +10,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.model.SignUpResponse;
 import com.frz.korearbazar.utils.SessionManager;

@@ -3,18 +3,15 @@ package com.frz.korearbazar;
 import com.frz.korearbazar.model.CheckOutResponse;
 import com.frz.korearbazar.model.SignInResponse;
 import com.frz.korearbazar.model.SignUpResponse;
-import com.frz.korearbazar.model.TokenResponse;
 
 import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.http.Field;
-import retrofit.http.FieldMap;
 import retrofit.http.FormUrlEncoded;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 
 public interface ApiInterface {
 

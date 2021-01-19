@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.model.BSBannerModel;
-import com.frz.korearbazar.model.LargeBannerModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

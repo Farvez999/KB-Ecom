@@ -7,15 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.frz.korearbazar.Interface.NewProdInterface;
 import com.frz.korearbazar.Interface.ProdInterface;
-import com.frz.korearbazar.MainActivity;
 import com.frz.korearbazar.R;
-import com.frz.korearbazar.model.NewProdModel;
 import com.frz.korearbazar.model.ProdModel;
 import com.squareup.picasso.Picasso;
 

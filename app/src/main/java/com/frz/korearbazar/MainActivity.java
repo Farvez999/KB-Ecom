@@ -165,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
     private BrandsAdapter BrandsProdAdapter;
     private RecyclerView BrandsProdRV;
 
-    
+
 
     private AppBarConfiguration mAppBarConfiguration;
 

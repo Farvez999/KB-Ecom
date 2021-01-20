@@ -61,6 +61,26 @@ public interface ApiInterface {
             @Header("Authorization") String Bearer
     );
 
+    @GET("api/user/affilate/code")
+    Call<String> getAffilateCode(
+            @Header("Authorization") String Bearer
+    );
+
+    @GET("api/user/affilate/withdraw")
+    Call<String> getAffilateWithdraw(
+            @Header("Authorization") String Bearer
+    );
+
+    @GET("api/user/messages")
+    Call<String> getMessages(
+            @Header("Authorization") String Bearer
+    );
+
+    @GET("api/user/favorite/seller")
+    Call<String> getFavoriteSelle(
+            @Header("Authorization") String Bearer
+    );
+
 //    @GET("api/profile")
 //    Call<String> getProfile(
 //            @Header("Authorization") String Bearer

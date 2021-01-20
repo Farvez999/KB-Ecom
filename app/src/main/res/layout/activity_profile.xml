@@ -27,182 +27,200 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
+            android:layout_marginRight="10dp"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_editetext">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Account Information"
-                android:textSize="30dp"
-                android:padding="5dp"
+                android:text="Dashboard"
+                android:textSize="25dp"
+                android:gravity="center"
                 android:textColor="@color/colorPrimary"></TextView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-                <TextView
-                    android:id="@+id/ed_username"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_editetext"
-                    android:drawableLeft="@drawable/ic_perm_"
-                    android:textColorHint="@color/colorGrey"
-                    android:drawablePadding="10dp"
-                    android:hint="Name"
-                    android:padding="12dp"
-                    android:textColor="@color/colorGrey2" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
-
-                <TextView
-                    android:id="@+id/ed_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_editetext"
-                    android:drawableLeft="@drawable/ic_email"
-                    android:textColorHint="@color/colorGrey"
-                    android:drawablePadding="10dp"
-                    android:hint="Name"
-                    android:padding="12dp"
-                    android:textColor="@color/colorGrey2" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/ed_alternatmob"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_editetext"
-                    android:drawableLeft="@drawable/ic_phone"
-                    android:textColorHint="@color/colorGrey"
-                    android:drawablePadding="10dp"
-                    android:hint="Phone Number"
-                    android:padding="12dp"
-                    android:textColor="@color/colorGrey2" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
-
-
-                <TextView
-                    android:id="@+id/city"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_editetext"
-                    android:drawableLeft="@drawable/ic_address"
-                    android:drawablePadding="10dp"
-                    android:hint="City"
-                    android:padding="12dp"
-                    android:textColor="@color/colorGrey2"
-                    android:textColorHint="@color/colorGrey" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
-
-
-                <TextView
-                    android:id="@+id/zip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_editetext"
-                    android:drawableLeft="@drawable/ic_zip_icon"
-                    android:textColorHint="@color/colorGrey"
-                    android:drawablePadding="10dp"
-                    android:hint="Zip"
-                    android:padding="12dp"
-                    android:textColor="@color/colorGrey2" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
-
-
-                <TextView
-                    android:id="@+id/address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_editetext"
-                    android:drawableLeft="@drawable/ic_address"
-                    android:textColorHint="@color/colorGrey"
-                    android:drawablePadding="10dp"
-                    android:hint="Address"
-                    android:padding="12dp"
-                    android:textColor="@color/colorGrey2" />
-            </LinearLayout>
-
-
-    </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="20dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="My Balance"
-                android:textSize="30dp"
-                android:padding="5dp"
-                android:textColor="@color/colorPrimary"></TextView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Affiliate Bonus: "
-                    android:textSize="25dp"></TextView>
-
-                <TextView
-                    android:id="@+id/affiliateBonus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="3dp"
-                    android:hint="$0"
-                    android:textSize="25dp"></TextView>
-
-            </LinearLayout>
-
-
-
+            //Account Info
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Account Information"
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <TextView
+                        android:id="@+id/ed_username"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_editetext"
+                        android:drawableLeft="@drawable/ic_perm_"
+                        android:textColorHint="@color/colorGrey"
+                        android:drawablePadding="10dp"
+                        android:hint="Name"
+                        android:padding="12dp"
+                        android:textColor="@color/colorGrey2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/ed_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_editetext"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:textColorHint="@color/colorGrey"
+                        android:drawablePadding="10dp"
+                        android:hint="Name"
+                        android:padding="12dp"
+                        android:textColor="@color/colorGrey2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/ed_alternatmob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_editetext"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:textColorHint="@color/colorGrey"
+                        android:drawablePadding="10dp"
+                        android:hint="Phone Number"
+                        android:padding="12dp"
+                        android:textColor="@color/colorGrey2" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+
+                    <TextView
+                        android:id="@+id/city"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_editetext"
+                        android:drawableLeft="@drawable/ic_address"
+                        android:drawablePadding="10dp"
+                        android:hint="City"
+                        android:padding="12dp"
+                        android:textColor="@color/colorGrey2"
+                        android:textColorHint="@color/colorGrey" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+
+                    <TextView
+                        android:id="@+id/zip"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_editetext"
+                        android:drawableLeft="@drawable/ic_zip_icon"
+                        android:textColorHint="@color/colorGrey"
+                        android:drawablePadding="10dp"
+                        android:hint="Zip"
+                        android:padding="12dp"
+                        android:textColor="@color/colorGrey2" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_editetext"
+                        android:drawableLeft="@drawable/ic_address"
+                        android:textColorHint="@color/colorGrey"
+                        android:drawablePadding="10dp"
+                        android:hint="Address"
+                        android:padding="12dp"
+                        android:textColor="@color/colorGrey2" />
+
+            </LinearLayout>
+
+
+            </LinearLayout>
+
+            ///My Balance
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/rounded_editetext">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="My Balance"
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Affiliate Bonus: "
+                        android:textSize="25dp"></TextView>
+
+                    <TextView
+                        android:id="@+id/affiliateBonus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:hint="$0"
+                        android:textSize="25dp"></TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            //Recent order
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_editetext">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -217,6 +235,319 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/item_order"></androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+
+    </LinearLayout>
+
+
+        ///Affiliate code
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="10dp"
+            android:orientation="vertical">
+
+
+
+            ////Affiliate Informations
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@drawable/rounded_editetext">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Affiliate Code"
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Affilate Link *"
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_editetext">
+
+                    <TextView
+                        android:id="@+id/copyaffilateLink"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_file_copy_24"
+                        android:textSize="20dp"
+                        android:padding="5dp"
+                        android:textColor="@color/colorBalck"></TextView>
+
+                    <TextView
+                        android:id="@+id/affilateLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textIsSelectable="true"
+                        android:textSize="20dp"
+                        android:padding="5dp"
+                        android:textColor="@color/colorBalck"></TextView>
+
+
+
+                </LinearLayout>
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Affiliate Banner HTML Code * "
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_editetext">
+
+                    <TextView
+                        android:id="@+id/copyAffilatehtml"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_file_copy_24"
+                        android:textSize="20dp"
+                        android:padding="5dp"
+                        android:textColor="@color/colorBalck"></TextView>
+
+                    <TextView
+                        android:id="@+id/affilatehtml"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textIsSelectable="true"
+                        android:textSize="20dp"
+                        android:padding="5dp"
+                        android:textColor="@color/colorBalck"></TextView>
+
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+            <View
+             android:layout_width="match_parent"
+             android:layout_height="25dp" />
+
+        </LinearLayout>
+
+        ///Withdraw
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_editetext">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My Withdraws"
+                android:textSize="25dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:textSize="12dp"
+                    android:text="Withdraw Date"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Method"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Account"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Amount"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Status"></TextView>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/wRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/withdraw_item"></androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
+        ///Message
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_editetext">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="My Message"
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_margin="2dp"
+                        android:textSize="12dp"
+                        android:text="Subject"></TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:layout_weight="1"
+                        android:layout_margin="2dp"
+                        android:text="Message"></TextView>
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/meRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/withdraw_item"></androidx.recyclerview.widget.RecyclerView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        ///FavoriteSeller
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_editetext">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Favorite Seller"
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginLeft="8dp"
+                        android:textSize="12dp"
+                        android:text="Shop Name"></TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:layout_weight="1"
+                        android:layout_margin="2dp"
+                        android:text="Owner Name"></TextView>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12dp"
+                        android:layout_weight="1"
+                        android:layout_margin="2dp"
+                        android:text="Address"></TextView>
+
+
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/fsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/withdraw_item"></androidx.recyclerview.widget.RecyclerView>
 
             </LinearLayout>
 

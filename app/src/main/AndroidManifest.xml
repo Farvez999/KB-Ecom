@@ -13,31 +13,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.frz.korearbazar.activity.LanguageActivity"></activity>
-        <activity android:name="com.frz.korearbazar.activity.VendorRegisterActivity" />
-        <activity android:name="com.frz.korearbazar.activity.RelatedProdDetailsActivity" />
-        <activity android:name="com.frz.korearbazar.activity.CategoryDetailsActivity" />
-        <activity android:name="com.frz.korearbazar.activity.CheckoutActivity"
-            android:parentActivityName="com.frz.korearbazar.MainActivity"/>
-        <activity android:name="com.frz.korearbazar.activity.CartActivity"
-            android:parentActivityName="com.frz.korearbazar.MainActivity"/>
+        <activity android:name=".activity.VendorActivity"
+            android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".activity.LanguageActivity" />
+        <activity android:name=".activity.VendorRegisterActivity" />
+        <activity android:name=".activity.RelatedProdDetailsActivity" />
+        <activity android:name=".activity.CategoryDetailsActivity" />
         <activity
-            android:name="com.frz.korearbazar.activity.ProfileActivity"
-            android:parentActivityName="com.frz.korearbazar.MainActivity" />
+            android:name=".activity.CheckoutActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name="com.frz.korearbazar.activity.SignUpActivity"
-            android:parentActivityName="com.frz.korearbazar.MainActivity" />
+            android:name=".activity.CartActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name="com.frz.korearbazar.activity.LoginActivity"
-            android:parentActivityName="com.frz.korearbazar.MainActivity" />
+            android:name=".activity.ProfileActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name="com.frz.korearbazar.activity.BlogActivity"
-            android:parentActivityName="com.frz.korearbazar.MainActivity" />
+            android:name=".activity.SignUpActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name="com.frz.korearbazar.activity.CategoryActivity"
-            android:parentActivityName="com.frz.korearbazar.MainActivity" />
+            android:name=".activity.LoginActivity"
+            android:parentActivityName=".MainActivity" />
         <activity
-            android:name="com.frz.korearbazar.FirstActivity"
+            android:name=".activity.BlogActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".activity.CategoryActivity"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".FirstActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,9 +49,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.frz.korearbazar.activity.ItemDetailsActivity" />
+        <activity android:name=".activity.ItemDetailsActivity" />
         <activity
-            android:name="com.frz.korearbazar.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

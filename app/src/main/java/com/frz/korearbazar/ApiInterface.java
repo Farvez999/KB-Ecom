@@ -16,7 +16,7 @@ import retrofit2.http.Header;
 
 public interface ApiInterface {
 
-       String JSONURL = "http://ecom.hrventure.xyz/public/";
+    String JSONURL = "http://ecom.hrventure.xyz/public/";
     //  String JSONURL = "http://192.168.0.108/project/hrv-ecom/public/";
     String CategoryImgUrl = "assets/images/categories/";
     String ProdImgUrl = "assets/images/thumbnails/";
@@ -28,8 +28,8 @@ public interface ApiInterface {
     String PDetailsImgUrl = "assets/images/products/";
     String RelatedProductImgUrl = "assets/images/thumbnails/";
     String CategoryDetailsProds = "assets/images/thumbnails/";
-    String ProdDetailsUrl= "api/item/";
-    String CategoryDetails= "api/category/";
+    String ProdDetailsUrl = "api/item/";
+    String CategoryDetails = "api/category/";
 
 
     //set false if you want price to be displayed in decimal
@@ -81,6 +81,19 @@ public interface ApiInterface {
             @Header("Authorization") String Bearer
     );
 
+
+    //Vendor Order
+    @GET("api/vendor/dashboard")
+    Call<String> getVendorDashboard(
+            @Header("Authorization") String Bearer
+    );
+
+    //Vendor Total Product
+    @GET("api/vendor/products")
+    Call<String> getVendorproducts(
+            @Header("Authorization") String Bearer
+    );
+
 //    @GET("api/profile")
 //    Call<String> getProfile(
 //            @Header("Authorization") String Bearer
@@ -92,9 +105,6 @@ public interface ApiInterface {
 
     @GET("api/products")
     Call<String> getProductsDetails();
-
-
-
 
 
     @FormUrlEncoded
@@ -111,7 +121,6 @@ public interface ApiInterface {
 //                      Callback<SignInResponse> callback);
 
 
-
     @FormUrlEncoded
     @retrofit.http.POST("/user/register")// API's endpoints
     public void registration(@retrofit.http.Field("name") String name,
@@ -123,16 +132,24 @@ public interface ApiInterface {
                              @Field("logintype") String logintype,
                              Callback<SignUpResponse> callback);
 
+    @FormUrlEncoded
+    @retrofit.http.POST("/user/register")// API's endpoints
+    public void vendorRegistration(@retrofit.http.Field("name") String name,
+                                   @retrofit.http.Field("email") String email,
+                                   @retrofit.http.Field("phone") String phone,
+                                   @retrofit.http.Field("address") String address,
+                                   @retrofit.http.Field("password") String password,
+                                   @retrofit.http.Field("password_confirmation") String password_confirmation,
+                                   @Field("logintype") String logintype,
+                                   Callback<SignUpResponse> callback);
 
 
     @FormUrlEncoded
     @retrofit.http.POST("/cashondelivery")// API's endpoints
     public void checkout(@Field("personal_name") String personal_name,
                          @Field("personal_email") String personal_email,
-
                          @Field("shipping") String shipping,
                          @Field("pickup_location") String pickup_location,
-
                          @Field("name") String name,
                          @Field("phone") String phone,
                          @Field("email") String email,
@@ -140,9 +157,6 @@ public interface ApiInterface {
                          @Field("customer_country") String customer_country,
                          @Field("city") String city,
                          @Field("zip") String zip,
-
-
-
                          @Field("shipping_name") String shipping_name,
                          @Field("shipping_email") String shipping_email,
                          @Field("shipping_phone") String shipping_phone,
@@ -150,21 +164,17 @@ public interface ApiInterface {
                          @Field("shipping_country") String shipping_country,
                          @Field("shipping_city") String shipping_city,
                          @Field("shipping_zip") String shipping_zip,
-
-
-    @Field("method") String method,
-    @Field("shipping_cost") String shipping_cost,
-    @Field("packing_cost") String packing_cost,
-    @Field("dp") String dp,
-    @Field("tax") String tax,
-    @Field("totalQty") String totalQty,
-    @Field("vendor_shipping_id") String vendor_shipping_id,
-    @Field("vendor_packing_id") String vendor_packing_id,
-    @Field("total") String total,
-
+                         @Field("method") String method,
+                         @Field("shipping_cost") String shipping_cost,
+                         @Field("packing_cost") String packing_cost,
+                         @Field("dp") String dp,
+                         @Field("tax") String tax,
+                         @Field("totalQty") String totalQty,
+                         @Field("vendor_shipping_id") String vendor_shipping_id,
+                         @Field("vendor_packing_id") String vendor_packing_id,
+                         @Field("total") String total,
                          @Field("user_id") Integer user_id,
                          @FieldMap Map<String, String> cartInfo,
-                         //@Field("logintype") String logintype,
                          Callback<CheckOutResponse> callback);
 
 

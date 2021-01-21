@@ -60,8 +60,8 @@ public class VendorRegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 vendorRegister();
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ecom.hrventure.xyz/user/dashboard"));
-                startActivity(intent);
+                //Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://ecom.hrventure.xyz/user/dashboard"));
+                //startActivity(intent);
             }
         });
     }

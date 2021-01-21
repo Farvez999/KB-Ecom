@@ -15,6 +15,11 @@
             android:title="My Profile" />
 
         <item
+            android:id="@+id/nav_vendorDashboard"
+            android:icon="@drawable/ic_profile"
+            android:title="Vendor Dashboard" />
+
+        <item
             android:id="@+id/nav_category"
             android:icon="@drawable/ic_category"
             android:title="@string/menu_category" />
@@ -34,10 +39,10 @@
             android:icon="@drawable/ic_logout"
             android:title="Login" />
 
-<!--        <item-->
-<!--            android:id="@+id/nav_vendorRe"-->
-<!--            android:icon="@drawable/ic_logout"-->
-<!--            android:title="Sell or Vendor Register" />-->
+        <item
+            android:id="@+id/nav_vendorRe"
+            android:icon="@drawable/ic_logout"
+            android:title="Sell or Vendor Register" />
 
         <item
             android:id="@+id/nav_logout"

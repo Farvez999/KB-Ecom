@@ -15,6 +15,8 @@ import com.frz.korearbazar.activity.CategoryActivity;
 import com.frz.korearbazar.activity.ItemDetailsActivity;
 import com.frz.korearbazar.activity.LoginActivity;
 import com.frz.korearbazar.activity.ProfileActivity;
+import com.frz.korearbazar.activity.VendorActivity;
+import com.frz.korearbazar.activity.VendorRegisterActivity;
 import com.frz.korearbazar.adapter.BannerTopSmallAdapter;
 import com.frz.korearbazar.adapter.BestSellerAdapter;
 import com.frz.korearbazar.adapter.BlogAdapter;
@@ -303,16 +305,16 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
             }
         });
 
-//        navigationView.getMenu().findItem(R.id.nav_vendorRe).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem menuItem) {
-//                drawer.close();
-//                Intent intent = new Intent(MainActivity.this, VendorRegisterActivity.class);
-//                startActivity(intent);
-//                finish();
-//                return false;
-//            }
-//        });
+        navigationView.getMenu().findItem(R.id.nav_vendorRe).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                drawer.close();
+                Intent intent = new Intent(MainActivity.this, VendorRegisterActivity.class);
+                startActivity(intent);
+                finish();
+                return false;
+            }
+        });
 
         navigationView.getMenu().findItem(R.id.nav_logout).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
@@ -333,6 +335,17 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 drawer.close();
                 Intent i = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(i);
+                return false;
+            }
+        });
+
+
+        navigationView.getMenu().findItem(R.id.nav_vendorDashboard).setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                drawer.close();
+                Intent i = new Intent(MainActivity.this, VendorActivity.class);
                 startActivity(i);
                 return false;
             }

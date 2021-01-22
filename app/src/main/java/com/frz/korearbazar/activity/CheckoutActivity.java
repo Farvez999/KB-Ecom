@@ -229,12 +229,8 @@ public class CheckoutActivity extends AppCompatActivity {
         Api.getClient().checkout(
                 personal_name.getText().toString().trim(),
                 personal_email.getText().toString().trim(),
-//                    personal_name,
-//                    personal_email,
-
                 shipping,
                 pickup_location,
-
                 name.getText().toString().trim(),
                 phone.getText().toString().trim(),
                 email.getText().toString().trim(),
@@ -242,14 +238,6 @@ public class CheckoutActivity extends AppCompatActivity {
                 customer_country.getText().toString().trim(),
                 city.getText().toString().trim(),
                 zip.getText().toString().trim(),
-//                    name,
-//                    phone,
-//                    email,
-//                    address,
-//                    customer_country,
-//                    city,
-//                    zip,
-
                 shipping_name.getText().toString().trim(),
                 shipping_email.getText().toString().trim(),
                 shipping_phone.getText().toString().trim(),
@@ -257,7 +245,6 @@ public class CheckoutActivity extends AppCompatActivity {
                 shipping_country.getText().toString().trim(),
                 shipping_city.getText().toString().trim(),
                 shipping_zip.getText().toString().trim(),
-
                 method = method,
                 shipping_cost,
                 packing_cost,
@@ -266,12 +253,9 @@ public class CheckoutActivity extends AppCompatActivity {
                 totalQty = totalQty,
                 vendor_shipping_id = vendor_shipping_id,
                 vendor_packing_id = vendor_packing_id,
-                //total,
                 total.getText().toString().trim(),
                 userId,
-                //String.valueOf(user_id = user_id),
                 map,
-                //"email",
                 new Callback<CheckOutResponse>() {
                     @Override
                     public void success(CheckOutResponse checkOutResponse, Response response) {
@@ -301,8 +285,8 @@ public class CheckoutActivity extends AppCompatActivity {
         Intent intent = getIntent();
         totalPrice = intent.getDoubleExtra("name", 0);
         String total = String.valueOf(totalPrice);
-        //Toast.makeText(this, "TOtal"+total, Toast.LENGTH_SHORT).show();
-//        edt_order_list.setText(total);
+        Toast.makeText(this, "TOtal"+total, Toast.LENGTH_SHORT).show();
+        edt_order_list.setText(total);
     }
 
 

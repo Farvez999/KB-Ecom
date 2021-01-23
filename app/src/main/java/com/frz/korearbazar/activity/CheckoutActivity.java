@@ -35,7 +35,7 @@ import retrofit.client.Response;
 public class CheckoutActivity extends AppCompatActivity {
 
     CheckOutResponse checkOutResponseData;
-    Integer userId;
+    Integer userId=13;
     SessionManager sessionManager;
     CartDB cartDB;
     ProgressDialog progressDialog;
@@ -144,7 +144,8 @@ public class CheckoutActivity extends AppCompatActivity {
         for (int i = 0; i < cartModelList.size(); i++) {
             map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][qty]", cartModelList.get(i).getQuantity());
             map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][size_key]","0");
-            map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][size_qty]", cartModelList.get(i).getSize_qty());
+//            map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][size_qty]", cartModelList.get(i).getSize_qty());
+            map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][size_qty]", "1");
             map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][size_price]","");
             map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][size]","");
             map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][color]","");
@@ -156,7 +157,7 @@ public class CheckoutActivity extends AppCompatActivity {
             map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][values]","");
             map.put("cart[items][" + cartModelList.get(i).getProduct_id() + "][product_id]", String.valueOf(cartModelList.get(i).getProduct_id()));
         }
-        //Log.e("map",map.get("cart[items][" + cartModelList.get(0).getProduct_id() + "][product_id]"));
+        //Log.e("mappsize_qty",map.get("cart[items][" + cartModelList.get(0).getProduct_id() + "][size_qty]"));
 
 
         if (cartDB.getAllData().size() > 0) {
@@ -256,7 +257,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 total.getText().toString().trim(),
                 userId,
                 map,
-                new Callback<CheckOutResponse>() {
+                "email", new Callback<CheckOutResponse>() {
                     @Override
                     public void success(CheckOutResponse checkOutResponse, Response response) {
                         progressDialog.dismiss();
@@ -272,7 +273,7 @@ public class CheckoutActivity extends AppCompatActivity {
                     public void failure(RetrofitError error) {
                         // if error occurs in network transaction then we can get the error in this method.
                         Toast.makeText(CheckoutActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
-                        Log.e("fdsgjsdh", error.getMessage());
+                        Log.e("fdsgjsdh", error.getBody().toString());
                         progressDialog.dismiss(); //dismiss progress dialog
 
                     }

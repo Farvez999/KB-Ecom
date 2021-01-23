@@ -3,6 +3,7 @@ package com.frz.korearbazar;
 import com.frz.korearbazar.model.CheckOutResponse;
 import com.frz.korearbazar.model.SignInResponse;
 import com.frz.korearbazar.model.SignUpResponse;
+import com.frz.korearbazar.model.VendorUpResponse;
 
 import java.util.Map;
 
@@ -134,14 +135,21 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @retrofit.http.POST("/user/register")// API's endpoints
-    public void vendorRegistration(@retrofit.http.Field("name") String name,
-                                   @retrofit.http.Field("email") String email,
-                                   @retrofit.http.Field("phone") String phone,
-                                   @retrofit.http.Field("address") String address,
-                                   @retrofit.http.Field("password") String password,
-                                   @retrofit.http.Field("password_confirmation") String password_confirmation,
+    public void vendorRegistration(@Field("name") String name,
+                                   @Field("email") String email,
+                                   @Field("phone") String phone,
+                                   @Field("address") String address,
+                                   @Field("password") String password,
+                                   @Field("password_confirmation") String password_confirmation,
+                                   @Field("shop_name") String shop_name,
+                                   @Field("owner_name") String owner_name,
+                                   @Field("shop_number") String shop_number,
+                                   @Field("shop_address") String shop_address,
+                                   @Field("reg_number") String reg_number,
+                                   @Field("shop_message") String shop_message,
+                                   @Field("vendor") String vendor,
                                    @Field("logintype") String logintype,
-                                   Callback<SignUpResponse> callback);
+                                   Callback<VendorUpResponse> callback);
 
 
     @FormUrlEncoded
@@ -175,6 +183,7 @@ public interface ApiInterface {
                          @Field("total") String total,
                          @Field("user_id") Integer user_id,
                          @FieldMap Map<String, String> cartInfo,
+                         @Field("logintype") String logintype,
                          Callback<CheckOutResponse> callback);
 
 

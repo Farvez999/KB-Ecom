@@ -13,8 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activity.VendorActivity"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".activity.VendorActivity"
+            android:parentActivityName=".MainActivity" />
         <activity android:name=".activity.LanguageActivity" />
         <activity android:name=".activity.VendorRegisterActivity" />
         <activity android:name=".activity.RelatedProdDetailsActivity" />

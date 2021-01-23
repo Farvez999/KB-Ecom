@@ -2,6 +2,7 @@ package com.frz.korearbazar.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,15 +11,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.frz.korearbazar.Api;
 import com.frz.korearbazar.R;
 import com.frz.korearbazar.model.SignUpResponse;
+import com.frz.korearbazar.model.VendorUpResponse;
 import com.frz.korearbazar.utils.SessionManager;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class VendorRegisterActivity extends AppCompatActivity {
 
-    SignUpResponse signUpResponsesData;
-    EditText email, password, name ,phone , address, password_confirmation, shop_name, owner_name, shop_num, shop_address, register_num, message;
+    VendorUpResponse vendorUpResponsesData;
+    EditText email, password, name ,phone , address, password_confirmation, shop_name, owner_name, shop_number, shop_address, reg_number, shop_message;
     TextView btSignIn,btnLogin;
+    String vendor = "1";
 
     Integer user_id;
     SessionManager sessionManager;
@@ -37,10 +45,10 @@ public class VendorRegisterActivity extends AppCompatActivity {
         password_confirmation = (EditText) findViewById(R.id.confirmation_password);
         shop_name = (EditText) findViewById(R.id.shopName);
         owner_name = (EditText) findViewById(R.id.ownerName);
-        shop_num = (EditText) findViewById(R.id.shopNumber);
+        shop_number = (EditText) findViewById(R.id.shopNumber);
         shop_address = (EditText) findViewById(R.id.shopAddress);
-        register_num = (EditText) findViewById(R.id.registerNumber);
-        message = (EditText) findViewById(R.id.message);
+        reg_number = (EditText) findViewById(R.id.registerNumber);
+        shop_message = (EditText) findViewById(R.id.message);
 
         sessionManager = new SessionManager(this);
 
@@ -66,7 +74,48 @@ public class VendorRegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void vendorRegister() {
-        Toast.makeText(this, "Work is Ongoing", Toast.LENGTH_SHORT).show();
-    }
+    private void vendorRegister(){
+    // display a progress dialog
+    final ProgressDialog progressDialog = new ProgressDialog(VendorRegisterActivity.this);
+        progressDialog.setCancelable(false); // set cancelable to false
+        progressDialog.setMessage("Please Wait"); // set message
+        progressDialog.show(); // show progress dialog
+
+
+        Api.getClient().vendorRegistration(
+                name.getText().toString().trim(),
+                email.getText().toString().trim(),
+                phone.getText().toString().trim(),
+                address.getText().toString().trim(),
+                password.getText().toString().trim(),
+                password_confirmation.getText().toString().trim(),
+                shop_name.getText().toString().trim(),
+                owner_name.getText().toString().trim(),
+                shop_number.getText().toString().trim(),
+                shop_address.getText().toString().trim(),
+                reg_number.getText().toString().trim(),
+                shop_message.getText().toString().trim(),
+                vendor,
+                "email", new Callback<VendorUpResponse>() {
+        @Override
+        public void success(VendorUpResponse vendorUpResponse, Response response) {
+            // in this method we will get the response from API
+            progressDialog.dismiss(); //dismiss progress dialog
+            vendorUpResponsesData = vendorUpResponse;
+            user_id = vendorUpResponse.getUserid();
+            Toast.makeText(VendorRegisterActivity.this, vendorUpResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(VendorRegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+
+        @Override
+        public void failure(RetrofitError error) {
+            // if error occurs in network transaction then we can get the error in this method.
+            Toast.makeText(VendorRegisterActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+            progressDialog.dismiss(); //dismiss progress dialog
+
+        }
+    });
+
+}
 }

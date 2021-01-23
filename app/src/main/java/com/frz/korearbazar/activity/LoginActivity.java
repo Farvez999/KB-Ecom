@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -107,6 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void failure(RetrofitError error) {
                         // if error occurs in network transaction then we can get the error in this method.
                         Toast.makeText(LoginActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
+                        Log.e("fgcfgdhf", error.getBody().toString());
                         progressDialog.dismiss(); //dismiss progress dialog
 
                     }

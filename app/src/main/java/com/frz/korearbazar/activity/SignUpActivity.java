@@ -93,8 +93,7 @@ public class SignUpActivity extends AppCompatActivity {
         progressDialog.setMessage("Please Wait"); // set message
         progressDialog.show(); // show progress dialog
 
-        // Api is a class in which we define a method getClient() that returns the API Interface class object
-        // registration is a POST request type method in which we are sending our field's data
+
         Api.getClient().registration(
                 name.getText().toString().trim(),
                 email.getText().toString().trim(),

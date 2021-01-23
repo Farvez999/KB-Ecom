@@ -1,12 +1,16 @@
 package com.frz.korearbazar;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.frz.korearbazar.Interface.ProdInterface;
@@ -63,6 +67,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
+
+import static com.frz.korearbazar.utils.CustPrograssbar.progressDialog;
 
 public class MainActivity extends AppCompatActivity implements ProdInterface {
 
@@ -154,7 +160,6 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
     private RecyclerView BrandsProdRV;
 
 
-
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override
@@ -163,8 +168,6 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
 
 
         pm = new ArrayList<>();
@@ -1334,6 +1337,7 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
                 //Toast.makeText()
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
+                        //progressDialog.dismiss();
                         Log.i("onSuccess", response.body().toString());
 
                         String jsonresponse = response.body().toString();
@@ -1391,6 +1395,11 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
 
+        final ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+        progressDialog.setCancelable(false); // set cancelable to false
+        progressDialog.setMessage("Please Wait"); // set message
+        progressDialog.show(); // show progress dialog
+
         ApiInterface api = retrofit.create(ApiInterface.class);
         Call<String> call = api.getProducts();
         call.enqueue(new Callback<String>() {
@@ -1400,6 +1409,7 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
                 //Toast.makeText()
                 if (response.isSuccessful()) {
                     if (response.body() != null) {
+                        progressDialog.dismiss();
                         Log.i("onSuccess", response.body().toString());
 
                         String jsonresponse = response.body().toString();
@@ -1513,7 +1523,8 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
             ArrayList<CateModel> modelRecyclerArrayList = new ArrayList<>();
             JSONArray dataArray = obj.getJSONArray("categories");
 
-            //Toast.makeText(this, ""+dataArray, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, "Category"+dataArray, Toast.LENGTH_SHORT).show();
+//            Log.e("CategoryData", String.valueOf(dataArray));
 
             for (int i = 0; i < dataArray.length(); i++) {
 

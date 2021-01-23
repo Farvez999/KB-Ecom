@@ -3,7 +3,8 @@ package com.frz.korearbazar.model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CheckOutResponse {
+public class VendorUpResponse {
+
     private String success;
     private String message;
     private Integer userid;
@@ -41,13 +42,4 @@ public class CheckOutResponse {
         this.additionalProperties.put(name, value);
     }
 
-    @Override
-    public String toString() {
-        return "CheckOutResponse{" +
-                "success='" + success + '\'' +
-                ", message='" + message + '\'' +
-                ", userid=" + userid +
-                ", additionalProperties=" + additionalProperties +
-                '}';
-    }
 }

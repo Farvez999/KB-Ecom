@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.frz.korearbazar.ApiInterface;
 import com.frz.korearbazar.R;
+import com.frz.korearbazar.UserProfile.WithdrawActivity;
 import com.frz.korearbazar.adapter.CategoryDetailsProdAdapter;
 import com.frz.korearbazar.adapter.DasboardOrderAdapter;
 import com.frz.korearbazar.adapter.FavoriteSellerAdapter;
@@ -46,6 +48,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ProfileActivity extends AppCompatActivity {
+
+    private TextView up_Withdraw;
 
     //private ArrayList<User> mExampleList;
     private RecyclerView mRecyclerView;
@@ -78,6 +82,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
 
+        up_Withdraw=findViewById(R.id.upWithdraw);
+        up_Withdraw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfileActivity.this, WithdrawActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         mRecyclerView = findViewById(R.id.recentOrderRV);
         mRecyclerView.setHasFixedSize(true);
@@ -85,10 +98,10 @@ public class ProfileActivity extends AppCompatActivity {
         mExampleList = new ArrayList<>();
         mRequestQueue = Volley.newRequestQueue(this);
 
-        wRecyclerView = findViewById(R.id.wRecyclerView);
-        wRecyclerView.setHasFixedSize(true);
-        wRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        wExampleList = new ArrayList<>();
+//        wRecyclerView = findViewById(R.id.wRecyclerView);
+//        wRecyclerView.setHasFixedSize(true);
+//        wRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+//        wExampleList = new ArrayList<>();
 
         fsRecyclerView = findViewById(R.id.fsRecyclerView);
         fsRecyclerView.setHasFixedSize(true);
@@ -104,7 +117,7 @@ public class ProfileActivity extends AppCompatActivity {
         Userdata();
         OrderJSON();
         affilateCodeData();
-        WithdrawData();
+//        WithdrawData();
         favoriteSeller();
         MessagesData();
 
@@ -288,79 +301,79 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
 
-    //AffilateWithdrawData
-    private void WithdrawData() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getAffilateWithdraw(sessionManager.getToken());
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        affilateWithdrawData_writeRecycler(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(ProfileActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-    }
-
-    private void affilateWithdrawData_writeRecycler(String jsonresponse) {
-        try {
-        JSONObject obj = new JSONObject(jsonresponse);
-        JSONArray jsonArray = obj.getJSONArray("withdraws");
-            //Toast.makeText(this, "affiliate_sign"+jsonArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                String id = jsonObject.getString("id");
-                String created_at = jsonObject.getString("created_at");
-                String method = jsonObject.getString("method");
-                String acc_email = jsonObject.getString("acc_email");
-                String amount = jsonObject.getString("amount");
-                String status = jsonObject.getString("status");
-
-                wExampleList.add(new WithdhowModel(id,created_at,method,acc_email,amount,status));
-//                Toast.makeText(this, "withdrawsID"+withdrawsID, Toast.LENGTH_SHORT).show();
-//                Log.e("withdrawsID",withdrawsID);
-            }
-
-            wExampleAdapter = new WithdhowAdapter(ProfileActivity.this, wExampleList);
-            wRecyclerView.setAdapter(wExampleAdapter);
-
-
-
-            JSONObject affiliate_sign=obj.getJSONObject("sign");
-            //Toast.makeText(this, "affiliate_sign"+affiliate_sign, Toast.LENGTH_SHORT).show();
-
-//        String affiliate_link = obj.getString("link");
-//        String affiliate_html = obj.getString("html");
-//        affilate_Link.setText(affiliate_link);
-//        affilate_html.setText(affiliate_html);
-
-    }catch (Exception e){
-
-    }
-    }
+//    //AffilateWithdrawData
+//    private void WithdrawData() {
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(ApiInterface.JSONURL)
+//                .addConverterFactory(ScalarsConverterFactory.create())
+//                .build();
+//
+//        ApiInterface api = retrofit.create(ApiInterface.class);
+//        Call<String> call = api.getAffilateWithdraw(sessionManager.getToken());
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+////                Log.i("Responsestring", response.body().toString());
+//                //Toast.makeText()
+//                if (response.isSuccessful()) {
+//                    if (response.body() != null) {
+//                        Log.i("onSuccess", response.body().toString());
+//
+//                        String jsonresponse = response.body().toString();
+//                        affilateWithdrawData_writeRecycler(jsonresponse);
+//
+//                    } else {
+//                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                Toast.makeText(ProfileActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//    }
+//
+//    private void affilateWithdrawData_writeRecycler(String jsonresponse) {
+//        try {
+//        JSONObject obj = new JSONObject(jsonresponse);
+//        JSONArray jsonArray = obj.getJSONArray("withdraws");
+//            //Toast.makeText(this, "affiliate_sign"+jsonArray, Toast.LENGTH_SHORT).show();
+//
+//            for (int i = 0; i < jsonArray.length(); i++) {
+//                JSONObject jsonObject = jsonArray.getJSONObject(i);
+//
+//                String id = jsonObject.getString("id");
+//                String created_at = jsonObject.getString("created_at");
+//                String method = jsonObject.getString("method");
+//                String acc_email = jsonObject.getString("acc_email");
+//                String amount = jsonObject.getString("amount");
+//                String status = jsonObject.getString("status");
+//
+//                wExampleList.add(new WithdhowModel(id,created_at,method,acc_email,amount,status));
+////                Toast.makeText(this, "withdrawsID"+withdrawsID, Toast.LENGTH_SHORT).show();
+////                Log.e("withdrawsID",withdrawsID);
+//            }
+//
+//            wExampleAdapter = new WithdhowAdapter(ProfileActivity.this, wExampleList);
+//            wRecyclerView.setAdapter(wExampleAdapter);
+//
+//
+//
+//            JSONObject affiliate_sign=obj.getJSONObject("sign");
+//            //Toast.makeText(this, "affiliate_sign"+affiliate_sign, Toast.LENGTH_SHORT).show();
+//
+////        String affiliate_link = obj.getString("link");
+////        String affiliate_html = obj.getString("html");
+////        affilate_Link.setText(affiliate_link);
+////        affilate_html.setText(affiliate_html);
+//
+//    }catch (Exception e){
+//
+//    }
+//    }
 
     //Affilate Code
     private void affilateCodeData() {

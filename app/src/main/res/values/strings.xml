@@ -30,4 +30,13 @@
     <string name="clear_all">Clear All</string>
     <string name="delete_all_orders">Are you sure you want to delete all orders?</string>
     <string name="cart_clean">Your cart is as clean as the first day.</string>
+
+    <string-array name="numbers">
+        <item>Select Withdraw Method</item>
+        <item>Paypal</item>
+        <item>Skrill</item>
+        <item>Payoneer</item>
+        <item>Bank</item>
+        <item>Cash</item>
+    </string-array>
 </resources>

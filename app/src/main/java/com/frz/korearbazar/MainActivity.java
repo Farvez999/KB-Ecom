@@ -160,6 +160,15 @@ public class MainActivity extends AppCompatActivity implements ProdInterface {
     private RecyclerView BrandsProdRV;
 
 
+    ////1
+    private ArrayList<ProdModel> mExampleList;
+
+    private RecyclerView mRecyclerView;
+    private ProdAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+    /////1
+
+
     private AppBarConfiguration mAppBarConfiguration;
 
     @Override

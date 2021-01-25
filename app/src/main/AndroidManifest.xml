@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.frz.korearbazar">
+    package="com.korearbazar.ecom">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -13,37 +13,48 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".UserProfile.WithdrawActivity"></activity>
+        <activity android:name="com.korearbazar.ecom.UserProfile.ResetPasswordActivity"
+            android:parentActivityName="com.korearbazar.ecom.activity.ProfileActivity"></activity>
+        <activity android:name="com.korearbazar.ecom.UserProfile.EditProfileActivity"
+            android:parentActivityName="com.korearbazar.ecom.activity.ProfileActivity"/>
+        <activity android:name="com.korearbazar.ecom.UserProfile.AffiliateCodeActivity"
+            android:parentActivityName="com.korearbazar.ecom.activity.ProfileActivity"/>
+        <activity android:name="com.korearbazar.ecom.UserProfile.FavoriteSellerActivity"
+            android:parentActivityName="com.korearbazar.ecom.activity.ProfileActivity"/>
+        <activity android:name="com.korearbazar.ecom.UserProfile.MessageActivity"
+            android:parentActivityName="com.korearbazar.ecom.activity.ProfileActivity"/>
+        <activity android:name="com.korearbazar.ecom.UserProfile.WithdrawActivity"
+            android:parentActivityName="com.korearbazar.ecom.activity.ProfileActivity"/>
         <activity
-            android:name=".activity.VendorActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".activity.LanguageActivity" />
-        <activity android:name=".activity.VendorRegisterActivity" />
-        <activity android:name=".activity.RelatedProdDetailsActivity" />
-        <activity android:name=".activity.CategoryDetailsActivity" />
+            android:name="com.korearbazar.ecom.activity.VendorActivity"
+            android:parentActivityName="com.korearbazar.ecom.MainActivity" />
+        <activity android:name="com.korearbazar.ecom.activity.LanguageActivity" />
+        <activity android:name="com.korearbazar.ecom.activity.VendorRegisterActivity" />
+        <activity android:name="com.korearbazar.ecom.activity.RelatedProdDetailsActivity" />
+        <activity android:name="com.korearbazar.ecom.activity.CategoryDetailsActivity" />
         <activity
-            android:name=".activity.CheckoutActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.korearbazar.ecom.activity.CheckoutActivity"
+            android:parentActivityName="com.korearbazar.ecom.MainActivity" />
         <activity
-            android:name=".activity.CartActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.korearbazar.ecom.activity.CartActivity"
+            android:parentActivityName="com.korearbazar.ecom.MainActivity" />
         <activity
-            android:name=".activity.ProfileActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.korearbazar.ecom.activity.ProfileActivity"
+            android:parentActivityName="com.korearbazar.ecom.MainActivity" />
         <activity
-            android:name=".activity.SignUpActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.korearbazar.ecom.activity.SignUpActivity"
+            android:parentActivityName="com.korearbazar.ecom.MainActivity" />
         <activity
-            android:name=".activity.LoginActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.korearbazar.ecom.activity.LoginActivity"
+            android:parentActivityName="com.korearbazar.ecom.MainActivity" />
         <activity
-            android:name=".activity.BlogActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.korearbazar.ecom.activity.BlogActivity"
+            android:parentActivityName="com.korearbazar.ecom.MainActivity" />
         <activity
-            android:name=".activity.CategoryActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name="com.korearbazar.ecom.activity.CategoryActivity"
+            android:parentActivityName="com.korearbazar.ecom.MainActivity" />
         <activity
-            android:name=".FirstActivity"
+            android:name="com.korearbazar.ecom.FirstActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,9 +62,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ItemDetailsActivity" />
+        <activity android:name="com.korearbazar.ecom.activity.ItemDetailsActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.korearbazar.ecom.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

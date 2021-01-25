@@ -21,21 +21,6 @@
         android:layout_marginTop="10dp"
         android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/upWithdraw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20dp"
-        android:text="Withdraw"></TextView>
-
-</LinearLayout>
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -243,323 +228,105 @@
                     android:textColor="@color/colorPrimary"></TextView>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginBottom="10dp"
                     android:id="@+id/recentOrderRV"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:listitem="@layout/item_order"></androidx.recyclerview.widget.RecyclerView>
+
 
             </LinearLayout>
 
 
     </LinearLayout>
 
-
-        ///Affiliate code
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
-
-
-
-            ////Affiliate Informations
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_editetext">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Affiliate Code"
-                    android:textSize="25dp"
-                    android:padding="5dp"
-                    android:textColor="@color/colorPrimary"></TextView>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Your Affilate Link *"
-                    android:textSize="25dp"
-                    android:padding="5dp"
-                    android:textColor="@color/colorPrimary"></TextView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rounded_editetext">
-
-                    <TextView
-                        android:id="@+id/copyaffilateLink"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_file_copy_24"
-                        android:textSize="20dp"
-                        android:padding="5dp"
-                        android:textColor="@color/colorBalck"></TextView>
-
-                    <TextView
-                        android:id="@+id/affilateLink"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textIsSelectable="true"
-                        android:textSize="20dp"
-                        android:padding="5dp"
-                        android:textColor="@color/colorBalck"></TextView>
-
-
-
-                </LinearLayout>
-
-
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Affiliate Banner HTML Code * "
-                    android:textSize="25dp"
-                    android:padding="5dp"
-                    android:textColor="@color/colorPrimary"></TextView>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:background="@drawable/rounded_editetext">
-
-                    <TextView
-                        android:id="@+id/copyAffilatehtml"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_file_copy_24"
-                        android:textSize="20dp"
-                        android:padding="5dp"
-                        android:textColor="@color/colorBalck"></TextView>
-
-                    <TextView
-                        android:id="@+id/affilatehtml"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text=""
-                        android:textIsSelectable="true"
-                        android:textSize="20dp"
-                        android:padding="5dp"
-                        android:textColor="@color/colorBalck"></TextView>
-
-
-
-                </LinearLayout>
-
-
-
-
-            </LinearLayout>
-
-            <View
-             android:layout_width="match_parent"
-             android:layout_height="25dp" />
-
-        </LinearLayout>
-
-        ///Withdraw
+        ////
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:background="@drawable/rounded_editetext">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="My Withdraws"
-                android:textSize="25dp"
-                android:padding="5dp"
-                android:textColor="@color/colorPrimary"></TextView>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="5">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_margin="2dp"
-                    android:textSize="12dp"
-                    android:text="Withdraw Date"></TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:layout_weight="1"
-                    android:layout_margin="2dp"
-                    android:text="Method"></TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:layout_weight="1"
-                    android:layout_margin="2dp"
-                    android:text="Account"></TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:layout_weight="1"
-                    android:layout_margin="2dp"
-                    android:text="Amount"></TextView>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:layout_weight="1"
-                    android:layout_margin="2dp"
-                    android:text="Status"></TextView>
-
-            </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/wRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:listitem="@layout/withdraw_item"></androidx.recyclerview.widget.RecyclerView>
-
-        </LinearLayout>
-
-        </LinearLayout>
-
-        ///Message
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:background="@drawable/rounded_editetext">
-
+            android:layout_margin="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="My Message"
-                    android:textSize="25dp"
-                    android:padding="5dp"
-                    android:textColor="@color/colorPrimary"></TextView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="2">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_margin="2dp"
-                        android:textSize="12dp"
-                        android:text="Subject"></TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12dp"
-                        android:layout_weight="1"
-                        android:layout_margin="2dp"
-                        android:text="Message"></TextView>
-
-
-                </LinearLayout>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/meRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/withdraw_item"></androidx.recyclerview.widget.RecyclerView>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        ///FavoriteSeller
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp"
-            android:background="@drawable/rounded_editetext">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Favorite Seller"
-                    android:textSize="25dp"
+                    android:id="@+id/upAffiliate"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
                     android:padding="5dp"
-                    android:textColor="@color/colorPrimary"></TextView>
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/rounded_green2"
+                    android:text="Affiliate Code"></TextView>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
+                <TextView
+                    android:id="@+id/upFSeller"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/rounded_green2"
+                    android:text="Favorite Sellers"></TextView>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="8dp"
-                        android:textSize="12dp"
-                        android:text="Shop Name"></TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12dp"
-                        android:layout_weight="1"
-                        android:layout_margin="2dp"
-                        android:text="Owner Name"></TextView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12dp"
-                        android:layout_weight="1"
-                        android:layout_margin="2dp"
-                        android:text="Address"></TextView>
+                <TextView
+                    android:id="@+id/upWithdraw"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/rounded_green2"
+                    android:text="Withdraw"></TextView>
+
+                <TextView
+                    android:id="@+id/upMessage"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/rounded_green2"
+                    android:text="Messages"></TextView>
 
 
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/upEditProfile"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:textSize="20dp"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/rounded_green2"
+                    android:text="Edit Profile"></TextView>
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/fsRecyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:listitem="@layout/withdraw_item"></androidx.recyclerview.widget.RecyclerView>
+                <TextView
+                    android:id="@+id/upResetPassword"
+                    android:layout_width="150dp"
+                    android:layout_height="40dp"
+                    android:textSize="15dp"
+                    android:padding="5dp"
+                    android:layout_margin="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/rounded_green2"
+                    android:text="Reset Password"></TextView>
+
 
             </LinearLayout>
 

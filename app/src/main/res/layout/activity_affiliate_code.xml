@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.korearbazar.ecom.UserProfile.AffiliateCodeActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_editetext">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="5dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/rounded_editetext">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Affiliate Code"
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Your Affilate Link *"
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_editetext">
+
+                    <TextView
+                        android:id="@+id/copyaffilateLink"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_file_copy_24"
+                        android:textSize="20dp"
+                        android:padding="5dp"
+                        android:textColor="@color/colorBalck"></TextView>
+
+                    <TextView
+                        android:id="@+id/affilateLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textIsSelectable="true"
+                        android:textSize="20dp"
+                        android:padding="5dp"
+                        android:textColor="@color/colorBalck"></TextView>
+
+
+
+                </LinearLayout>
+
+
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Affiliate Banner HTML Code * "
+                    android:textSize="25dp"
+                    android:padding="5dp"
+                    android:textColor="@color/colorPrimary"></TextView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:background="@drawable/rounded_editetext">
+
+                    <TextView
+                        android:id="@+id/copyAffilatehtml"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/ic_file_copy_24"
+                        android:textSize="20dp"
+                        android:padding="5dp"
+                        android:textColor="@color/colorBalck"></TextView>
+
+                    <TextView
+                        android:id="@+id/affilatehtml"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textIsSelectable="true"
+                        android:textSize="20dp"
+                        android:padding="5dp"
+                        android:textColor="@color/colorBalck"></TextView>
+
+
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

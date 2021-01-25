@@ -135,7 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp">
 
-                <EditText
+                <com.maksim88.passwordedittext.PasswordEditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -147,6 +147,19 @@
                     android:padding="12dp"
                     android:textColor="@color/colorGrey2"
                     android:textColorHint="@color/colorGrey" />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/password"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/rounded_editetext"-->
+<!--                    android:drawableLeft="@drawable/ic_lock"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:hint="Password"-->
+<!--                    android:inputType="textPassword"-->
+<!--                    android:padding="12dp"-->
+<!--                    android:textColor="@color/colorGrey2"-->
+<!--                    android:textColorHint="@color/colorGrey" />-->
             </LinearLayout>
 
             <LinearLayout
@@ -154,7 +167,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp">
 
-                <EditText
+                <com.maksim88.passwordedittext.PasswordEditText
                     android:id="@+id/confirmation_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -166,6 +179,19 @@
                     android:padding="12dp"
                     android:textColor="@color/colorGrey2"
                     android:textColorHint="@color/colorGrey" />
+
+<!--                <EditText-->
+<!--                    android:id="@+id/confirmation_password"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:background="@drawable/rounded_editetext"-->
+<!--                    android:drawableLeft="@drawable/ic_lock"-->
+<!--                    android:drawablePadding="10dp"-->
+<!--                    android:hint="Confirmation Password"-->
+<!--                    android:inputType="textPassword"-->
+<!--                    android:padding="12dp"-->
+<!--                    android:textColor="@color/colorGrey2"-->
+<!--                    android:textColorHint="@color/colorGrey" />-->
             </LinearLayout>
 
             <View

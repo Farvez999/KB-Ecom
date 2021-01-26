@@ -208,7 +208,7 @@ public interface ApiInterface {
     @FormUrlEncoded // annotation used in POST type requests
 
    // @Headers({"Authorization"})
-    @POST("/user/user/contact")     // API's endpoints
+    @POST("user/user/contact")     // API's endpoints
     public void UserPmeaasgeSend(@Header("Authorization") String Bearer,
                                  @Field("to") String to,
                                  @Field("subject") String subject,
@@ -217,4 +217,6 @@ public interface ApiInterface {
                                  Callback<MessageResponse> callback);
 
     //
+
+
 }

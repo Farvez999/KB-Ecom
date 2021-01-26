@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,7 @@ import com.android.volley.VolleyError;
 
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.korearbazar.ecom.Api;
 import com.korearbazar.ecom.ApiInterface;
 
 import com.korearbazar.ecom.R;
@@ -35,6 +37,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
+import retrofit.RetrofitError;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -80,87 +83,91 @@ public class MessageActivity extends AppCompatActivity {
 
         MessagesData();
 
-    }
 
-    private void messageSend() {
-        String url="http://ecom.hrventure.xyz/api/user/user/contact";
-        final String phoneNumber = mTo.getText().toString();
-        final String amounts = mSubjects.getText().toString();
-        final String acc_emails = mMessages.getText().toString();
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (!response.equals(null)) {
-                    Log.e("Your Array Response", response);
-                } else {
-                    Log.e("Your Array Response", "Data Null");
-                }
-            }
+        sessionManager.getToken();
+//        Toast.makeText(this, "Check session Manager"+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
 
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("error is ", "" + error);
-            }
-        }) {
-
-            //This is for Headers If You Needed
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("Content-Type", "application/json; charset=UTF-8");
-                params.put("Authorization", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9lY29tLmhydmVudHVyZS54eXpcL3B1YmxpY1wvYXBpXC9sb2dpbiIsImlhdCI6MTYxMTU1MzcwNCwiZXhwIjoxNjExNjQwMTA0LCJuYmYiOjE2MTE1NTM3MDQsImp0aSI6Ikhpek5uMDVHRmpyMGlWck0iLCJzdWIiOjEzLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.1kxRuz1zPqkHw8Tyr8lQyrcp6GtrQpCNcTmzhHF3cY0");
-                Log.e("Check A",params.put("token","eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOlwvXC9lY29tLmhydmVudHVyZS54eXpcL3B1YmxpY1wvYXBpXC9sb2dpbiIsImlhdCI6MTYxMTU1MzcwNCwiZXhwIjoxNjExNjQwMTA0LCJuYmYiOjE2MTE1NTM3MDQsImp0aSI6Ikhpek5uMDVHRmpyMGlWck0iLCJzdWIiOjEzLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.1kxRuz1zPqkHw8Tyr8lQyrcp6GtrQpCNcTmzhHF3cY0"));
-                return params;
-            }
-
-            //Pass Your Parameters here
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("to", phoneNumber);
-                params.put("subject", amounts);
-                params.put("body", acc_emails);
-                return params;
-            }
-        };
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        queue.add(request);
     }
 
 //    private void messageSend() {
-//        // display a progress dialog
-//        final ProgressDialog progressDialog = new ProgressDialog(MessageActivity.this);
-//        progressDialog.setCancelable(false);
-//        progressDialog.setMessage("Please Wait");
-//        progressDialog.show();
-//
-//
-//        Api.getClient().UserPmeaasgeSend(
-//                sessionManager.getToken(),
-//
-//                mTo.getText().toString().trim(),
-//                mSubjects.getText().toString().trim(),
-//                mMessages.getText().toString().trim(),
-//                "email", 
-//                new retrofit.Callback<MessageResponse>() {
-//                    @Override
-//                    public void success(MessageResponse messageResponse, retrofit.client.Response response) {
-//                        progressDialog.dismiss(); //dismiss progress dialog
-//                        messageResponseData = messageResponse;
-//                        Toast.makeText(MessageActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void failure(RetrofitError error) {
-//                        Toast.makeText(MessageActivity.this, error.toString(), Toast.LENGTH_LONG).show();
-//                        progressDialog.dismiss();
-//                    }
+//        String url="http://ecom.hrventure.xyz/api/user/user/contact";
+//        final String phoneNumber = mTo.getText().toString();
+//        final String amounts = mSubjects.getText().toString();
+//        final String acc_emails = mMessages.getText().toString();
+//        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
+//            @Override
+//            public void onResponse(String response) {
+//                if (!response.equals(null)) {
+//                    Log.e("Your Array Response", response);
+//                } else {
+//                    Log.e("Your Array Response", "Data Null");
 //                }
-//                );
+//            }
 //
-//        Log.e("Check Session", String.valueOf(sessionManager));
+//        }, new com.android.volley.Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("error is ", "" + error);
+//            }
+//        }) {
+//
+//            //This is for Headers If You Needed
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("Content-Type", "application/json; charset=UTF-8");
+//                params.put("Authorization", sessionManager.getToken());
+//                return params;
+//            }
+//
+//            //Pass Your Parameters here
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("to", phoneNumber);
+//                params.put("subject", amounts);
+//                params.put("body", acc_emails);
+//                return params;
+//            }
+//        };
+//        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+//        queue.add(request);
 //    }
+
+    private void messageSend() {
+        // display a progress dialog
+        final ProgressDialog progressDialog = new ProgressDialog(MessageActivity.this);
+        progressDialog.setCancelable(false);
+        progressDialog.setMessage("Please Wait");
+        progressDialog.show();
+       // ApiInterface api = retrofit.create(ApiInterface.class);
+//        Call<String> call = Api.getClient().getMessages(sessionManager.getToken());
+//        Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+
+        Api.getClient().UserPmeaasgeSend(
+                sessionManager.getToken(),
+
+                mTo.getText().toString().trim(),
+                mSubjects.getText().toString().trim(),
+                mMessages.getText().toString().trim(),
+                "email",
+                new retrofit.Callback<MessageResponse>() {
+                    @Override
+                    public void success(MessageResponse messageResponse, retrofit.client.Response response) {
+                        progressDialog.dismiss(); //dismiss progress dialog
+                        messageResponseData = messageResponse;
+                        Toast.makeText(MessageActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        Toast.makeText(MessageActivity.this, error.toString(), Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                    }
+                }
+                );
+
+    }
 
 
 

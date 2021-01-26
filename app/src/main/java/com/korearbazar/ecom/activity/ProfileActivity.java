@@ -215,7 +215,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ApiInterface api = retrofit.create(ApiInterface.class);
         Call<String> call = api.getProfile(sessionManager.getToken());
-        //Toast.makeText(this, "Check session Manager"+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Check session Manager"+sessionManager.getToken(), Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {

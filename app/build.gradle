@@ -1,31 +1,54 @@
 apply plugin: 'com.android.application'
 
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:0.12.10'
+    }
+}
+apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+
+repositories {
+    maven { url 'https://maven.google.com' }
+}
+apply plugin: 'com.google.gms.google-services'
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.korearBazar.ecom"
+        applicationId "com.korearbazar.ecom"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+        manifestPlaceholders = [
+                onesignal_app_id: '75dbb53e-2d48-41e9-8c59-c004bd908cf2',
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
+    
 
 
     //Extra ami nije korlam
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+
+
+    android {
+        defaultConfig {
+
+        }
     }
 }
 
@@ -74,4 +97,9 @@ dependencies {
     //PasswordEditText
     implementation 'com.maksim88:PasswordEditText:v0.9'
 
+    //OneSignal
+    implementation 'com.onesignal:OneSignal:3.15.3'
+
 }
+
+apply plugin: 'com.google.gms.google-services'

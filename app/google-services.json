@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "928001085660",
+    "project_id": "korear-bazar-iuvufa",
+    "storage_bucket": "korear-bazar-iuvufa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:928001085660:android:29e06241b709b1f7ace419",
+        "android_client_info": {
+          "package_name": "com.korearbazar.ecom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "928001085660-d8hcq7jf2et9oofj4st5uaqfo6mq0jeq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.korearbazar.ecom",
+            "certificate_hash": "8b373949f7e2796b7558177ecb2492ddba32fd1f"
+          }
+        },
+        {
+          "client_id": "928001085660-6n8kpphm7p9aeb9qfe7cleho2q1gkhct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN_m1qA5zRFkkxS4y6zsNriIYK3b-XLH4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "928001085660-6n8kpphm7p9aeb9qfe7cleho2q1gkhct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

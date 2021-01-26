@@ -22,21 +22,20 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.korearBazar.ecom"
+        applicationId "com.korearbazar.ecom"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+        manifestPlaceholders = [
+                onesignal_app_id: '75dbb53e-2d48-41e9-8c59-c004bd908cf2',
+                onesignal_google_project_number: 'REMOTE'
+        ]
     }
+    
 
     android {
         defaultConfig {
@@ -52,6 +51,13 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+
+
+    android {
+        defaultConfig {
+
+        }
     }
 }
 

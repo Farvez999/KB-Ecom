@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VendorProfile.VendorDashboadActivity">
+
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/btn_orderPending"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Orders Pending!"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/rounded_green"
+            android:textColor="@color/colorWhite"></TextView>
+
+        <TextView
+            android:id="@+id/btn_orderProcessing"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Orders Procsessing!"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/rounded_green"
+            android:textColor="@color/colorWhite"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/btn_orderCompleted"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Orders Completed!"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/rounded_green"
+            android:textColor="@color/colorWhite"></TextView>
+
+        <TextView
+            android:id="@+id/btn_orderProducts"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:text="Total Products!"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:background="@drawable/rounded_green"
+            android:textColor="@color/colorWhite"></TextView>
+
+    </LinearLayout>
+
+</LinearLayout>
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    //Orders Pending!
+    <LinearLayout
+        android:id="@+id/orderPending"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_editetext">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Orders Pending!"
+                android:textSize="25dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All Orders"
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="12dp"
+                    android:text="Order Number"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Total Qty"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Total Cost"></TextView>
+
+                <!--                            <TextView-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:textSize="12dp"-->
+                <!--                                android:layout_weight="1"-->
+                <!--                                android:layout_margin="2dp"-->
+                <!--                                android:text="Payment Method"></TextView>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Actions"></TextView>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vOrderRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    //Orders Processing!
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/orderProcessing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_editetext">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Orders Procsessing!"
+                android:textSize="25dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Orders Procsessing!"
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="12dp"
+                    android:text="Order Number"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Total Qty"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Total Cost"></TextView>
+
+                <!--                            <TextView-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:textSize="12dp"-->
+                <!--                                android:layout_weight="1"-->
+                <!--                                android:layout_margin="2dp"-->
+                <!--                                android:text="Payment Method"></TextView>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Actions"></TextView>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vProcessingRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    //Orders Complete!
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/orderComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_editetext">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Orders Completed!"
+                android:textSize="25dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="All Completed Orders"
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="12dp"
+                    android:text="Order Number"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Total Qty"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Total Cost"></TextView>
+
+                <!--                            <TextView-->
+                <!--                                android:layout_width="wrap_content"-->
+                <!--                                android:layout_height="wrap_content"-->
+                <!--                                android:textSize="12dp"-->
+                <!--                                android:layout_weight="1"-->
+                <!--                                android:layout_margin="2dp"-->
+                <!--                                android:text="Payment Method"></TextView>-->
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Actions"></TextView>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/vCompleteRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    //Total Products!!
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/orderProducts"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:padding="5dp">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/rounded_editetext">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Total Products!!"
+                android:textSize="25dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Products"
+                android:textSize="20dp"
+                android:padding="5dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="4">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="8dp"
+                    android:textSize="12dp"
+                    android:text="Name"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Type"></TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Price"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="	Status"></TextView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:layout_weight="1"
+                    android:layout_margin="2dp"
+                    android:text="Actions"></TextView>
+
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/totalProductRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>
+
+
+
+</LinearLayout>
+
+</ScrollView>

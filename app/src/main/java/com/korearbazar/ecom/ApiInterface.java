@@ -98,6 +98,12 @@ public interface ApiInterface {
             @Header("Authorization") String Bearer
     );
 
+    //Vendor All Order
+    @GET("api/vendor/orders")
+    Call<String> getVendorOrder(
+            @Header("Authorization") String Bearer
+    );
+
 //    @GET("api/profile")
 //    Call<String> getProfile(
 //            @Header("Authorization") String Bearer

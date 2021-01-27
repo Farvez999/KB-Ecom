@@ -146,7 +146,6 @@ public class MessageActivity extends AppCompatActivity {
 
         Api.getClient().UserPmeaasgeSend(
                 sessionManager.getToken(),
-
                 mTo.getText().toString().trim(),
                 mSubjects.getText().toString().trim(),
                 mMessages.getText().toString().trim(),

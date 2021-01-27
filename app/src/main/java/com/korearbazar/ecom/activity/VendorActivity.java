@@ -4,12 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.korearbazar.ecom.ApiInterface;
 import com.korearbazar.ecom.R;
+import com.korearbazar.ecom.VendorProfile.VendorBulkProductUploadActivity;
+import com.korearbazar.ecom.VendorProfile.VendorDashboadActivity;
+import com.korearbazar.ecom.VendorProfile.VendorOrderActivity;
+import com.korearbazar.ecom.VendorProfile.VendorProductsActivity;
+import com.korearbazar.ecom.VendorProfile.VendorSettingsActivity;
+import com.korearbazar.ecom.VendorProfile.VendorWithdrawsActivity;
 import com.korearbazar.ecom.adapter.VendorOrderAdapter;
 import com.korearbazar.ecom.adapter.VendorProductAdapter;
 import com.korearbazar.ecom.model.VendorOrderModel;
@@ -31,21 +40,7 @@ public class VendorActivity extends AppCompatActivity {
 
     SessionManager sessionManager;
 
-    private RecyclerView meRecyclerView;
-    private VendorOrderAdapter meExampleAdapter;
-    private ArrayList<VendorOrderModel> meExampleList;
-
-    private RecyclerView vcRecyclerView;
-    private VendorOrderAdapter vcExampleAdapter;
-    private ArrayList<VendorOrderModel> vcExampleList;
-
-    private RecyclerView vpRecyclerView;
-    private VendorOrderAdapter vpExampleAdapter;
-    private ArrayList<VendorOrderModel> vpExampleList;
-
-    private RecyclerView vproductRecyclerView;
-    private VendorProductAdapter vproductExampleAdapter;
-    private ArrayList<VendorProductModel> vproductExampleList;
+    TextView vDashboard,vOrder,vProducts,vWithdraws,vBulkProductUpload,vSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,288 +51,63 @@ public class VendorActivity extends AppCompatActivity {
 
         sessionManager = new SessionManager(this);
 
-        meRecyclerView = findViewById(R.id.vOrderRecyclerView);
-        meRecyclerView.setHasFixedSize(true);
-        meRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        meExampleList = new ArrayList<>();
+        vDashboard = findViewById(R.id.vDashboard);
+        vOrder = findViewById(R.id.vOrder);
+        vProducts = findViewById(R.id.vProducts);
+        vWithdraws = findViewById(R.id.vWithdraws);
+        vBulkProductUpload = findViewById(R.id.vBulkProductUpload);
+        vSettings = findViewById(R.id.vSettings);
 
-        vcRecyclerView = findViewById(R.id.vCompleteRecyclerView);
-        vcRecyclerView.setHasFixedSize(true);
-        vcRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        vcExampleList = new ArrayList<>();
-
-        vpRecyclerView = findViewById(R.id.vProcessingRecyclerView);
-        vpRecyclerView.setHasFixedSize(true);
-        vpRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        vpExampleList = new ArrayList<>();
-
-        vproductRecyclerView = findViewById(R.id.totalProductRecyclerView);
-        vproductRecyclerView.setHasFixedSize(true);
-        vproductRecyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
-        vproductExampleList = new ArrayList<>();
-
-        vOrderData();
-        vProcessingData();
-        vCompleteData();
-        totalProductData();
-
-    }
-
-    private void totalProductData() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getVendorproducts(sessionManager.getToken());
-        call.enqueue(new Callback<String>() {
+        vDashboard.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        Vendorproducts_rv(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(VendorActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(VendorActivity.this, VendorDashboadActivity.class);
+                startActivity(intent);
             }
         });
-    }
 
-    private void Vendorproducts_rv(String jsonresponse) {
-        try {
-            JSONObject obj = new JSONObject(jsonresponse);
-
-            JSONArray jsonArray = obj.getJSONArray("products");
-            //Toast.makeText(this, "affiliate_products"+jsonArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                String id = jsonObject.getString("id");
-                String name = jsonObject.getString("name");
-                String type = jsonObject.getString("type");
-                String price = jsonObject.getString("price");
-                String status = jsonObject.getString("status");
-                //String status = jsonObject.getString("status");
-
-
-                vproductExampleList.add(new VendorProductModel(id,name,type,price,status));
-//                String withdrawsID = jsonObject.getString("id");
-//                Toast.makeText(this, "withdrawsID"+withdrawsID, Toast.LENGTH_SHORT).show();
-//                Log.e("withdrawsID",withdrawsID);
-            }
-
-            vproductExampleAdapter = new VendorProductAdapter(VendorActivity.this, vproductExampleList);
-            vproductRecyclerView.setAdapter(vproductExampleAdapter);
-
-        }catch (Exception e){
-
-        }
-    }
-
-    private void vProcessingData() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getVendorDashboard(sessionManager.getToken());
-        call.enqueue(new Callback<String>() {
+        vOrder.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        vProcessingData_rv(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(VendorActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(VendorActivity.this, VendorOrderActivity.class);
+                startActivity(intent);
             }
         });
-    }
 
-    private void vProcessingData_rv(String jsonresponse) {
-        try {
-            JSONObject obj = new JSONObject(jsonresponse);
-
-            JSONArray jsonArray = obj.getJSONArray("processing");
-           // Toast.makeText(this, "affiliate_completed"+jsonArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                String id = jsonObject.getString("id");
-                String order_number = jsonObject.getString("order_number");
-                String qty = jsonObject.getString("qty");
-                String price = jsonObject.getString("price");
-                String status = jsonObject.getString("status");
-
-
-                vpExampleList.add(new VendorOrderModel(id,order_number,qty,price,status));
-//                String withdrawsID = jsonObject.getString("id");
-//                Toast.makeText(this, "withdrawsID"+withdrawsID, Toast.LENGTH_SHORT).show();
-//                Log.e("withdrawsID",withdrawsID);
-            }
-
-            vpExampleAdapter = new VendorOrderAdapter(VendorActivity.this, vpExampleList);
-            vpRecyclerView.setAdapter(vpExampleAdapter);
-
-        }catch (Exception e){
-
-        }
-    }
-
-    private void vCompleteData() {
-
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getVendorDashboard(sessionManager.getToken());
-        call.enqueue(new Callback<String>() {
+        vProducts.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        vCompleteData_rv(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(VendorActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(VendorActivity.this, VendorProductsActivity.class);
+                startActivity(intent);
             }
         });
-    }
 
-    private void vCompleteData_rv(String jsonresponse) {
-        try {
-            JSONObject obj = new JSONObject(jsonresponse);
-
-            JSONArray jsonArray = obj.getJSONArray("completed");
-            //Toast.makeText(this, "affiliate_completed"+jsonArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                String id = jsonObject.getString("id");
-                String order_number = jsonObject.getString("order_number");
-                String qty = jsonObject.getString("qty");
-                String price = jsonObject.getString("price");
-                String status = jsonObject.getString("status");
-
-
-                vcExampleList.add(new VendorOrderModel(id,order_number,qty,price,status));
-//                String withdrawsID = jsonObject.getString("id");
-//                Toast.makeText(this, "withdrawsID"+withdrawsID, Toast.LENGTH_SHORT).show();
-//                Log.e("withdrawsID",withdrawsID);
-            }
-
-            vcExampleAdapter = new VendorOrderAdapter(VendorActivity.this, vcExampleList);
-            vcRecyclerView.setAdapter(vcExampleAdapter);
-
-        }catch (Exception e){
-
-        }
-    }
-
-    private void vOrderData() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ApiInterface.JSONURL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .build();
-
-        ApiInterface api = retrofit.create(ApiInterface.class);
-        Call<String> call = api.getVendorDashboard(sessionManager.getToken());
-        call.enqueue(new Callback<String>() {
+        vWithdraws.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-//                Log.i("Responsestring", response.body().toString());
-                //Toast.makeText()
-                if (response.isSuccessful()) {
-                    if (response.body() != null) {
-                        Log.i("onSuccess", response.body().toString());
-
-                        String jsonresponse = response.body().toString();
-                        vOrderData_rv(jsonresponse);
-
-                    } else {
-                        Log.i("onEmptyResponse", "Returned empty response");//Toast.makeText(getContext(),"Nothing returned",Toast.LENGTH_LONG).show();
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(VendorActivity.this, "Error" + t, Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                Intent intent = new Intent(VendorActivity.this, VendorWithdrawsActivity.class);
+                startActivity(intent);
             }
         });
-    }
 
-    private void vOrderData_rv(String jsonresponse) {
-        try {
-            JSONObject obj = new JSONObject(jsonresponse);
-
-            JSONArray jsonArray = obj.getJSONArray("pending");
-            //Toast.makeText(this, "affiliate_pending"+jsonArray, Toast.LENGTH_SHORT).show();
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                String id = jsonObject.getString("id");
-                String order_number = jsonObject.getString("order_number");
-                String qty = jsonObject.getString("qty");
-                String price = jsonObject.getString("price");
-                String status = jsonObject.getString("status");
-
-
-                meExampleList.add(new VendorOrderModel(id,order_number,qty,price,status));
-//                String withdrawsID = jsonObject.getString("id");
-//                Toast.makeText(this, "withdrawsID"+withdrawsID, Toast.LENGTH_SHORT).show();
-//                Log.e("withdrawsID",withdrawsID);
+        vBulkProductUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VendorActivity.this, VendorBulkProductUploadActivity.class);
+                startActivity(intent);
             }
+        });
 
-            meExampleAdapter = new VendorOrderAdapter(VendorActivity.this, meExampleList);
-            meRecyclerView.setAdapter(meExampleAdapter);
+        vSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(VendorActivity.this, VendorSettingsActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        }catch (Exception e){
 
-        }
+
     }
+
 }

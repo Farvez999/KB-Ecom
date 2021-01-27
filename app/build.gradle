@@ -22,7 +22,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.korearbazar.ecom"
+        applicationId "com.korearBazar.ecom"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1

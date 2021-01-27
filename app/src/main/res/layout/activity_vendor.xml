@@ -32,369 +32,124 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginBottom="10dp"
-                android:orientation="vertical"
-                android:background="@drawable/rounded_editetext">
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/vDashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
                     android:text="Dashboard"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/colorPrimary"></TextView>
-
-                //Orders Pending!
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:background="@drawable/rounded_editetext">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Orders Pending!"
-                            android:textSize="25dp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorPrimary"></TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="All Orders"
-                            android:textSize="20dp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorPrimary"></TextView>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="4">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginLeft="8dp"
-                                android:textSize="12dp"
-                                android:text="Order Number"></TextView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Total Qty"></TextView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Total Cost"></TextView>
-
-<!--                            <TextView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:textSize="12dp"-->
-<!--                                android:layout_weight="1"-->
-<!--                                android:layout_margin="2dp"-->
-<!--                                android:text="Payment Method"></TextView>-->
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Actions"></TextView>
-
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/vOrderRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-                //Orders Processing!
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/rounded_editetext">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Orders Procsessing!"
-                            android:textSize="25dp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorPrimary"></TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Orders Procsessing!"
-                            android:textSize="20dp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorPrimary"></TextView>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="4">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginLeft="8dp"
-                                android:textSize="12dp"
-                                android:text="Order Number"></TextView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Total Qty"></TextView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Total Cost"></TextView>
-
-                            <!--                            <TextView-->
-                            <!--                                android:layout_width="wrap_content"-->
-                            <!--                                android:layout_height="wrap_content"-->
-                            <!--                                android:textSize="12dp"-->
-                            <!--                                android:layout_weight="1"-->
-                            <!--                                android:layout_margin="2dp"-->
-                            <!--                                android:text="Payment Method"></TextView>-->
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Actions"></TextView>
-
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/vProcessingRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                //Orders Complete!
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/rounded_editetext">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Orders Completed!"
-                            android:textSize="25dp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorPrimary"></TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="All Completed Orders"
-                            android:textSize="20dp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorPrimary"></TextView>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="4">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginLeft="8dp"
-                                android:textSize="12dp"
-                                android:text="Order Number"></TextView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Total Qty"></TextView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Total Cost"></TextView>
-
-                            <!--                            <TextView-->
-                            <!--                                android:layout_width="wrap_content"-->
-                            <!--                                android:layout_height="wrap_content"-->
-                            <!--                                android:textSize="12dp"-->
-                            <!--                                android:layout_weight="1"-->
-                            <!--                                android:layout_margin="2dp"-->
-                            <!--                                android:text="Payment Method"></TextView>-->
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Actions"></TextView>
-
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/vCompleteRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-
-                //Total Products!!
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/rounded_editetext">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Total Products!!"
-                            android:textSize="25dp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorPrimary"></TextView>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Products"
-                            android:textSize="20dp"
-                            android:padding="5dp"
-                            android:textColor="@color/colorPrimary"></TextView>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:weightSum="4">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:layout_marginLeft="8dp"
-                                android:textSize="12dp"
-                                android:text="Name"></TextView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Type"></TextView>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Price"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="	Status"></TextView>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="12dp"
-                                android:layout_weight="1"
-                                android:layout_margin="2dp"
-                                android:text="Actions"></TextView>
-
-
-                        </LinearLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/totalProductRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
+
+                <TextView
+                    android:id="@+id/vOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Orders"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/vProducts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Products"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
+
+                <TextView
+                    android:id="@+id/vWithdraws"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Withdraws"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <TextView
+                    android:id="@+id/vBulkProductUpload"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Bulk Product Upload"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
+
+                <TextView
+                    android:id="@+id/vSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Settings"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
+
+
 
 
             </LinearLayout>

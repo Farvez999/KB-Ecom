@@ -245,90 +245,119 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_margin="5dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/upAffiliate"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Affiliate Code"
                     android:textSize="20dp"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:background="@drawable/rounded_green2"
-                    android:text="Affiliate Code"></TextView>
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
 
                 <TextView
                     android:id="@+id/upFSeller"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Favorite Sellers"
                     android:textSize="20dp"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:background="@drawable/rounded_green2"
-                    android:text="Favorite Sellers"></TextView>
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/upWithdraw"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Withdraw"
                     android:textSize="20dp"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:background="@drawable/rounded_green2"
-                    android:text="Withdraw"></TextView>
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
 
                 <TextView
                     android:id="@+id/upMessage"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Messages"
                     android:textSize="20dp"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:background="@drawable/rounded_green2"
-                    android:text="Messages"></TextView>
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
 
                 <TextView
                     android:id="@+id/upEditProfile"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Edit Profile"
                     android:textSize="20dp"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:background="@drawable/rounded_green2"
-                    android:text="Edit Profile"></TextView>
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
 
                 <TextView
                     android:id="@+id/upResetPassword"
-                    android:layout_width="150dp"
-                    android:layout_height="40dp"
-                    android:textSize="15dp"
-                    android:padding="5dp"
-                    android:layout_margin="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:text="Reset Password"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:background="@drawable/rounded_green2"
-                    android:text="Reset Password"></TextView>
-
+                    android:layout_margin="5dp"
+                    android:padding="5dp"
+                    android:background="@drawable/rounded_green"
+                    android:textColor="@color/colorWhite"></TextView>
 
             </LinearLayout>
+
 
         </LinearLayout>
 

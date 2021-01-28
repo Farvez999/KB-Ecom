@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.korearbazar.ecom.VendorProfile.VendorAddNewProductsActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name*In English"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Product Name In English"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name*In Chinese"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Product Name In Chinese"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name*In Korean"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Product Name In Korean"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name*In Vietnam"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Product Name In Vietnam"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name*In Indonesia"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Product Name In Indonesia"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name*In Thailand"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Product Name In Thailand"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Name*In Bangladesh"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Product Name In Bangladesh"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Product Sku*"
+            android:textSize="20dp"
+            android:textColor="@color/colorPrimary"></TextView>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_editetext"
+            android:drawablePadding="10dp"
+            android:hint="7WP42587UT"
+            android:inputType="text"
+            android:padding="12dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/colorGrey2"
+            android:textColorHint="@color/colorGrey" />
+
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Category*"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Category"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Sub Category*"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Sub Category"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Child Category*"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="Child Category"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Stock*"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint="e.g.20"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+
+        ///Description
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Product Description (In English)*"
+                android:textSize="20dp"
+                android:textColor="@color/colorPrimary"></TextView>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded_editetext"
+                android:drawablePadding="10dp"
+                android:hint=""
+                android:lines="3"
+                android:inputType="text"
+                android:padding="12dp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/colorGrey2"
+                android:textColorHint="@color/colorGrey" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</ScrollView>

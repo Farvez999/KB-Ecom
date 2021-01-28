@@ -13,41 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".VendorProfile.VendorSettingsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".VendorProfile.VendorAddNewProductsActivity">
         </activity>
-        <activity android:name=".VendorProfile.VendorBulkProductUploadActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".VendorProfile.VendorWithdrawsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".VendorProfile.VendorProductsActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".VendorProfile.VendorOrderActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".VendorProfile.VendorSettingsActivity"></activity>
+        <activity android:name=".VendorProfile.VendorBulkProductUploadActivity"></activity>
+        <activity android:name=".VendorProfile.VendorWithdrawsActivity"></activity>
+        <activity android:name=".VendorProfile.VendorProductsActivity"></activity>
+        <activity android:name=".VendorProfile.VendorOrderActivity"></activity>
         <activity
             android:name=".UserProfile.UserDashboardActivity"
             android:parentActivityName=".activity.ProfileActivity" />

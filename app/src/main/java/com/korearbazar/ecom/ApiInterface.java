@@ -104,6 +104,16 @@ public interface ApiInterface {
             @Header("Authorization") String Bearer
     );
 
+    @GET("api/vendor/products")
+    Call<String> getVendorProduct(
+            @Header("Authorization") String Bearer
+    );
+
+    @GET("api/vendor/withdraw")
+    Call<String> getVendorWithdraw(
+            @Header("Authorization") String Bearer
+    );
+
 //    @GET("api/profile")
 //    Call<String> getProfile(
 //            @Header("Authorization") String Bearer
